@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 
 var inventorySchema = new mongoose.Schema({
   title: {type: String, required: true},
-  createDate: Date,
+  createDate: {type: Date, default: Date.now},
+  createdBy: {type: String, required: true},
   deadlineDate: {type: Date, required: true},
   description: {type: String, required: true},
   perishable: {type: Boolean, required: true},

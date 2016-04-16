@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-mongoose.connect(process.env.MONGOLAB_URI || db.url);
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/waste_not');
 
 const donorRouter = require(__dirname + '/routes/donor_routes');
 const userRouter = require(__dirname + '/routes/user_routes');

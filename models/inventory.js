@@ -1,0 +1,15 @@
+const mongoose = require('mongoose');
+
+var inventorySchema = new mongoose.Schema({
+  title: {type: String, required: true},
+  createDate: Date,
+  deadlineDate: {type: Date, required: true},
+  description: {type: String, required: true},
+  perishable: {type: Boolean, required: true},
+  address: {type: String, required: true},
+  category: {type: String, enum: ['Food', 'Clothing', 'Women', 'Children', 'Other'], required: true},
+  note: String,
+  claimedBy: {type: String, default: ''}
+});
+
+module.exports = exports = mongoose.model('Inventory', inventorySchema);

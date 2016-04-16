@@ -8,14 +8,35 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jessethach/waste-not.git"
+    "url": "git+https://github.com/waste-not/waste-not.git"
   },
-  "author": "Jesse Thach, Logan Tegman, Natalie Chow, Jose Tello, Sabrina Tee",
+  "author": [
+    {
+      "name": "Natalie Chow",
+      "email": "cychownat@gmail.com"
+    },
+    {
+      "name": "Sabrina Tee",
+      "email": "sabrinatee@me.com"
+    },
+    {
+      "name": "Logan Tegman",
+      "email": "ltegman@gmail.com"
+    },
+    {
+      "name": "Jose Tello",
+      "email": "josectello@gmail.com"
+    },
+    {
+      "name": "Jesse Thach",
+      "email": "jessethach@gmail.com"
+    }
+  ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jessethach/waste-not/issues"
+    "url": "https://github.com/waste-not/waste-not/issues"
   },
-  "homepage": "https://github.com/jessethach/waste-not#readme",
+  "homepage": "https://github.com/waste-not/waste-not#readme",
   "dependencies": {
     "body-parser": "^1.15.0",
     "express": "^4.13.4",

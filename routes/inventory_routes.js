@@ -17,7 +17,7 @@ inventoryRouter.post('/inventory', jsonParser, (req, res) => {
   var newInventory = new Inventory(req.body);
   newInventory.save((err, data) => {
     if (err) return handleUnavailError(err, res);
-    res.status(200).json({msg: 'Successfully created inventory'});
+    res.status(200).json(data);
   });
 });
 
@@ -40,6 +40,6 @@ inventoryRouter.put('/inventory/:id/:claimedByID', jsonParser, (req, res) => {
 inventoryRouter.delete('/inventory/:id', (req, res) => {
   Inventory.remove({_id: req.params.id}, (err) => {
     if (err) return handleDBError(err, res);
-    res.status(200).json({msg: 'Successfully deleted inventory'});
+    res.status(200).json({msg: 'Successfully deleted inventory', id: req.params.id});
   });
 });

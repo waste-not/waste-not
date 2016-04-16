@@ -17,7 +17,7 @@ userRouter.post('/users', jsonParser, (req, res) => {
   var newUser = new User(req.body);
   newUser.save((err, data) => {
     if (err) return handleUnavailError(err, res);
-    res.status(200).json({msg: 'Successly created user'});
+    res.status(200).json(data);
   });
 });
 

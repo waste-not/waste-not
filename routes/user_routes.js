@@ -13,7 +13,7 @@ userRouter.get('/users', (req, res) => {
   });
 });
 
-userRouter.post('/users', (req, res) => {
+userRouter.post('/users', jsonParser, (req, res) => {
   var newUser = new User(req.body);
   newUser.save((err, data) => {
     if (err) return handleUnavailError(err, res);

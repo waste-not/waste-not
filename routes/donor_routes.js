@@ -13,7 +13,7 @@ donorRouter.get('/donors', (req, res) => {
   });
 });
 
-donorRouter.post('/donors', (req, res) => {
+donorRouter.post('/donors', jsonParser, (req, res) => {
   var newDonor = new Donor(req.body);
   newDonor.save((err, data) => {
     if (err) return handleUnavailError(err, res);

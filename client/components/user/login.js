@@ -17,28 +17,31 @@ class Login extends Component {
     const { fields: { username, password }, handleSubmit } = this.props;
 
     return (
-      <section className="columns is-mobile">
-        <section className="column is-half is-offset-one-quarter">
-          <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+      <section className="main">
+        <div className="container">
+          <h1 className="page-title">Sign In</h1>
+          <div className="columns is-desktop">
+            <div className="column is-one-third is-offset-one-third">
+              <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
 
-            <section className={`${username.touched && username.invalid ? 'is-danger' : ''}`}>
-              <label>Username</label>
-              <p className="control">
-                <input type='text' {...username} />
-              </p>
-            </section>
 
-            <label>Password</label>
-            <p className="control">
-              <input type='password' {...password} />
-            </p>
+                <p className={`control ${username.touched && username.invalid ? 'is-danger' : ''}`}>
+                  <input className="input auth-input" type='text' placeholder="Username" {...username} />
+                </p>
 
-            <p className="control">
-              <button type="submit">Submit</button>
-            </p>
 
-          </form>
-        </section>
+                <p className="control">
+                  <input className="input auth-input" type='password' placeholder="Password" {...password} />
+                </p>
+
+                <p className="control center-control">
+                  <button type="submit" className="button button-submit">Sign In</button>
+                </p>
+
+              </form>
+            </div>
+          </div>
+        </div>
       </section>
 
     );

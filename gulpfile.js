@@ -17,6 +17,11 @@ gulp.task('static:dev', () => {
     .pipe(gulp.dest('dist/'));
 });
 
+gulp.task('webfonts:dev', () => {
+  gulp.src('client/webfonts/**/*')
+    .pipe(gulp.dest('dist/webfonts'));
+});
+
 gulp.task('sass:dev', () => {
   gulp.src('client/sass/main.scss')
     .pipe(sass().on('error', sass.logError))
@@ -305,7 +310,7 @@ gulp.task('watch', () => {
   gulp.watch('client/sass/*.sass', ['sass:dev']);
 });
 
-gulp.task('dev', ['lint', 'static:dev', 'build:dev', 'sass:dev']);
-gulp.task('style:dev', ['static:dev', 'sass:dev']);
+gulp.task('dev', ['lint', 'static:dev', 'build:dev', 'sass:dev', 'webfonts:dev']);
+gulp.task('style:dev', ['static:dev', 'sass:dev', 'webfonts:dev']);
 
 gulp.task('default', ['watch', 'dev']);

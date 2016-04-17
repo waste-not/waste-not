@@ -9,7 +9,7 @@ const sass = require('gulp-sass');
 const scripts = ['index.js', 'lib/*.js', 'test/**/*.js', 'models/*.js',
   'routes/*.js', 'client/**/*.js?(x)', '!test/client/test_bundle.js'];
 const clientScripts = ['client/**/*.js?(x)'];
-const staticFiles = ['client/**/*.html', 'client/**/*.png'];
+const staticFiles = ['client/**/*.html', 'client/**/*.png', 'client/**/*.jpg'];
 const clientTests = ['test/client/*.js', '!test/client/test_bundle.js'];
 
 gulp.task('static:dev', () => {

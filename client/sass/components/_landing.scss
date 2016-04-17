@@ -17,6 +17,14 @@
 .landing-hero {
   background-color: transparent;
   text-align: center;
+  background-image: url(./img/blue_sky_hero.jpg);
+  background-attachment: scroll;
+  background-position: center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+
   .title {
     font-size: 3.6rem;
     color: white;
@@ -52,6 +60,9 @@
   .content-text {
     color: $color-base-navy;
   }
+  .content-img {
+    width: 100%;
+  }
   p:not(:last-child) {
     margin-bottom: 12px;
   }
@@ -59,4 +70,8 @@
     margin: 0px;
     border-top: 1px solid $color-lightest-navy;
   }
+}
+
+.hero .header .container {
+  box-shadow: none;
 }

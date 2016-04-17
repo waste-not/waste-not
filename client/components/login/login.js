@@ -13,8 +13,9 @@ class Login extends Component {
 
   onSubmit(props) {
     this.props.login(props)
-      .then(({ role }) => {
-        this.context.router.push(`/${role}`);
+      .then((data) => {
+        console.log(data.payload.data.role);
+        this.context.router.push(`/${data.payload.data.role}`);
       })
   }
 

@@ -5,9 +5,9 @@ import InventoryDonorItem from './inventory_donor_item';
 import { Link } from 'react-router';
 
 const dummyq = [
-  { title: 'Dummy', id: 123 },
-  { title: 'Dummy2', id: 124 },
-  { title: 'Dummy3', id: 125 }
+  { title: 'Dummy', _id: 123 },
+  { title: 'Dummy2', _id: 124 },
+  { title: 'Dummy3', _id: 125 }
 ];
 
 class InventoryForm extends Component {

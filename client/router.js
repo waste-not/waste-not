@@ -8,6 +8,7 @@ import Login from './components/login/login';
 import HeroContainer from './components/navbar/hero';
 import Signup from './components/signup/signup';
 import WrapRole from './components/authentication/wrap_role';
+import InventoryForm from './components/donor/inventory_form';
 
 export default (
   <Route path='/' component={App}>
@@ -16,5 +17,6 @@ export default (
     <Route path='/signup' component={WrapRole(Signup)} />
     <Route path='/user' component={UserProfile} />
     <Route path='/login' component={Login} />
+    <Route path='/newdonation' component={InventoryForm} />
   </Route>
 );

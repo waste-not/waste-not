@@ -1,11 +1,11 @@
 import axios from 'axios';
 
-const SET_ROLE = 'set_role';
-const CREATE_USER = 'create_user';
-const LOGIN = 'login';
-const FETCH_INVENTORY = 'fetch_inventory';
-const CREATE_INVENTORY = 'create_inventory';
-const DELETE_INVENTORY = 'delete_inventory';
+export const SET_ROLE = 'set_role';
+export const CREATE_USER = 'create_user';
+export const LOGIN = 'login';
+export const FETCH_INVENTORY = 'fetch_inventory';
+export const CREATE_INVENTORY = 'create_inventory';
+export const DELETE_INVENTORY = 'delete_inventory';
 
 const ROOT_URL = 'localhost:3000/api';
 
@@ -52,6 +52,11 @@ export function setRole(role) {
   };
 }
 
-// export function login(user) {
-//   const request = axios.post(`${ROOT_URL}/users`, )
-// }
+export function login(user) {
+  const request = axios.get(`${ROOT_URL}/signin`, user);
+
+  return {
+    type: LOGIN,
+    payload: request
+  };
+}

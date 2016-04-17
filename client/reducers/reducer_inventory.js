@@ -1,4 +1,4 @@
-import { CREATE_INVENTORY, DELETE_INVENTORY } from '../actions';
+import { CREATE_INVENTORY, DELETE_INVENTORY, FETCH_INVENTORY, LOGIN } from '../actions';
 
 export default function(state = [], action) {
   switch (action.type) {
@@ -6,6 +6,10 @@ export default function(state = [], action) {
       return [...state, action.payload.data];
     case DELETE_INVENTORY:
       return state.filter(item => item.id != action.payload.data.id);
+    case FETCH_INVENTORY:
+      return [...state, action.payload.data];
+    case LOGIN:
+      return [...state, action.payload.data];
     default:
       return state;
   }

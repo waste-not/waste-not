@@ -7,8 +7,14 @@ export const LOGIN = 'login';
 export const FETCH_INVENTORY = 'fetch_inventory';
 export const CREATE_INVENTORY = 'create_inventory';
 export const DELETE_INVENTORY = 'delete_inventory';
+export const CREATE_ORG = 'create_org';
 
-const ROOT_URL = 'https://localhost:3000/api';
+const ROOT_URL = 'http://localhost:3000/api';
+
+const getAxiosConfig = () => {
+  const token = window.localStorage.getItem('token');
+  return token ? { headers: { 'Token': token } } : null;
+}
 
 // Will be used as higher order component
 export function authenticate(isLoggedIn) {
@@ -37,7 +43,8 @@ export function createOrg(newOrg) {
 }
 
 export function createInventory(newInventory) {
-  const request = axios.post(`${ROOT_URL}/inventory`, newInventory);
+
+  const request = axios.post(`${ROOT_URL}/inventory`, newInventory, getAxiosConfig());
 
   return  {
     type: CREATE_INVENTORY,
@@ -55,7 +62,7 @@ export function fetchInventory() {
 }
 
 export function deleteInventory(id) {
-  const request = axios.delete(`${ROOT_URL}/inventory/${id}`);
+  const request = axios.delete(`${ROOT_URL}/inventory/${id}`, getAxiosConfig());
 
   return {
     type: DELETE_INVENTORY,
@@ -71,7 +78,7 @@ export function setRole(role) {
 }
 
 export function login(user) {
-  const request = axios.get(`${ROOT_URL}/signin`, user);
+  const request = axios.get(`${ROOT_URL}/signin`, { headers: { 'Authorization': 'Basic ' + window.btoa(`${user.username}:${user.password}`)} });
 
   return {
     type: LOGIN,

@@ -6,6 +6,11 @@ import { Link } from 'react-router';
 const fields = ['username', 'password'];
 
 class Login extends Component {
+
+  static contextTypes = {
+    router: React.PropTypes.object
+  }
+
   onSubmit(props) {
     this.props.login(props)
       .then(({ role }) => {

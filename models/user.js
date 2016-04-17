@@ -11,6 +11,10 @@ var userSchema = new mongoose.Schema({
   city: {type: String, required: true},
   state: {type: String, required: true},
   zip: {type: String, required: true},
+  coordinates: {
+    lat: { type: Number, min: -90, max: 90 },
+    lng: { type: Number, min: -180, max: 180 }
+  },
   contactNumber: {type: String, required: true},
   email: {type: String, required: true},
   role: {type: String, enum: ['donor', 'user'], required: true}

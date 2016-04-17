@@ -37,3 +37,6 @@ node_modules
 
 # built files
 dist/
+
+# CSV output
+data/active_inventory.csv

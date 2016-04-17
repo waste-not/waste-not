@@ -99,11 +99,6 @@ function validate(values) {
 
 // reduxForm: 1 is form config, 2nd is mapStateToProps, 3rd is mapDispatchToProps
 
-// export default reduxForm({
-//   form: 'UserSignupForm',
-//   fields
-// }, null, null)(UserSignup);
-
 export default reduxForm({
   form: 'UserSignupForm',
   fields

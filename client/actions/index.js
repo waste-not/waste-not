@@ -7,7 +7,7 @@ export const FETCH_INVENTORY = 'fetch_inventory';
 export const CREATE_INVENTORY = 'create_inventory';
 export const DELETE_INVENTORY = 'delete_inventory';
 
-const ROOT_URL = 'localhost:3000/api';
+const ROOT_URL = 'https://localhost:3000/api';
 
 export function createUser(newUser) {
   const request = axios.post(`${ROOT_URL}/users`, newUser);

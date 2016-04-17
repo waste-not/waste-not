@@ -24,6 +24,9 @@ a {
 
 .main {
   margin-top: 24px;
+  hr {
+    border-top-color: $color-light-navy;
+  }
 }
 
 .page-title {

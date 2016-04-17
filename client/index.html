@@ -45,7 +45,7 @@
         }, domConstruct.create("div"));
         domClass.add(popup.domNode, "dark");
 
-        csv = new CSVLayer("./tiny.csv");
+        csv = new CSVLayer("data/active_inventory.csv");
         var marker = new SimpleMarkerSymbol(10);
         marker.setSize(12);
 
@@ -53,6 +53,7 @@
         csv.setRenderer(renderer);
         var template = new InfoTemplate("${_id}", "${_id}");
         csv.setInfoTemplate(template);
+        csv.refreshInterval = .10;
         map.addLayer(csv);
       });
     }

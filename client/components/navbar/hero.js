@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import { connect } from 'react-redux';
+import { setRole } from '../../actions';
 
-export default class HeroContainer extends Component {
+class HeroContainer extends Component {
   render() {
+
+  const { setRole } = this.props;
+
     return (
       <div>
         <section className="hero landing-hero">
@@ -16,8 +21,8 @@ export default class HeroContainer extends Component {
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                   </p>
                   <div className="columns is-mobile">
-                    <Link className="column is-one-quarter is-offset-one-quarter button button-direct" to="/newuser">Pick Up</Link>
-                    <Link className="button is-one-quarter column button-direct" to="/donors">Donate</Link>
+                    <Link className="column is-one-quarter is-offset-one-quarter button button-direct" to="/signup" onClick={setRole.bind(null, 'user')}>Pick Up</Link>
+                    <Link className="button is-one-quarter column button-direct" to="/signup" onClick={setRole.bind(null, 'donor')}>Donate</Link>
                   </div>
                 </div>
               </div>
@@ -64,3 +69,5 @@ export default class HeroContainer extends Component {
     );
   }
 }
+
+export default connect(null, { setRole })(HeroContainer)

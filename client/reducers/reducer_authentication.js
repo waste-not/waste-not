@@ -1,12 +1,22 @@
 import {
-  CHANGE_AUTH
+  CHANGE_AUTH,
+  SET_ROLE
 } from '../actions';
 
-export default function(state = false, action) {
+const initialState = {
+  authenticated: !!window.localStorage.getItem('token'),
+  role: 'donor',
+  token: window.localStorage.getItem('token')
+}
+
+export default function(state = initialState, action) {
   switch (action.type) {
     case CHANGE_AUTH:
-        return action.payload;
-
+      return { ...state, ...action.payload };
+    case SET_ROLE:
+      return { ...state, role: action.payload };
+    default:
+      return state;
   }
 
   return state;

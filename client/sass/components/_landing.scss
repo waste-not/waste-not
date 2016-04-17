@@ -56,9 +56,26 @@
   .title {
     color: $color-mid-navy;
     text-align: center;
+    font-size: 2.4rem;
+  }
+  .subtitle {
+    color: $color-light-navy;
+    text-align: center;
+    margin-top: 12px;
   }
   .content-text {
-    color: $color-base-navy;
+    color: $color-black;
+  }
+  .infographic {
+    .content-text {
+      @include font-ridley(400);
+      font-size: 1.4rem;
+      text-align: center;
+      span {
+        @include font-ridley(500);
+        font-size: 2rem;
+      }
+    }
   }
   .content-img {
     width: 100%;

@@ -1,6 +1,6 @@
 import { CREATE_INVENTORY, DELETE_INVENTORY } from '../actions';
 
-export default function(state = [], actions) {
+export default function(state = [], action) {
   switch (action.type) {
     case CREATE_INVENTORY:
       return [...state, action.payload.data];

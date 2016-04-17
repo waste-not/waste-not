@@ -1,9 +1,10 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
+import App from './components/app';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import { Router, browserHistory } from 'react-router';// Alternatively use hashHistory for anything after a # or memoryHistory
 import reducers from './reducers';
+import { Router, hashHistory } from 'react-router';
 import router from './router';
 import promise from 'redux-promise';
 
@@ -11,8 +12,10 @@ const createStoreWithMiddleware = applyMiddleware(
   promise
 )(createStore);
 
-ReactDOM.render(
-  <Provider store={createStoreWithMiddleware(reducers)}>
-    <Router history={browserHistory} router={router} />
-  </Provider>
-  , document.querySelector('.container'));
+const store = createStoreWithMiddleware(reducers);
+
+render((
+  <Provider store = { store }>
+    <Router history={hashHistory} routes={router} />
+  </Provider>),
+  document.getElementById('app'));

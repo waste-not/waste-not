@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
+import InventoryItem from './inventory_item';
 
 const dummy = [
   { title: 'Dummy', id: 123 },
@@ -13,27 +14,10 @@ class InventoryList extends Component {
     this.props.fetchInventory();
   }
 
-  // renderInventory(inventoryData) {
-  //   return inventoryData.map((inventory) => {
-  //     <h3 className="inventory-name">{inventory.title}</h3>
-  //   });
-  //   // const title = inventoryData.map(inventory => inventory.title);
-  //   // const company = inventoryData.map(inventory => inventory.title);
-  //   // const { lon, lat } = inventoryData.inventory.coord;
-  //
-  //   return (
-  //     <div className="inventory-list">
-  //         {items}
-  //     </div>
-  //   );
-  // }
-
   renderInventory(inventoryData) {
     return inventoryData.map((inventory) => {
       return (
-        <li key={inventory.id}>
-          <strong>{inventory.title}</strong>
-        </li>
+        <InventoryItem />
       )
     })
   }
@@ -48,12 +32,6 @@ class InventoryList extends Component {
     );
   }
 }
-
-// function mapStateToProps(state) {
-//   return { users: state.users };
-// }
-//
-// export default connect(mapStateToProps, actions)(InventoryList);
 
 function mapStateToProps({ inventory }) {
   return { inventory }

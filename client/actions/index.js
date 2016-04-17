@@ -77,7 +77,7 @@ export function fetchDonorInventory() {
 
   return {
     type: FETCH_DONOR_INVENTORY,
-    payload:request
+    payload: request
   };
 }
 

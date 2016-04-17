@@ -1,71 +1,43 @@
 import React, { Component } from 'react';
-import { reduxForm } from 'redux-form';
-import { createOrg } from '../../actions';
+import { connect } from 'react-redux';
+import * as actions from '../../actions';
+import InventoryDonorItem from './inventory_donor_item';
 import { Link } from 'react-router';
 
-const fields = ['username', 'name', 'contactNumber', 'email', 'address1', 'address2', 'city', 'state', 'zip', 'country', 'password'];
+const dummyq = [
+  { title: 'Dummy', id: 123 },
+  { title: 'Dummy2', id: 124 },
+  { title: 'Dummy3', id: 125 }
+];
 
-class DonorProfile extends Component {
-  onSubmit(props) {
-    this.props.createOrg(props)
-      .then(() => {
-        this.context.router.push('/');
-      })
+class InventoryForm extends Component {
+  componentWillMount() {
+    this.props.fetchDonorInventory();
+  }
+
+  renderDonorInventory(inventoryData) {
+    return inventoryData.map((inventory) => {
+      return (
+        <InventoryDonorItem key={inventory._id} {...inventory} />
+      )
+    })
   }
 
   render() {
-    const { fields: { username, name, contactNumber, email, address1, address2, city, state, zip, country, password }, handleSubmit } = this.props;
-
     return (
       <section className="main">
         <div className="container">
-          <h1 className="page-title">Register to donate</h1>
-          <div className="columns is-desktop">
-            <div className="column is-one-third is-offset-one-third">
-              <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-                <p className="control">
-                  <input className="input auth-input" placeholder="Company Name" type='text' {...name} />
-                </p>
-
-                <p className="control">
-                  <input className="input auth-input" placeholder="Phone Number" type='text' {...contactNumber} />
-                </p>
-
-                <p className="control">
-                  <input className="input auth-input" placeholder="Email" type='text' {...email} />
-                </p>
-
-                <p className="control">
-                  <input className="input auth-input" type="text" placeholder="Address line 1" {...address1} />
-                </p>
-
-                <p className="control">
-                  <input className="input auth-input" type="text" placeholder="Address line 2 (Apt, Ste #)" {...address2} />
-                </p>
-
-                <p className="control">
-                  <input className="input auth-input" type="text" placeholder="City" {...city} />
-                </p>
-
-                <p className="control is-grouped">
-                  <input className="input auth-input" type="text" placeholder="State" {...state} />
-                  <input className="input auth-input" type="text" placeholder="Zip code" {...zip} />
-                </p>
-
-                <p className="control">
-                  <input className="input auth-input" type="text" placeholder="Username" {...username} />
-                </p>
-
-                <p className="control">
-                  <input className="input auth-input" type="password" placeholder="Password" {...password} />
-                </p>
-
-                <p className="control center-control">
-                  <button type="submit" className="button button-submit">Sign Up</button>
-                </p>
-              </form>
+          { this.props.children }
+          <h1 className="page-title">Posted donations</h1>
+          <div className="columns is-multiline">
+            <div className="column is-half">
+              <Link to='/donor/newdonation'>
+                <button className="card is-fullwidth donor-add ">
+                  <h1><span>+</span><br />Add new donation</h1>
+                </button>
+            </Link>
             </div>
-
+              {this.renderDonorInventory(this.props.inventory)}
           </div>
         </div>
       </section>
@@ -73,30 +45,8 @@ class DonorProfile extends Component {
   }
 }
 
-function validate(values) {
-  const errors = {};
-
-  if (!values.title) {
-    errors.title = 'Enter a title';
-  }
-  if (!values.categories) {
-    errors.categories = 'Enter categories';
-  }
-  if (!values.content) {
-    errors.content = 'Enter some content';
-  }
-
-  return errors;
+function mapStateToProps(state) {
+  return { inventory: state.inventory }
 }
 
-// reduxForm: 1 is form config, 2nd is mapStateToProps, 3rd is mapDispatchToProps
-
-// export default reduxForm({
-//   form: 'DonorProfileForm',
-//   fields
-// }, null, null)(DonorProfile);
-
-export default reduxForm({
-  form: 'DonorProfileForm',
-  fields
-}, null, { createOrg })(DonorProfile);
+export default connect(mapStateToProps, actions)(InventoryForm);

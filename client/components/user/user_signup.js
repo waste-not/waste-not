@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
-import { createOrg } from '../../actions';
+import { createUser } from '../../actions';
 import { Link } from 'react-router';
 
 const fields = ['username', 'name', 'contactNumber', 'email', 'address1', 'address2', 'city', 'state', 'zip', 'country'];
 
-class DonorProfile extends Component {
+class UserSignup extends Component {
   onSubmit(props) {
-    this.props.createOrg(props)
+    this.props.createUser(props)
       .then(() => {
         this.context.router.push('/');
       })
@@ -99,12 +99,7 @@ function validate(values) {
 
 // reduxForm: 1 is form config, 2nd is mapStateToProps, 3rd is mapDispatchToProps
 
-// export default reduxForm({
-//   form: 'DonorProfileForm',
-//   fields
-// }, null, null)(DonorProfile);
-
 export default reduxForm({
-  form: 'DonorProfileForm',
+  form: 'UserSignupForm',
   fields
-}, null, { createOrg })(DonorProfile);
+}, null, { createUser })(UserSignup);

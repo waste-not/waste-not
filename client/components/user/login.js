@@ -48,7 +48,7 @@ class Login extends Component {
 function validate(values) {
   const errors = {};
 
-  if (!values.title) {
+  if (!values.username) {
     errors.title = 'Enter a title';
   }
   if (!values.categories) {

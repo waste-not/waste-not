@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+export const CHANGE_AUTH = 'change_auth';
 export const SET_ROLE = 'set_role';
 export const CREATE_USER = 'create_user';
 export const LOGIN = 'login';
@@ -9,11 +10,28 @@ export const DELETE_INVENTORY = 'delete_inventory';
 
 const ROOT_URL = 'https://localhost:3000/api';
 
+// Will be used as higher order component
+export function authenticate(isLoggedIn) {
+  return {
+    type: CHANGE_AUTH,
+    payload: isLoggedIn
+  };
+}
+
 export function createUser(newUser) {
-  const request = axios.post(`${ROOT_URL}/users`, newUser);
+  const request = axios.post(`${ROOT_URL}/signup`, newUser);
 
   return  {
     type: CREATE_USER,
+    payload: request
+  };
+}
+
+export function createOrg(newOrg) {
+  const request = axios.post(`${ROOT_URL}/signup`, newOrg);
+
+  return  {
+    type: CREATE_ORG,
     payload: request
   };
 }

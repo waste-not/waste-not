@@ -5,6 +5,7 @@ export const SET_ROLE = 'set_role';
 export const CREATE_USER = 'create_user';
 export const LOGIN = 'login';
 export const FETCH_INVENTORY = 'fetch_inventory';
+export const FETCH_DONOR_INVENTORY = 'fetch_donor_inventory';
 export const CREATE_INVENTORY = 'create_inventory';
 export const DELETE_INVENTORY = 'delete_inventory';
 export const CREATE_ORG = 'create_org';
@@ -58,6 +59,15 @@ export function fetchInventory() {
   return {
     type: FETCH_INVENTORY,
     payload: request
+  };
+}
+
+export function fetchDonorInventory() {
+  const request = axios.get(`${ROOT_URL}/inventory/history`, getAxiosConfig());
+
+  return {
+    type: FETCH_DONOR_INVENTORY,
+    payload:request
   };
 }
 

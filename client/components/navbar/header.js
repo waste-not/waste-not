@@ -1,7 +1,18 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import HeaderItem from './header_login';
+import { connect } from 'react-redux';
+import * as actions from '../../actions';
 
 export default class Header extends Component {
+  authButton() {
+    if (this.props.authenticated) {
+      return <HeaderItem onClick={() => this.props.authenticate(false)}></HeaderItem>;
+    }
+
+    return <HeaderItem onClick={() => this.props.authenticate(true)}></HeaderItem>;
+  }
+
   render() {
     return (
       <header className="header landing-nav">
@@ -11,15 +22,15 @@ export default class Header extends Component {
               <img src="img/logo_single_light.png" alt="Waste Not" className="brand-logo" />
             </Link>
           </div>
-
-          <div className="header-right header-menu">
-            <Link to="/login" className="header-item">Already Registered?</Link>
-            <span className="header-item">
-              <Link className="button button-direct" to="/login">Log in</Link>
-            </span>
-          </div>
+          {this.authButton()}
         </div>
       </header>
     );
   }
 }
+
+function mapStateToProps(state) {
+  return { authenticated: state.authenticated };
+}
+
+export default connect(mapStateToProps, actions)(Header);

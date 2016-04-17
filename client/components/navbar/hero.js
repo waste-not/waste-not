@@ -29,39 +29,57 @@ class HeroContainer extends Component {
             </div>
           </div>
         </section>
+        
         <section className="landing-content">
           <div className="container">
             <article>
-              <h2 className="title">300 million tons wasted</h2>
-                <p className="content-text">
-                  WILL MAKE PRETTY LATER
-                  <br />
-                  - This is the total net food production of Sub-Saharan Africa
-                  - Worth around US $1 trillion
-                  - Sufficient to feed the estimated 900 million people hungry in the world
-                  - 6 billion pounds of fresh produce unharvested or unsold each year
-                  - Food waste that goes to the landfill breaks down anaerobically and produces methane; methane is 21 times more potent than CO2 as a greenhouse gas
-                </p>
-            </article>
-            <hr />
-            <article>
-              <h2 class="title">Our solution</h2>
-              <div class="columns">
-                <div class="column is-one-third">
-                  cheesy stock photo
+              <h2 className="title">300 million tons wasted each year</h2>
+              <h4 className="subtitle">300 million tons of food is...</h4>
+
+              <div className="columns infographic is-multilined">
+                <div className="column is-half">
+                  <p className="content-text">
+                    <span>Six&nbsp;billion&nbsp;pounds</span><br />of fresh produce unharvested<br />or unsold each year
+                  </p>
                 </div>
-                <div class="column is-two-thirds">
-                  <p class="content-text">
+                <div className="column is-half">
+                  <p className="content-text">
+                    Worth around <span>$1,000,000,000,000</span><br />(1 trillion) US Dollars
+                  </p>
+                </div>
+              </div>
+
+              <div className="columns infographic is-multilined">
+                <div className="column is-half is-offset-one-quarter">
+                  <p className="content-text">
+                    Sufficient to feed the estimated <span>900,000,000</span><br />people hungry in the world
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <hr />
+
+            <article>
+              <h2 className="title">Our solution</h2>
+              <div className="columns">
+                <div className="column is-one-third">
+                  <img src="img/grapes.jpg" className="content-img" />
+                </div>
+
+                <div className="column is-two-thirds">
+                  <p className="content-text">
                     According to a recent report by the United Nations, about one-third of all food produced worldwide, worth around US$1 trillion, gets lost or wasted in food production and consumption systems. On the other end of the spectrum, a report revealed that 48.1 million Americans live in food-insecure households; of whom, 15.3 million of them children. Waste Not aims to bridge this gap, completely changing the way food surplus is handled.
                   </p>
-                  <p class="content-text">
+                  <p className="content-text">
                     Waste Not is a new technology platform that makes it simple for retail outlets to inventory items that they plan on throwing out and enables social and community organizations to claim these items for redistribution.
                   </p>
-                  <p class="content-text">
+                  <p className="content-text">
                     Currently, Waste Not is only available to registered social organizations, although we do have plans to opening our platform to individuals in need.
                   </p>
                 </div>
               </div>
+
             </article>
           </div>
         </section>

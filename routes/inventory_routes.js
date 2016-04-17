@@ -9,6 +9,32 @@ const geocoder = require(__dirname + '/../lib/geocoder');
 
 var inventoryRouter = module.exports = exports = express.Router();
 
+// donations available to claim by USER
+inventoryRouter.get('/inventory/active', (req, res) => {
+  Inventory.find({ claimedBy: '' }, (err, data) => {
+    if (err) return handleDBError(err, res);
+    res.status(200).json(data);
+    renderCSV();
+  });
+});
+
+// donations claimed by USER
+inventoryRouter.get('/inventory/claimed', jwtAuth, (req, res) => {
+  Inventory.find({ claimedBy: req.user._id }, (err, data) => {
+    if (err) return handleDBError(err, res);
+    res.status(200).json(data);
+  });
+});
+
+// all donations by a DONOR
+inventoryRouter.get('/inventory/history', jwtAuth, (req, res) => {
+  Inventory.find({ createdBy: req.user._id }, (err, data) => {
+    if (err) return handleDBError(err, res);
+    res.status(200).json(data);
+  });
+});
+
+// all the donations, just for safe measure
 inventoryRouter.get('/inventory', (req, res) => {
   Inventory.find({}, (err, data) => {
     if (err) return handleDBError(err, res);
@@ -16,6 +42,7 @@ inventoryRouter.get('/inventory', (req, res) => {
     renderCSV();
   });
 });
+
 
 inventoryRouter.post('/inventory', jwtAuth, jsonParser, (req, res) => {
   var newInventory = new Inventory(req.body);

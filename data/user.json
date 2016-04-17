@@ -1,5 +1,6 @@
 [
   {
+    "id": "1",
     "username": "amazon",
     "password": "amazon1",
     "name": "Amazon Seattle",
@@ -12,6 +13,7 @@
     "role": "donor"
   },
   {
+    "id": "2",
     "username": "qfc_wallingford",
     "password": "qfc123",
     "name": "QFC Wallingford",
@@ -24,6 +26,7 @@
     "role": "donor"
   },
   {
+    "id": "3",
     "username": "qfc_uvillage",
     "password": "qfc123",
     "name": "QFC University Village",
@@ -36,6 +39,7 @@
     "role": "donor"
   },
   {
+    "id": "4",
     "username": "traderjoe",
     "password": "qfc_sux123",
     "name": "Trader Joe",
@@ -48,6 +52,7 @@
     "role": "donor"
   },
   {
+    "id": "5",
     "username": "wholefoods_westlake",
     "password": "wholefoods1",
     "name": "Wholefoods Westlake",
@@ -60,6 +65,7 @@
     "role": "donor"
   },
   {
+    "id": "6",
     "username": "bwayne",
     "password": "iambatman",
     "name": "Bruce Wayne",
@@ -72,6 +78,7 @@
     "role": "user"
   },
   {
+    "id": "7",
     "username": "marysplace",
     "password": "marysplace1",
     "name": "Mary's Place",
@@ -84,6 +91,7 @@
     "role": "user"
   },
   {
+    "id": "8",
     "username": "redcross_seattle",
     "password": "password1",
     "name": "Red Cross Seattle",
@@ -96,6 +104,7 @@
     "role": "user"
   },
   {
+    "id": "9",
     "username": "salvation_army_queenA",
     "password": "password1",
     "name": "Salvation Army Queen Anne",
@@ -108,6 +117,7 @@
     "role": "user"
   },
   {
+    "id": "10",
     "username": "goodwill_westlake",
     "password": "password1",
     "name": "Goodwill Westlake",

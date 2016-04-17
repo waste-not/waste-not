@@ -1,0 +1,122 @@
+[
+  {
+    "username": "amazon",
+    "password": "amazon1",
+    "name": "Amazon Seattle",
+    "address1": "511 Boren Ave N",
+    "city": "Seattle",
+    "state": "WA",
+    "zip": "98109",
+    "contactNumber": "0123456789",
+    "email": "amazon@amazon.com",
+    "role": "donor"
+  },
+  {
+    "username": "qfc_wallingford",
+    "password": "qfc123",
+    "name": "QFC Wallingford",
+    "address1": "4500 Wallingford Ave N",
+    "city": "Seattle",
+    "state": "WA",
+    "zip": "98103",
+    "contactNumber": "0123456789",
+    "email": "wallingford@qfc.com",
+    "role": "donor"
+  },
+  {
+    "username": "qfc_uvillage",
+    "password": "qfc123",
+    "name": "QFC University Village",
+    "address1": "2746 NE 45th St",
+    "city": "Seattle",
+    "state": "WA",
+    "zip": "98105",
+    "contactNumber": "0123456789",
+    "email": "uvillage@qfc.com",
+    "role": "donor"
+  },
+  {
+    "username": "traderjoe",
+    "password": "qfc_sux123",
+    "name": "Trader Joe",
+    "address1": "4609 14th Ave NW",
+    "city": "Seattle",
+    "state": "WA",
+    "zip": "98107",
+    "contactNumber": "0123456789",
+    "email": "traderjoeseattle@traderjoe.com",
+    "role": "donor"
+  },
+  {
+    "username": "wholefoods_westlake",
+    "password": "wholefoods1",
+    "name": "Wholefoods Westlake",
+    "address1": "2210 Westlake Ave",
+    "city": "Seattle",
+    "state": "WA",
+    "zip": "98121",
+    "contactNumber": "0123456789",
+    "email": "westlakeseattle@wholefoods.com",
+    "role": "donor"
+  },
+  {
+    "username": "bwayne",
+    "password": "iambatman",
+    "name": "Bruce Wayne",
+    "address1": "588 Bell St",
+    "city": "Seattle",
+    "state": "WA",
+    "zip": "98121",
+    "contactNumber": "0123456789",
+    "email": "bruce@wayneenterprises.com",
+    "role": "user"
+  },
+  {
+    "username": "marysplace",
+    "password": "marysplace1",
+    "name": "Mary's Place",
+    "address1": "1830 9th Ave",
+    "city": "Seattle",
+    "state": "WA",
+    "zip": "98101",
+    "contactNumber": "0123456789",
+    "email": "marysplace@gmail.com",
+    "role": "user"
+  },
+  {
+    "username": "redcross_seattle",
+    "password": "password1",
+    "name": "Red Cross Seattle",
+    "address1": "1900 25th Ave S",
+    "city": "Seattle",
+    "state": "WA",
+    "zip": "98144",
+    "contactNumber": "0123456789",
+    "email": "seattle@redcross.com",
+    "role": "user"
+  },
+  {
+    "username": "salvation_army_queenA",
+    "password": "password1",
+    "name": "Salvation Army Queen Anne",
+    "address1": "111 Queen Anne Ave N",
+    "city": "Seattle",
+    "state": "WA",
+    "zip": "98109",
+    "contactNumber": "0123456789",
+    "email": "queenanne@salvationarmy.com",
+    "role": "user"
+  },
+  {
+    "username": "goodwill_westlake",
+    "password": "password1",
+    "name": "Goodwill Westlake",
+    "address1": "411 Westlake Ave N",
+    "city": "Seattle",
+    "state": "WA",
+    "zip": "98109",
+    "contactNumber": "0123456789",
+    "email": "westlake@goodwill.com",
+    "role": "user"
+  }
+]

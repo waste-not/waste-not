@@ -17,30 +17,66 @@ class DonorProfile extends Component {
     const { fields: { username, name, contactNumber, email, address1, address2, city, state, zip, country }, handleSubmit } = this.props;
 
     return (
-      <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-        <h3>Register to Donate</h3>
-        <label>Username</label>
-        <input type='text' {...username} />
-        <label>Company Name</label>
-        <input type='text' {...name} />
-        <label>Phone Number</label>
-        <input type='text' {...contactNumber} />
-        <label>Email</label>
-        <input type='text' {...email} />
-        <label>Address Line 1</label>
-        <input type='text' {...address1} />
-        <label>Address Line 2</label>
-        <input type='text' {...address2} />
-        <label>City</label>
-        <input type='text' {...city} />
-        <label>State</label>
-        <input type='text' {...state} />
-        <label>Zip</label>
-        <input type='text' {...zip} />
-        <label>Country</label>
-        <input type='text' {...country} />
-        <button type="submit">Submit</button>
-      </form>
+      <section className="columns is-mobile">
+        <section className="column is-half is-offset-one-quarter">
+          <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+            <h3>Register to Donate</h3>
+            <label className="label">Username</label>
+            <p className="control">
+              <input className="input" type='text' {...username} />
+            </p>
+
+            <label className="label">Company Name</label>
+            <p className="control">
+              <input className="input" type='text' {...name} />
+            </p>
+
+            <label className="label">Phone Number</label>
+            <p className="control">
+              <input className="input" type='text' {...contactNumber} />
+            </p>
+
+            <label className="label">Email</label>
+            <p className="control">
+              <input className="input" type='text' {...email} />
+            </p>
+
+            <label className="label">Address Line 1</label>
+            <p className="control">
+              <input className="input" type='text' {...address1} />
+            </p>
+            <label className="label">Address Line 2</label>
+            <p>
+              <input className="input" type='text' {...address2} />
+            </p>
+
+            <label className="label">City</label>
+            <p className="control">
+              <input className="input" type='text' {...city} />
+            </p>
+
+            <label className="label">State</label>
+            <p className="control">
+              <input className="input" type='text' {...state} />
+            </p>
+
+            <label className="label">Zip</label>
+            <p>
+              <input className="input" type='text' {...zip} />
+            </p>
+
+            <label className="label">Country</label>
+            <p>
+              <input className="input" type='text' {...country} />
+            </p>
+
+            <p class="control">
+              <button type="submit" className="button is-primary">Submit</button>
+              <button className="button is-link">Cancel</button>
+            </p>
+          </form>
+        </section>
+      </section>
     );
   }
 }

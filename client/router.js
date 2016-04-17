@@ -12,7 +12,7 @@ import WrapRole from './components/authentication/wrap_role';
 export default (
   <Route path='/' component={App}>
     <IndexRoute component={HeroContainer} />
-    <Route path='/donors' component={DonorProfile} />
+    <Route path='/donor' component={DonorProfile} />
     <Route path='/signup' component={WrapRole(Signup)} />
     <Route path='/user' component={UserProfile} />
     <Route path='/login' component={Login} />

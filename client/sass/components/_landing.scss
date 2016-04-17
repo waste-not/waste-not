@@ -1,0 +1,94 @@
+.landing-nav {
+  height: auto;
+  padding: 24px 0px;
+  background-color: transparent;
+
+  .brand-logo {
+    max-height: none;
+    height: 60px;
+  }
+  .button-direct {
+    @include btn-outline();
+    font-size: 1rem;
+  }
+}
+
+
+.landing-hero {
+  background-color: transparent;
+  text-align: center;
+  background-image: url(./img/blue_sky_hero.jpg);
+  background-attachment: scroll;
+  background-position: center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+
+  .title {
+    font-size: 3.6rem;
+    color: white;
+  }
+  .subtitle {
+    margin-top: 0px;
+    padding-bottom: 12px;
+    color: white;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    word-break: keep-all;
+  }
+  .button-direct {
+    @include btn-solid();
+    padding: 8px 20px 6px 20px;
+    margin: auto 6px;
+  }
+  .hero-content {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+}
+
+.landing-content {
+  background-color: $color-light-gray;
+  article {
+    padding: 48px 0px;
+  }
+  .title {
+    color: $color-mid-navy;
+    text-align: center;
+    font-size: 2.4rem;
+  }
+  .subtitle {
+    color: $color-light-navy;
+    text-align: center;
+    margin-top: 12px;
+  }
+  .content-text {
+    color: $color-black;
+  }
+  .infographic {
+    .content-text {
+      @include font-ridley(400);
+      font-size: 1.4rem;
+      text-align: center;
+      span {
+        @include font-ridley(500);
+        font-size: 2rem;
+      }
+    }
+  }
+  .content-img {
+    width: 100%;
+  }
+  p:not(:last-child) {
+    margin-bottom: 12px;
+  }
+  hr {
+    margin: 0px;
+    border-top: 1px solid $color-lightest-navy;
+  }
+}
+
+.hero .header .container {
+  box-shadow: none;
+}

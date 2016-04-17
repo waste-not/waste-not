@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>
+    <title>MAP MAP</title>
+    <link rel="stylesheet" href="https://js.arcgis.com/3.16/esri/css/esri.css">
+    <style>
+      html, body, #map {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background-color: #FFF;
+        overflow: hidden;
+        font-family: "Trebuchet MS";
+      }
+    </style>
+    <script src="https://js.arcgis.com/3.16/"></script>
+    <script>
+      var map, csv;
+      require([
+        "esri/map",
+        "esri/dijit/Popup",
+        "esri/dijit/PopupTemplate",
+        "esri/layers/CSVLayer",
+        "esri/Color",
+        "esri/symbols/SimpleMarkerSymbol",
+        "esri/renderers/SimpleRenderer",
+        "esri/InfoTemplate",
+        "esri/urlUtils",
+        "dojo/dom-class",
+        "dojo/dom-construct",
+        "dojo/on",
+        "dojo/domReady!"
+      ], function(Map, Popup, PopupTemplate, CSVLayer, Color, SimpleMarkerSymbol, SimpleRenderer, InfoTemplate, urlUtils, domClass, domConstruct, on) {
+        map = new Map("map", {
+          basemap: "streets",
+          center: [ -122.3321, 47.6062 ],
+          zoom: 13,
+          infoWindow: popup
+        });
+
+        var popup = new Popup({
+          titleInBody: false
+        }, domConstruct.create("div"));
+        domClass.add(popup.domNode, "dark");
+
+        csv = new CSVLayer("./tiny.csv");
+        var marker = new SimpleMarkerSymbol(10);
+        marker.setSize(12);
+
+        var renderer = new SimpleRenderer(marker);
+        csv.setRenderer(renderer);
+        var template = new InfoTemplate("${_id}", "${_id}");
+        csv.setInfoTemplate(template);
+        map.addLayer(csv);
+      });
+    </script>
+  </head>
+​
+  <body>
+    <div id="map"></div>
+  </body>
+</html>

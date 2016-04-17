@@ -1,0 +1,58 @@
+<section className="main">
+  <div className="container">
+    <h1 className="page-title">Add A DropOff</h1>
+    <div className="columns is-desktop">
+      <div className="column is-one-third is-offset-one-third">
+        <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+          <p className="control">
+            <input placeholder="DropOff Title" type='text' {...title} />
+          </p>
+
+          <p className="control">
+            <label>Deadline Pickup Date: </label>
+            <input type="date" {...deadlineDate} />
+          </p>
+
+          <p className="control">
+            <input placeholder="Full Inventory Description" type='text' {...description} />
+          </p>
+
+          <p className="control">
+            <label>Perishable?</label>
+            <select className={...perishable}>
+              <option value='true'>True</option>
+              <option value='false'>False</option>
+            </select>
+          </p>
+
+          <p className="control">
+            <input placeholder="Address" type='text' {...address} />
+          </p>
+
+          <p className="control">
+            <label>Category:</label>
+            <select className={...category}>
+              <option value='Food'>Food</option>
+              <option value='Clothing'>Clothing</option>
+              <option value='Women'>Women</option>
+              <option value='Children'>Children</option>
+              <option value='Other'>Other</option>
+            </select>
+          </p>
+
+          <p className="control">
+            <input placeholder="Additional Information?" type='text' {...note} />
+          </p>
+
+          <p className="control center-control">
+            <button type="submit" className="button button-submit">Submit</button>
+          </p>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- make sure to add created by to automatically include donor id -->
+<!-- don't forget coordinates conversion of address -->

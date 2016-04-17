@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Waste Not</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.0.21/css/bulma.min.css">
+  <link rel="stylesheet" href="main.css">
+  <script src="https://js.arcgis.com/3.16/"></script>
+  <link rel="stylesheet" href="https://js.arcgis.com/3.16/esri/css/esri.css">
+  <style>
+    #map {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 100px;
+    }
+  </style>
+  <script>
+    function renderMap() {
+      var map, csv;
+      require([
+        "esri/map",
+        "esri/dijit/Popup",
+        "esri/dijit/PopupTemplate",
+        "esri/layers/CSVLayer",
+        "esri/Color",
+        "esri/symbols/SimpleMarkerSymbol",
+        "esri/renderers/SimpleRenderer",
+        "esri/InfoTemplate",
+        "esri/urlUtils",
+        "dojo/dom-class",
+        "dojo/dom-construct",
+        "dojo/on",
+        "dojo/domReady!"
+      ], function(Map, Popup, PopupTemplate, CSVLayer, Color, SimpleMarkerSymbol, SimpleRenderer, InfoTemplate, urlUtils, domClass, domConstruct, on) {
+        map = new Map("map", {
+          basemap: "streets",
+          center: [ -122.3321, 47.6062 ],
+          zoom: 13,
+          infoWindow: popup
+        });
+
+        var popup = new Popup({
+          titleInBody: false
+        }, domConstruct.create("div"));
+        domClass.add(popup.domNode, "dark");
+
+        csv = new CSVLayer("data/active_inventory.csv");
+        var marker = new SimpleMarkerSymbol(10);
+        marker.setSize(12);
+
+        var renderer = new SimpleRenderer(marker);
+        csv.setRenderer(renderer);
+        var template = new InfoTemplate("${_id}", "${_id}");
+        csv.setInfoTemplate(template);
+        csv.refreshInterval = .10;
+        map.addLayer(csv);
+      });
+    }
+  </script>
+</head>
+<body>
+  <main id="app">
+  </main>
+<script src="bundle.js" charset="utf-8"></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+.control.has-addons.user-nav {
+  width: 100%;
+  margin-bottom: 20px;
+  a.button {
+    @include font-ridley(00, uppercase);
+    background-color: $color-light-navy;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: $color-dark-navy;
+    width: 50%;
+    border: 0px;
+    &.user-nav-active {
+      background-color: $color-lightest-navy;
+    }
+  }
+}

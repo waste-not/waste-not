@@ -17,65 +17,57 @@ class DonorProfile extends Component {
     const { fields: { username, name, contactNumber, email, address1, address2, city, state, zip, country }, handleSubmit } = this.props;
 
     return (
-      <section className="columns is-mobile">
-        <section className="column is-half is-offset-one-quarter">
-          <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-            <h3>Register to Donate</h3>
-            <label className="label">Username</label>
-            <p className="control">
-              <input className="input" type='text' {...username} />
-            </p>
+      <section className="main">
+        <div className="container">
+          <h1 className="page-title">Register to donate</h1>
+          <div className="columns is-desktop">
+            <div className="column is-one-third is-offset-one-third">
+              <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+                <p className="control">
+                  <input className="input auth-input" placeholder="Company Name" type='text' {...username} />
+                </p>
 
-            <label className="label">Company Name</label>
-            <p className="control">
-              <input className="input" type='text' {...name} />
-            </p>
+                <p className="control">
+                  <input className="input auth-input" placeholder="Phone Number" type='text' {...contactNumber} />
+                </p>
 
-            <label className="label">Phone Number</label>
-            <p className="control">
-              <input className="input" type='text' {...contactNumber} />
-            </p>
+                <p className="control">
+                  <input className="input auth-input" placeholder="Email" type='text' {...email} />
+                </p>
 
-            <label className="label">Email</label>
-            <p className="control">
-              <input className="input" type='text' {...email} />
-            </p>
+                <p className="control">
+                  <input className="input auth-input" type="text" placeholder="Address line 1" {...address1} />
+                </p>
 
-            <label className="label">Address Line 1</label>
-            <p className="control">
-              <input className="input" type='text' {...address1} />
-            </p>
-            <label className="label">Address Line 2</label>
-            <p>
-              <input className="input" type='text' {...address2} />
-            </p>
+                <p className="control">
+                  <input className="input auth-input" type="text" placeholder="Address line 2 (Apt, Ste #)" {...address2} />
+                </p>
 
-            <label className="label">City</label>
-            <p className="control">
-              <input className="input" type='text' {...city} />
-            </p>
+                <p className="control">
+                  <input className="input auth-input" type="text" placeholder="City" {...city} />
+                </p>
 
-            <label className="label">State</label>
-            <p className="control">
-              <input className="input" type='text' {...state} />
-            </p>
+                <p className="control is-grouped">
+                  <input className="input auth-input" type="text" placeholder="State" {...state} />
+                  <input className="input auth-input" type="text" placeholder="Zip code" {...zip} />
+                </p>
 
-            <label className="label">Zip</label>
-            <p>
-              <input className="input" type='text' {...zip} />
-            </p>
+                <p className="control">
+                  <input className="input auth-input" type="text" placeholder="Username" {...username} />
+                </p>
 
-            <label className="label">Country</label>
-            <p>
-              <input className="input" type='text' {...country} />
-            </p>
+                <p className="control">
+                  <input className="input auth-input" type="password" placeholder="Password" {...username} />
+                </p>
 
-            <p class="control">
-              <button type="submit" className="button is-primary">Submit</button>
-              <button className="button is-link">Cancel</button>
-            </p>
-          </form>
-        </section>
+                <p className="control center-control">
+                  <button type="submit" className="button button-submit">Sign Up</button>
+                </p>
+              </form>
+            </div>
+
+          </div>
+        </div>
       </section>
     );
   }

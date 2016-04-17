@@ -18,6 +18,15 @@ export function createUser(newUser) {
   };
 }
 
+export function createOrg(newOrg) {
+  const request = axios.post(`${ROOT_URL}/users`, newOrg);
+
+  return  {
+    type: CREATE_ORG,
+    payload: request
+  };
+}
+
 export function createInventory(newInventory) {
   const request = axios.post(`${ROOT_URL}/inventory`, newInventory);
 

@@ -1,7 +1,11 @@
-import { CREATE_INVENTORY, DELETE_INVENTORY, FETCH_INVENTORY, LOGIN } from '../actions';
+import { CREATE_INVENTORY, DELETE_INVENTORY, FETCH_INVENTORY, LOGIN, CREATE_USER, CREATE_ORG } from '../actions';
 
 export default function(state = [], action) {
   switch (action.type) {
+    case CREATE_ORG:
+      return [...state, action.payload.data];
+    case CREATE_USER:
+      return [...state, action.payload.data];
     case CREATE_INVENTORY:
       return [...state, action.payload.data];
     case DELETE_INVENTORY:

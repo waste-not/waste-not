@@ -14,13 +14,13 @@ const clientTests = ['test/client/*.js', '!test/client/test_bundle.js'];
 
 gulp.task('static:dev', () => {
   gulp.src(staticFiles, { 'base': 'client' })
-    .pipe(gulp.dest('build/'));
+    .pipe(gulp.dest('dist/'));
 });
 
 gulp.task('sass:dev', () => {
   gulp.src('client/sass/main.sass')
     .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest('./build'));
+    .pipe(gulp.dest('./dist'));
 });
 
 gulp.task('build:dev', () => {

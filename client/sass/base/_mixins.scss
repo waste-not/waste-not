@@ -1,0 +1,34 @@
+@mixin btn() {
+  padding: 6px 18px;
+  // font...
+}
+
+@mixin btn-solid($color-static: $color-base-yellow, $color-hover: $color-light-yellow, $color-text: $color-dark-navy) {
+  @include btn;
+  background-color: $color-static;
+  color: $color-text;
+  border: 0px;
+
+  &:hover {
+    background-color: $color-hover;
+  }
+  &:active {
+    background-color: $color-static;
+  }
+}
+
+@mixin btn-outline($color-static: white, $color-hover: $color-base-yellow, $color-click: $color-light-yellow) {
+  background-color: transparent;
+  border: 2px solid $color-static;
+  color: $color-static;
+  padding: 6px 18px;
+
+  &:hover {
+    border-color: $color-hover;
+    color: $color-hover;
+  }
+  &:active {
+    border-color: $color-click;
+    color: $color-click;
+  }
+}

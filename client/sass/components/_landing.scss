@@ -1,0 +1,54 @@
+.landing-nav {
+  height: auto;
+  padding: 24px 0px;
+  background-color: transparent;
+  // background-color: rgba(255, 255, 255, 0.2);
+
+  .brand-logo {
+    max-height: none;
+    height: 60px;
+  }
+  .header-item {
+    color: white;
+    &:hover { color: $color-base-yellow; }
+    &:active { color: $color-light-yellow; }
+  }
+  .button-direct {
+    @include btn-outline();
+  }
+}
+
+.landing-hero {
+  background-color: transparent;
+  text-align: center;
+  .title {
+    font-size: 3.6rem;
+    color: white;
+  }
+  .subtitle {
+    margin-top: 0px;
+    color: white;
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+  .button-direct {
+    @include btn-solid();
+    padding: 6px 20px;
+    margin: auto 6px;
+  }
+  .hero-content {
+    padding-bottom: 60px;
+  }
+}
+
+
+// TODO: move to normal file
+header.normal-nav {
+  height: auto;
+  background-color: rgba(255, 255, 255, 0.2);
+
+  .brand-logo {
+    max-height: none;
+    height: 30px;
+  }
+}

@@ -9,7 +9,7 @@ const sass = require('gulp-sass');
 const scripts = ['index.js', 'lib/*.js', 'test/**/*.js', 'models/*.js',
   'routes/*.js', 'client/**/*.js?(x)', '!test/client/test_bundle.js'];
 const clientScripts = ['client/**/*.js?(x)'];
-const staticFiles = ['client/**/*.html'];
+const staticFiles = ['client/**/*.html', 'client/**/*.png'];
 const clientTests = ['test/client/*.js', '!test/client/test_bundle.js'];
 
 gulp.task('static:dev', () => {
@@ -18,7 +18,7 @@ gulp.task('static:dev', () => {
 });
 
 gulp.task('sass:dev', () => {
-  gulp.src('client/sass/main.sass')
+  gulp.src('client/sass/main.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(gulp.dest('./dist'));
 });
@@ -306,5 +306,6 @@ gulp.task('watch', () => {
 });
 
 gulp.task('dev', ['lint', 'static:dev', 'build:dev', 'sass:dev']);
+gulp.task('style:dev', ['static:dev', 'sass:dev']);
 
 gulp.task('default', ['watch', 'dev']);

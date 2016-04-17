@@ -1,0 +1,18 @@
+html {
+  background-color: $color-base-navy;
+  color: white;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  color: white;
+}
+
+a {
+  color: $color-base-teal;
+  &:hover {
+    color: $color-light-teal;
+  }
+  &:active {
+    color: $color-base-teal;
+  }
+}

@@ -1,0 +1,20 @@
+.inv-item {
+  .card-header-title {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    color: $color-base-navy;
+  }
+  &.inv-active .card-header-title { background-color: $color-base-yellow; }
+  &.inv-claimed .card-header-title { background-color: $color-base-teal; }
+  &.inv-inactive .card-header-title { background-color: $color-light-gray; }
+}
+
+.donor-add {
+  padding: 30px 20px 40px 20px;
+  min-height: 150px;
+  background-color: $color-mid-navy;
+  border: 2px dashed white;
+  text-align: center;
+  h1 { font-size: 2rem; }
+  span { font-size: 4rem; }
+}

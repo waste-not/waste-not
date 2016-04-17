@@ -10,6 +10,7 @@ const inventoryRouter = require(__dirname + '/routes/inventory_routes');
 app.use('/api', authRouter);
 // app.use('/api', userRouter);
 app.use('/api', inventoryRouter);
+app.use(express.static(__dirname + '/dist'));
 
 const PORT = process.env.PORT || 3000;
 module.exports = exports = app.listen(PORT, () => console.log('Server started on port: ' + PORT));

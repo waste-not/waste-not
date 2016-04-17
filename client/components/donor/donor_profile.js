@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form'
 
+const fields = ['username', 'name', 'contactNumber', 'email', 'address1', 'address2', 'city', 'state', 'zip', 'country'];
+
 class DonorProfile extends Component {
 
   onSubmit(props) {

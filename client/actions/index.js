@@ -1,10 +1,11 @@
 import axios from 'axios';
 
-export const SET_ROLE = 'set_role';
-export const CREATE_USER = 'create_user';
-export const LOGIN = 'login';
-export const CREATE_INVENTORY = 'create_inventory';
-export const DELETE_INVENTORY = 'delete_inventory';
+const SET_ROLE = 'set_role';
+const CREATE_USER = 'create_user';
+const LOGIN = 'login';
+const FETCH_INVENTORY = 'fetch_inventory';
+const CREATE_INVENTORY = 'create_inventory';
+const DELETE_INVENTORY = 'delete_inventory';
 
 const ROOT_URL = 'localhost:3000/api';
 
@@ -22,6 +23,15 @@ export function createInventory(newInventory) {
 
   return  {
     type: CREATE_INVENTORY,
+    payload: request
+  };
+}
+
+export function fetchInventory() {
+  const request = axios.get(`${ROOT_URL}/inventory`);
+
+  return {
+    type: FETCH_INVENTORY,
     payload: request
   };
 }

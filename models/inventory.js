@@ -8,6 +8,10 @@ var inventorySchema = new mongoose.Schema({
   description: {type: String, required: true},
   perishable: {type: Boolean, required: true},
   address: {type: String, required: true},
+  coordinates: {
+    lat: { type: Number, min: -90, max: 90 },
+    lng: { type: Number, min: -180, max: 180 }
+  },
   category: {type: String, enum: ['Food', 'Clothing', 'Women', 'Children', 'Other'], required: true},
   note: String,
   claimedBy: {type: String, default: ''}

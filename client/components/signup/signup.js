@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
 import { createOrg } from '../../actions';
-import { Link } from 'react-router';
 
 const fields = ['username', 'name', 'contactNumber', 'email', 'address1', 'address2', 'city', 'state', 'zip', 'country', 'password'];
 
@@ -14,7 +13,6 @@ class DonorProfile extends Component {
   onSubmit(props) {
     this.props.createOrg({ ...props, role: this.props.role })
       .then((data) => {
-        console.log(data);
         this.context.router.push(`/${this.props.role}`);
         window.localStorage.setItem('token', data.token);
       })

@@ -14,7 +14,8 @@ class Login extends Component {
   onSubmit(props) {
     this.props.login(props)
       .then((data) => {
-        console.log(data.payload.data.role);
+        console.log(data.payload.data);
+        window.localStorage.setItem('token', data.payload.data.token);
         this.context.router.push(`/${data.payload.data.role}`);
       })
   }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 const InventoryDonorItem = (props) => {
   return (
-    <div key={props.id} className="column is-half">
+    <div className="column is-half">
       <article className="card is-fullwidth inv-item inv-active">
         <header className="card-header is-fullwidth">
           <h3 className="card-header-title">

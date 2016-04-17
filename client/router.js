@@ -13,10 +13,11 @@ import InventoryForm from './components/donor/inventory_form';
 export default (
   <Route path='/' component={App}>
     <IndexRoute component={HeroContainer} />
-    <Route path='/donor' component={DonorProfile} />
+    <Route path='/donor' component={DonorProfile}>
+      <Route path='newdonation' component={InventoryForm} />
+    </Route>
     <Route path='/signup' component={WrapRole(Signup)} />
     <Route path='/user' component={UserProfile} />
     <Route path='/login' component={Login} />
-    <Route path='/newdonation' component={InventoryForm} />
   </Route>
 );

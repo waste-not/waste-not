@@ -1,0 +1,33 @@
+header {
+  .header-item {
+    color: white;
+    @include font-ridley(400);
+  }
+  a.header-item {
+    @include font-ridley(500, uppercase);
+    &:hover { color: $color-base-yellow; }
+    &:active { color: $color-light-yellow; }
+  }
+
+}
+
+.normal-nav {
+  height: auto;
+  padding: 8px 0px;
+  background-color: rgba(255, 255, 255, 0.2);
+  .brand-logo {
+    max-height: none;
+    height: 40px;
+  }
+  .button-direct {
+    @include btn-outline();
+    font-size: 1rem;
+    @include font-ridley(400);
+    border-width: 1px;
+    padding: 8px 10px 6px 10px;
+  }
+  .button-tight {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+}

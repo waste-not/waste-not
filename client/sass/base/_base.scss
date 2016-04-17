@@ -3,7 +3,12 @@ html {
   color: white;
 }
 
-h1, h2, h3, h4, h5, h6, p {
+h1, h2, h3, h4, h5, h6 {
+  @include font-ridley(500);
+  color: white;
+}
+
+p {
   color: white;
 }
 
@@ -15,4 +20,14 @@ a {
   &:active {
     color: $color-base-teal;
   }
+}
+
+.main {
+  margin-top: 24px;
+}
+
+.page-title {
+  font-size: 2.4rem;
+  text-align: center;
+  margin-bottom: 12px;
 }

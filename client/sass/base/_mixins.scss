@@ -1,6 +1,21 @@
+@mixin font-ridley($weight: 400, $tranform: none) {
+  @if $weight == 400 {
+    font-family: 'RidleyGrotesk-Medium';
+  } @else if $weight == 500 {
+    font-family: 'RidleyGrotesk-SemiBold';
+  } @else {
+    font-family: 'RidleyGrotesk-Bold';
+  }
+	font-weight: normal;
+	font-style: normal;
+  text-transform: $tranform;
+}
+
 @mixin btn() {
-  padding: 6px 18px;
-  // font...
+  padding: 8px 18px 6px 18px;
+  @include font-ridley(500, uppercase);
+  font-size: 1.1rem;
+  vertical-align:baseline;
 }
 
 @mixin btn-solid($color-static: $color-base-yellow, $color-hover: $color-light-yellow, $color-text: $color-dark-navy) {
@@ -18,10 +33,10 @@
 }
 
 @mixin btn-outline($color-static: white, $color-hover: $color-base-yellow, $color-click: $color-light-yellow) {
+  @include btn;
   background-color: transparent;
   border: 2px solid $color-static;
   color: $color-static;
-  padding: 6px 18px;
 
   &:hover {
     border-color: $color-hover;

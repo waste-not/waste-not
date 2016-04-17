@@ -2,21 +2,17 @@
   height: auto;
   padding: 24px 0px;
   background-color: transparent;
-  // background-color: rgba(255, 255, 255, 0.2);
 
   .brand-logo {
     max-height: none;
     height: 60px;
   }
-  .header-item {
-    color: white;
-    &:hover { color: $color-base-yellow; }
-    &:active { color: $color-light-yellow; }
-  }
   .button-direct {
     @include btn-outline();
+    font-size: 1rem;
   }
 }
+
 
 .landing-hero {
   background-color: transparent;
@@ -27,28 +23,40 @@
   }
   .subtitle {
     margin-top: 0px;
+    padding-bottom: 12px;
     color: white;
     font-size: 1rem;
     line-height: 1.5rem;
+    word-break: keep-all;
   }
   .button-direct {
     @include btn-solid();
-    padding: 6px 20px;
+    padding: 8px 20px 6px 20px;
     margin: auto 6px;
   }
   .hero-content {
-    padding-bottom: 60px;
+    padding-top: 80px;
+    padding-bottom: 80px;
   }
 }
 
-
-// TODO: move to normal file
-header.normal-nav {
-  height: auto;
-  background-color: rgba(255, 255, 255, 0.2);
-
-  .brand-logo {
-    max-height: none;
-    height: 30px;
+.landing-content {
+  background-color: $color-light-gray;
+  article {
+    padding: 48px 0px;
+  }
+  .title {
+    color: $color-mid-navy;
+    text-align: center;
+  }
+  .content-text {
+    color: $color-base-navy;
+  }
+  p:not(:last-child) {
+    margin-bottom: 12px;
+  }
+  hr {
+    margin: 0px;
+    border-top: 1px solid $color-lightest-navy;
   }
 }

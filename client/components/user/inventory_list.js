@@ -4,8 +4,8 @@ import * as actions from '../../actions';
 import InventoryItem from './inventory_item';
 
 const dummy = [
-  { title: 'Dummy', id: 123 },
-  { title: 'Dummy2', id: 124 }
+  { title: 'Dummy', _id: 123 },
+  { title: 'Dummy2', _id: 124 }
 ];
 
 class InventoryList extends Component {
@@ -69,14 +69,7 @@ class InventoryList extends Component {
                 </footer>
               </article>
             </div>
-
-
           </div>
-
-
-
-
-
         </div>
       </section>
     );

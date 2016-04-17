@@ -6,10 +6,17 @@ import { Link } from 'react-router';
 const fields = ['username', 'name', 'contactNumber', 'email', 'address1', 'address2', 'city', 'state', 'zip', 'country', 'password'];
 
 class DonorProfile extends Component {
+
+  static contextTypes = {
+    router: React.PropTypes.object
+  }
+
   onSubmit(props) {
-    this.props.createOrg(props)
-      .then(() => {
-        this.context.router.push('/');
+    this.props.createOrg({ ...props, role: this.props.role })
+      .then((data) => {
+        console.log(data);
+        this.context.router.push(`/${this.props.role}`);
+        window.localStorage.setItem('token', data.token);
       })
   }
 
@@ -19,7 +26,7 @@ class DonorProfile extends Component {
     return (
       <section className="main">
         <div className="container">
-          <h1 className="page-title">Register to donate</h1>
+          <h1 className="page-title">Register to {this.props.role === 'donor' ? 'Donate' : 'Pickup'}</h1>
           <div className="columns is-desktop">
             <div className="column is-one-third is-offset-one-third">
               <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>

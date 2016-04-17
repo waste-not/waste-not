@@ -17,7 +17,7 @@ class InventoryList extends Component {
   renderInventory(inventoryData) {
     return inventoryData.map((inventory) => {
       return (
-        <InventoryItem />
+        <InventoryItem key={inventory.id} {...inventory} />
       )
     })
   }

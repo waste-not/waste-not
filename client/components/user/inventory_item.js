@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { PropTypes } from 'react';
 
 const InventoryItem = (props) => {
   return (
-    <div key={props.id} className="column is-half">
+    <div className="column is-half">
       <article className="card is-fullwidth inv-item inv-claimed">
         <header className="card-header is-fullwidth">
           <h3 className="card-header-title">
@@ -11,7 +11,8 @@ const InventoryItem = (props) => {
         </header>
         <div className="card-content">
           <div className="content">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Phasellus nec iaculis mauris.
           </div>
         </div>
         <footer className="card-footer">
@@ -21,7 +22,10 @@ const InventoryItem = (props) => {
       </article>
     </div>
   );
+};
 
-}
+InventoryItem.propTypes = {
+  title: PropTypes.string
+};
 
 export default InventoryItem;

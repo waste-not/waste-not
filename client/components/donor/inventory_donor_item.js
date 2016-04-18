@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PropTypes } from 'react';
 
 const InventoryDonorItem = (props) => {
   return (
@@ -11,7 +11,8 @@ const InventoryDonorItem = (props) => {
         </header>
         <div className="card-content">
           <div className="content">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Phasellus nec iaculis mauris.
             <br />
             <small>2 hours remaining</small>
           </div>
@@ -23,6 +24,10 @@ const InventoryDonorItem = (props) => {
       </article>
     </div>
   );
-}
+};
+
+InventoryDonorItem.propTypes = {
+  title: PropTypes.string
+};
 
 export default InventoryDonorItem;

@@ -24,15 +24,15 @@ userRouter.post('/users', jsonParser, (req, res) => {
 userRouter.put('/users/:id', jsonParser, (req, res) => {
   var userData = req.body;
   delete userData._id;
-  User.update({_id: req.params.id}, userData, (err, data) => {
+  User.update({ _id: req.params.id }, userData, (err) => {
     if (err) return handleDBError(err, res);
-    res.status(200).json({msg: 'Successly updated user'});
+    res.status(200).json({ msg: 'Successly updated user' });
   });
 });
 
 userRouter.delete('/users/:id', (req, res) => {
-  User.remove({_id: req.params.id}, (err) => {
+  User.remove({ _id: req.params.id }, (err) => {
     if (err) return handleDBError(err, res);
-    res.status(200).json({msg: 'Successly deleted user'});
+    res.status(200).json({ msg: 'Successly deleted user' });
   });
 });

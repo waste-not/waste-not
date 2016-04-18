@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import InventoryItem from './inventory_item';
@@ -9,6 +9,12 @@ const dummy = [
 ];
 
 class InventoryList extends Component {
+
+  static propTypes = {
+    fetchInventory: PropTypes.func,
+    fetchClaimedInventory: PropTypes.func
+  }
+
   componentWillMount() {
     this.props.fetchInventory();
     this.props.fetchClaimedInventory();
@@ -18,8 +24,8 @@ class InventoryList extends Component {
     return inventoryData.map((inventory) => {
       return (
         <InventoryItem key={inventory._id} {...inventory} />
-      )
-    })
+      );
+    });
   }
 
 
@@ -37,7 +43,6 @@ class InventoryList extends Component {
           <hr />
 
           <h1 className="page-title">Active donations</h1>
-
 
           <nav className="control has-addons user-nav">
             <a className="button user-nav-active">
@@ -60,7 +65,8 @@ class InventoryList extends Component {
                 </header>
                 <div className="card-content">
                   <div className="content">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Phasellus nec iaculis mauris.
                   </div>
                 </div>
                 <footer className="card-footer">
@@ -77,7 +83,7 @@ class InventoryList extends Component {
 }
 
 function mapStateToProps({ inventory }) {
-  return { inventory }
+  return { inventory };
 }
 
 export default connect(mapStateToProps, actions)(InventoryList);

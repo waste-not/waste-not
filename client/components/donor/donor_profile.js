@@ -1,16 +1,20 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import InventoryDonorItem from './inventory_donor_item';
 import { Link } from 'react-router';
 
-const dummyq = [
-  { title: 'Dummy', _id: 123 },
-  { title: 'Dummy2', _id: 124 },
-  { title: 'Dummy3', _id: 125 }
-];
-
 class InventoryForm extends Component {
+
+  static propTypes = {
+    children: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.node),
+      PropTypes.node
+    ]),
+    fetchDonorInventory: PropTypes.func,
+    inventory: PropTypes.array
+  }
+
   componentWillMount() {
     this.props.fetchDonorInventory();
   }
@@ -19,25 +23,28 @@ class InventoryForm extends Component {
     return inventoryData.map((inventory) => {
       return (
         <InventoryDonorItem key={inventory._id} {...inventory} />
-      )
-    })
+      );
+    });
   }
 
   render() {
+
+    const { children, inventory } = this.props;
+
     return (
       <section className="main">
         <div className="container">
-          { this.props.children }
+          {children}
           <h1 className="page-title">Posted donations</h1>
           <div className="columns is-multiline">
             <div className="column is-half">
-              <Link to='/donor/newdonation'>
+              <Link to="/donor/newdonation">
                 <button className="card is-fullwidth donor-add ">
                   <h1><span>+</span><br />Add new donation</h1>
                 </button>
             </Link>
             </div>
-              {this.renderDonorInventory(this.props.inventory)}
+              {this.renderDonorInventory(inventory)}
           </div>
         </div>
       </section>
@@ -46,7 +53,7 @@ class InventoryForm extends Component {
 }
 
 function mapStateToProps(state) {
-  return { inventory: state.inventory }
+  return { inventory: state.inventory };
 }
 
 export default connect(mapStateToProps, actions)(InventoryForm);

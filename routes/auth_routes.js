@@ -15,7 +15,13 @@ authRouter.post('/signup', jsonParser, signupValidation, (req, res) => {
   var newUser = new User(req.body);
 
   req.body.address2 = req.body.address2 || '';
-  var addressStr = [req.body.address1, req.body.address2, req.body.city, req.body.state, req.body.zip].join(' ');
+  var addressStr = [
+    req.body.address1,
+    req.body.address2,
+    req.body.city,
+    req.body.state,
+    req.body.zip
+  ].join(' ');
 
   geocoder(addressStr)
     .then((coord) => {
@@ -26,15 +32,16 @@ authRouter.post('/signup', jsonParser, signupValidation, (req, res) => {
       });
     }, (geocodeErr) => {
       console.log(geocodeErr);
-      res.status(500).json({msg: 'Error in geocoding'})
+      res.status(500).json({ msg: 'Error in geocoding' });
     });
 });
 
 authRouter.get('/signin', basicHttpAuth, (req, res) => {
   User.findOne({ username: req.basicHTTP.username }, (err, data) => {
-    if (err) return dbErrorHandler(err, res);
-    if (!data || !data.comparePassword(req.basicHTTP.password))
+    if (err) return handleDBError(err, res);
+    if (!data || !data.comparePassword(req.basicHTTP.password)) {
       return res.status(401).json({ msg: 'invalid username or password' });
+    }
 
     res.json({ token: data.generateToken(), role: data.role });
   });

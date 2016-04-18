@@ -7,7 +7,7 @@ const initialState = {
   authenticated: !!window.localStorage.getItem('token'),
   role: 'donor',
   token: window.localStorage.getItem('token')
-}
+};
 
 export default function(state = initialState, action) {
   switch (action.type) {
@@ -18,6 +18,4 @@ export default function(state = initialState, action) {
     default:
       return state;
   }
-
-  return state;
 }

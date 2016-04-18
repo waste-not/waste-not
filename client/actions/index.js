@@ -16,7 +16,7 @@ const ROOT_URL = 'http://localhost:3000/api';
 const getAxiosConfig = () => {
   const token = window.localStorage.getItem('token');
   return token ? { headers: { 'Token': token } } : null;
-}
+};
 
 // Will be used as higher order component
 export function authenticate(isLoggedIn) {
@@ -29,7 +29,7 @@ export function authenticate(isLoggedIn) {
 export function createUser(newUser) {
   const request = axios.post(`${ROOT_URL}/signup`, newUser);
 
-  return  {
+  return {
     type: CREATE_USER,
     payload: request
   };
@@ -38,7 +38,7 @@ export function createUser(newUser) {
 export function createOrg(newOrg) {
   const request = axios.post(`${ROOT_URL}/signup`, newOrg);
 
-  return  {
+  return {
     type: CREATE_ORG,
     payload: request
   };
@@ -46,9 +46,10 @@ export function createOrg(newOrg) {
 
 export function createInventory(newInventory) {
 
-  const request = axios.post(`${ROOT_URL}/inventory`, newInventory, getAxiosConfig());
+  const request =
+    axios.post(`${ROOT_URL}/inventory`, newInventory, getAxiosConfig());
 
-  return  {
+  return {
     type: CREATE_INVENTORY,
     payload: request
   };
@@ -98,7 +99,15 @@ export function setRole(role) {
 }
 
 export function login(user) {
-  const request = axios.get(`${ROOT_URL}/signin`, { headers: { 'Authorization': 'Basic ' + window.btoa(`${user.username}:${user.password}`)} });
+
+  const basic = window.window.btoa(`${user.username}:${user.password}`);
+
+  const request = axios.get(`${ROOT_URL}/signin`,
+    {
+      headers: {
+        'Authorization': `Basic ${basic}`
+      }
+    });
 
   return {
     type: LOGIN,

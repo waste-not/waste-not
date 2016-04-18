@@ -1,16 +1,22 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 import { login } from '../../actions';
-import { Link } from 'react-router';
 
 const fields = ['username', 'password'];
 
 class Login extends Component {
+
+  static propTypes = {
+    fields: PropTypes.object,
+    handleSubmit: PropTypes.func,
+    login: PropTypes.func
+  }
+
   onSubmit(props) {
     this.props.login(props)
       .then(() => {
         this.context.router.push('/');
-      })
+      });
   }
 
   render() {
@@ -24,18 +30,28 @@ class Login extends Component {
             <div className="column is-one-third is-offset-one-third">
               <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
 
-
-                <p className={`control ${username.touched && username.invalid ? 'is-danger' : ''}`}>
-                  <input className="input auth-input" type='text' placeholder="Username" {...username} />
+                <p className={`control ${username.touched &&
+                    username.invalid ? 'is-danger' : ''}`}>
+                  <input
+                    className="input auth-input"
+                    type="text"
+                    placeholder="Username"
+                    {...username} />
                 </p>
 
-
                 <p className="control">
-                  <input className="input auth-input" type='password' placeholder="Password" {...password} />
+                  <input
+                    className="input auth-input"
+                    type="password"
+                    placeholder="Password"
+                    {...password} />
                 </p>
 
                 <p className="control center-control">
-                  <button type="submit" className="button button-submit">Sign In</button>
+                  <button
+                    type="submit"
+                    className="button button-submit">Sign In
+                  </button>
                 </p>
 
               </form>
@@ -46,22 +62,6 @@ class Login extends Component {
 
     );
   }
-}
-
-function validate(values) {
-  const errors = {};
-
-  if (!values.username) {
-    errors.title = 'Enter a title';
-  }
-  if (!values.categories) {
-    errors.categories = 'Enter categories';
-  }
-  if (!values.content) {
-    errors.content = 'Enter some content';
-  }
-
-  return errors;
 }
 
 export default reduxForm({

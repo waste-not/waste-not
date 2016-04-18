@@ -58,7 +58,7 @@ inventoryRouter.post('/inventory', jwtAuth, jsonParser, (req, res) => {
       });
     }, (geocodeErr) => {
       console.log(geocodeErr);
-      res.status(500).json({msg: 'Error in geocoding'})
+      res.status(500).json({ msg: 'Error in geocoding' });
     });
 });
 
@@ -68,19 +68,21 @@ inventoryRouter.put('/inventory/:id', jwtAuth, jsonParser, (req, res) => {
 
   Inventory.update({ _id: req.params.id }, inventoryData, (err) => {
     if (err) return handleDBError(err, res);
-    res.status(200).json({msg: 'Successfully updated inventory'});
+    res.status(200).json({ msg: 'Successfully updated inventory' });
     renderCSV();
   });
 });
 
 inventoryRouter.put('/inventory/claim/:id', jwtAuth, jsonParser, (req, res) => {
   Inventory.update(
-    { _id: req.params.id, claimedBy: {$eq: ''} },
+    { _id: req.params.id, claimedBy: { $eq: '' } },
     { $set: { claimedBy: req.user._id } },
     (err, data) => {
       if (err) return handleDBError(err, res);
-      if (!data.n) return res.status(410).json({msg: 'Inventory already claimed'});
-      res.status(200).json({msg: 'Successfully claimed inventory'});
+      if (!data.n) {
+        return res.status(410).json({ msg: 'Inventory already claimed' });
+      }
+      res.status(200).json({ msg: 'Successfully claimed inventory' });
       renderCSV();
     }
   );
@@ -89,7 +91,10 @@ inventoryRouter.put('/inventory/claim/:id', jwtAuth, jsonParser, (req, res) => {
 inventoryRouter.delete('/inventory/:id', (req, res) => {
   Inventory.remove({ _id: req.params.id }, (err) => {
     if (err) return handleDBError(err, res);
-    res.status(200).json({msg: 'Successfully deleted inventory', id: req.params.id});
+    res.status(200).json({
+      msg: 'Successfully deleted inventory',
+      id: req.params.id
+    });
     renderCSV();
   });
 });

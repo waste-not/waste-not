@@ -50,7 +50,6 @@
     "use-isnan": 2,
     "valid-jsdoc": 2,
     "valid-typeof": 2,
-    "max-len": 0,
 
     "block-scoped-var": 0,
     "complexity": 0,

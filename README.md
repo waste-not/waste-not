@@ -1,4 +1,6 @@
-# Waste Not
+<div style="text-align:center">
+  <h1>Waste Not</h1>
+</div>
 
 An application developed to assist organizations and individuals alike in the donation of leftover food to address the issues of hunger and food waste.
 

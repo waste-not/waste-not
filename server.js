@@ -4,11 +4,9 @@ const mongoose = require('mongoose');
 mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/waste_not');
 
 const authRouter = require(__dirname + '/routes/auth_routes');
-// const userRouter = require(__dirname + '/routes/user_routes');
 const inventoryRouter = require(__dirname + '/routes/inventory_routes');
 
 app.use('/api', authRouter);
-// app.use('/api', userRouter);
 app.use('/api', inventoryRouter);
 app.use(express.static(__dirname + '/dist'));
 app.use('/data', express.static(__dirname + '/data'));

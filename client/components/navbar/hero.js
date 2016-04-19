@@ -21,26 +21,24 @@ class HeroContainer extends Component {
               <h1 className="title">Waste No More!</h1>
 
               <div className="columns is-mobile">
-                <div className="column is-half is-offset-one-quarter">
+                <div className="expands column is-half is-offset-one-quarter">
                   <p className="subtitle">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit,
                     sed do eiusmod tempor incididunt ut labore et dolore magna
                     aliqua. Ut enim ad minim veniam, quis nostrud exercitation
                     ullamco laboris nisi ut aliquip ex ea commodo consequat.
                   </p>
-                  <div className="columns is-mobile">
-                    <Link
-                      className="column is-one-quarter is-offset-one-quarter
-                        button button-direct"
-                      to="/signup"
-                      onClick={setRole.bind(null, 'user')}>Pick Up
-                    </Link>
-                    <Link
-                      className="button is-one-quarter column button-direct"
-                      to="/signup"
-                      onClick={setRole.bind(null, 'donor')}>Donate
-                    </Link>
-                  </div>
+                  <Link
+                  className="column is-one-quarter is-offset-one-quarter
+                  button button-direct"
+                  to="/signup"
+                  onClick={setRole.bind(null, 'user')}>Pick Up
+                  </Link>
+                  <Link
+                  className="button is-one-quarter column button-direct"
+                  to="/signup"
+                  onClick={setRole.bind(null, 'donor')}>Donate
+                  </Link>
                 </div>
               </div>
             </div>
@@ -88,7 +86,7 @@ class HeroContainer extends Component {
                 </div>
 
                 <div className="column is-two-thirds">
-                  <p className="content-text">
+                  <p className="content-text-paragraph">
                     According to a recent report by the United Nations,
                     about one-third of all food produced worldwide,
                     worth around US$1 trillion, gets lost or wasted in food
@@ -98,13 +96,13 @@ class HeroContainer extends Component {
                     them children. Waste Not aims to bridge this gap,
                     completely changing the way food surplus is handled.
                   </p>
-                  <p className="content-text">
+                  <p className="content-text-paragraph">
                     Waste Not is a new technology platform that makes it
                     simple for retail outlets to inventory items that they
                     plan on throwing out and enables social and community
                     organizations to claim these items for redistribution.
                   </p>
-                  <p className="content-text">
+                  <p className="content-text-paragraph">
                     Currently, Waste Not is only available to registered
                     social organizations, although we do have plans to
                     opening our platform to individuals in need.

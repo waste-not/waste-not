@@ -15,10 +15,11 @@ _Winner of [AngelHack Seattle 2016](http://angelhack.com/)_
 cd waste-not
 mkdir db
 npm install
+gulp
 mongod --dbpath=./db --smallfiles
 node server.js
-gulp
 ```
+Now the app should be running on ```localhost:3000```
 
 ### Issues? Suggestions? Comments?
 Submit an issue on [GitHub](https://github.com/waste-not/waste-not/issues).

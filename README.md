@@ -6,7 +6,7 @@ Through this platform, Waste Not aims to bridge the gap between consumer waste a
 
 _Waste Not is the winner of [AngelHack Seattle 2016](http://angelhack.com/)_
 
-![Landing Page](https://s31.postimg.org/6pbs6id5l/Waste_Not.png "Waste Not")
+![Landing Page](http://s31.postimg.org/3lhdpdbkr/Screen_Shot_2016_04_19_at_4_29_24_PM.png "Waste Not")
 
 ### Getting Started
 - Ensure you have [Node](https://nodejs.org/en/) and [MongoDB](https://www.mongodb.org/) installed
@@ -15,18 +15,19 @@ _Waste Not is the winner of [AngelHack Seattle 2016](http://angelhack.com/)_
   $ git clone https://github.com/waste-not/waste-not.git
   $ cd waste-not
   ```
-  
+
 - Install dependencies and create dev build
   ```
   $ npm install
   $ gulp dev
   ```
-  
+
 - Run local server and database
   ```
   $ mongod --dbpath=./db --smallfiles
   $ node server.js
   ```
+- The app should now be running on ```localhost:3000``` on your browser
 
 ### Issues? Suggestions? Comments?
 Submit an issue on [GitHub](https://github.com/waste-not/waste-not/issues).

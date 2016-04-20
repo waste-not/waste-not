@@ -4,26 +4,25 @@ const gulp = require('gulp');
 const eslint = require('gulp-eslint');
 const webpack = require('webpack-stream');
 const sass = require('gulp-sass');
-// const Server = require('karma').Server;
 
-const scripts = ['index.js', 'lib/*.js', 'test/**/*.js', 'models/*.js',
-  'routes/*.js', 'client/**/*.js?(x)', '!test/client/test_bundle.js'];
+const scripts = ['server.js', 'lib/**/*.js', 'models/**/*.js', 'routes/**/*.js',
+  'client/**/*.js?(x)', '!**/*bundle.js'];
 const clientScripts = ['client/**/*.js?(x)'];
-const staticFiles = ['client/**/*.html', 'client/**/*.png', 'client/**/*.jpg', 'client/**/*.csv'];
-const clientTests = ['test/client/*.js', '!test/client/test_bundle.js'];
+const staticFiles = ['client/**/*.html', 'client/**/*.png', 'client/**/*.jpg',
+  'client/**/*.csv'];
 
 gulp.task('static:dev', () => {
-  gulp.src(staticFiles, { 'base': 'client' })
+  return gulp.src(staticFiles, { 'base': 'client' })
     .pipe(gulp.dest('dist/'));
 });
 
 gulp.task('webfonts:dev', () => {
-  gulp.src('client/webfonts/**/*')
+  return gulp.src('client/webfonts/**/*')
     .pipe(gulp.dest('dist/webfonts'));
 });
 
 gulp.task('sass:dev', () => {
-  gulp.src('client/sass/main.scss')
+  return gulp.src('client/sass/main.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(gulp.dest('./dist'));
 });
@@ -58,11 +57,10 @@ gulp.task('watch', () => {
   gulp.watch(scripts, ['lint']);
   gulp.watch(clientScripts, ['build:dev']);
   gulp.watch(staticFiles, ['static:dev']);
-  // gulp.watch(clientTests, ['test:client']);
   gulp.watch('client/sass/*.sass', ['sass:dev']);
 });
 
-gulp.task('dev', ['lint', 'static:dev', 'build:dev', 'sass:dev', 'webfonts:dev']);
+gulp.task('dev', ['static:dev', 'build:dev', 'sass:dev', 'webfonts:dev']);
 gulp.task('style:dev', ['static:dev', 'sass:dev', 'webfonts:dev']);
 
-gulp.task('default', ['watch', 'dev']);
+gulp.task('default', ['dev', 'lint']);

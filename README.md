@@ -6,7 +6,7 @@ Through this platform, Waste Not aims to bridge the gap between consumer waste a
 
 _Waste Not is the winner of [AngelHack Seattle 2016](http://angelhack.com/)_
 
-![Landing Page](https://s31.postimg.org/6pbs6id5l/Waste_Not.png "Waste Not")
+![Landing Page](https://i.imgsafe.org/66616d7.png "Waste Not")
 
 ### Getting Started
 - Ensure you have [Node](https://nodejs.org/en/) and [MongoDB](https://www.mongodb.org/) installed

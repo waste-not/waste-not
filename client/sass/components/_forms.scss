@@ -7,6 +7,12 @@
     border-color: white;
     color: white;
   }
+  &select {
+    color: white;
+  }
+  option {
+    background-color: $color-base-navy;
+  }
 }
 
 .button-submit {

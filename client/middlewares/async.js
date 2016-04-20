@@ -5,11 +5,11 @@ export default function({ dispatch }) {
       return next(action);
     }
 
-    //Make sure the action's promise resolves
+    // Make sure the action's promise resolves
     action.payload
-      .then(function(res) {
+      .then((res) => {
         const newAction = { ...action, payload: res };
         dispatch(newAction);
       });
-  }
+  };
 }

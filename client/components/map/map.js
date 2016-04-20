@@ -5,7 +5,7 @@ const { renderMap } = window;
 export default class Map extends Component {
   render() {
     return (
-      <div id='map' />
+      <div id="map" />
     );
   }
 

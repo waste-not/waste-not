@@ -1,72 +1,153 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 import { createOrg } from '../../actions';
 
-const fields = ['username', 'name', 'contactNumber', 'email', 'address1', 'address2', 'city', 'state', 'zip', 'country', 'password'];
+const fields = [
+  'username',
+  'name',
+  'contactNumber',
+  'email',
+  'address1',
+  'address2',
+  'city',
+  'state',
+  'zip',
+  'country',
+  'password'];
 
 class DonorProfile extends Component {
 
   static contextTypes = {
-    router: React.PropTypes.object
+    router: PropTypes.object
+  }
+
+  static propTypes = {
+    createOrg: PropTypes.func,
+    fields: PropTypes.object,
+    handleSubmit: PropTypes.func,
+    role: PropTypes.string
   }
 
   onSubmit(props) {
-    this.props.createOrg({ ...props, role: this.props.role })
+
+    const { createOrg, role } = this.props;
+
+    createOrg({ ...props, role: role })
       .then((data) => {
-        this.context.router.push(`/${this.props.role}`);
+        this.context.router.push(`/${role}`);
         window.localStorage.setItem('token', data.token);
-      })
+      });
   }
 
   render() {
-    const { fields: { username, name, contactNumber, email, address1, address2, city, state, zip, country, password }, handleSubmit } = this.props;
+    const {
+      fields: {
+        username,
+        name,
+        contactNumber,
+        email,
+        address1,
+        address2,
+        city,
+        state,
+        zip,
+        password
+      },
+      handleSubmit,
+      role
+    } = this.props;
 
     return (
       <section className="main">
         <div className="container">
-          <h1 className="page-title">Register to {this.props.role === 'donor' ? 'Donate' : 'Pickup'}</h1>
+          <h1 className="page-title">
+            Register to {role === 'donor' ? 'Donate' : 'Pickup'}
+          </h1>
           <div className="columns is-desktop">
             <div className="column is-one-third is-offset-one-third">
               <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                 <p className="control">
-                  <input className="input auth-input" placeholder="Company Name" type='text' {...name} />
+                  <input
+                    className="input auth-input"
+                    placeholder="Company Name"
+                    type="text"
+                    {...name} />
                 </p>
 
                 <p className="control">
-                  <input className="input auth-input" placeholder="Phone Number" type='text' {...contactNumber} />
+                  <input
+                    className="input auth-input"
+                    placeholder="Phone Number"
+                    type="text"
+                    {...contactNumber} />
                 </p>
 
                 <p className="control">
-                  <input className="input auth-input" placeholder="Email" type='text' {...email} />
+                  <input
+                    className="input auth-input"
+                    placeholder="Email"
+                    type="text"
+                    {...email} />
                 </p>
 
                 <p className="control">
-                  <input className="input auth-input" type="text" placeholder="Address line 1" {...address1} />
+                  <input
+                    className="input auth-input"
+                    type="text"
+                    placeholder="Address line 1"
+                    {...address1} />
                 </p>
 
                 <p className="control">
-                  <input className="input auth-input" type="text" placeholder="Address line 2 (Apt, Ste #)" {...address2} />
+                  <input
+                    className="input auth-input"
+                    type="text"
+                    placeholder="Address line 2 (Apt, Ste #)"
+                    {...address2} />
                 </p>
 
                 <p className="control">
-                  <input className="input auth-input" type="text" placeholder="City" {...city} />
+                  <input
+                    className="input auth-input"
+                    type="text"
+                    placeholder="City"
+                    {...city} />
                 </p>
 
                 <p className="control is-grouped">
-                  <input className="input auth-input" type="text" placeholder="State" {...state} />
-                  <input className="input auth-input" type="text" placeholder="Zip code" {...zip} />
+                  <input
+                    className="input auth-input"
+                    type="text"
+                    placeholder="State"
+                    {...state} />
+                  <input
+                    className="input auth-input"
+                    type="text"
+                    placeholder="Zip code"
+                    {...zip} />
                 </p>
 
                 <p className="control">
-                  <input className="input auth-input" type="text" placeholder="Username" {...username} />
+                  <input
+                    className="input auth-input"
+                    type="text"
+                    placeholder="Username"
+                    {...username} />
                 </p>
 
                 <p className="control">
-                  <input className="input auth-input" type="password" placeholder="Password" {...password} />
+                  <input
+                    className="input auth-input"
+                    type="password"
+                    placeholder="Password"
+                    {...password} />
                 </p>
 
                 <p className="control center-control">
-                  <button type="submit" className="button button-submit">Sign Up</button>
+                  <button
+                    type="submit"
+                    className="button button-submit">Sign Up
+                  </button>
                 </p>
               </form>
             </div>
@@ -78,28 +159,9 @@ class DonorProfile extends Component {
   }
 }
 
-function validate(values) {
-  const errors = {};
-
-  if (!values.title) {
-    errors.title = 'Enter a title';
-  }
-  if (!values.categories) {
-    errors.categories = 'Enter categories';
-  }
-  if (!values.content) {
-    errors.content = 'Enter some content';
-  }
-
-  return errors;
-}
-
-// reduxForm: 1 is form config, 2nd is mapStateToProps, 3rd is mapDispatchToProps
-
-// export default reduxForm({
-//   form: 'DonorProfileForm',
-//   fields
-// }, null, null)(DonorProfile);
+// reduxForm: 1 is form config,
+// 2nd is mapStateToProps,
+// 3rd is mapDispatchToProps
 
 export default reduxForm({
   form: 'DonorProfileForm',

@@ -14,7 +14,7 @@
 @mixin btn() {
   padding: 8px 18px 6px 18px;
   @include font-ridley(500, uppercase);
-  font-size: 1.1rem;
+  font-size: 1rem;
   vertical-align:baseline;
 }
 

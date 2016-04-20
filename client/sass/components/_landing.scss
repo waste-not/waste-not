@@ -28,6 +28,9 @@
   .title {
     font-size: 3.6rem;
     color: white;
+    @media screen and (max-width: 450px) {
+      font-size: 2em;
+    }
   }
   .subtitle {
     margin-top: 0px;
@@ -41,15 +44,28 @@
     @include btn-solid();
     padding: 8px 20px 6px 20px;
     margin: auto 6px;
+    @media screen and (max-width: 450px) {
+      margin: 0 0 .5em 0;
+      width: 250px;
+    }
   }
   .hero-content {
     padding-top: 80px;
     padding-bottom: 80px;
+    .expands {
+      @media screen and (max-width: 450px) {
+        width: 100% !important;
+        margin: 0 !important;
+      }
+    }
   }
 }
 
 .landing-content {
   background-color: $color-light-gray;
+  @media screen and (max-width: 400px) {
+    padding: 0 1em;
+  }
   article {
     padding: 48px 0px;
   }
@@ -57,35 +73,60 @@
     color: $color-mid-navy;
     text-align: center;
     font-size: 2.4rem;
+    margin-bottom: 1px;
+    word-break: keep-all;
+    @media screen and (max-width: 400px) {
+      font-size: 1.5rem;
+    }
   }
   .subtitle {
     color: $color-light-navy;
     text-align: center;
+    font-size: 1.6rem;
     margin-top: 12px;
+    word-break: keep-all;
   }
   .content-text {
     color: $color-black;
+    font-size: 1rem;
   }
+  .content-text-paragraph {
+    color: $color-black;
+    font-size: 1rem;
+    line-height: 1.2rem;
+  }
+
   .infographic {
+    margin-top: 12px;
     .content-text {
       @include font-ridley(400);
       font-size: 1.4rem;
       text-align: center;
+      line-height: 1.8rem;
       span {
         @include font-ridley(500);
-        font-size: 2rem;
+        font-size: 1.6em;
+        @media screen and (max-width: 400px) {
+          font-size: 1.3em;
+        }
       }
     }
   }
-  .content-img {
-    width: 100%;
+
+  .landing-article {
+    .columns {
+      margin-top: 12px;
+    }
+    .content-img {
+      width: 100%;
+    }
   }
   p:not(:last-child) {
     margin-bottom: 12px;
   }
   hr {
     margin: 0px;
-    border-top: 1px solid $color-lightest-navy;
+    border-top: 1px solid $color-dark-gray;
   }
 }
 

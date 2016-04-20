@@ -75,7 +75,7 @@ class HeroContainer extends Component {
 
             <hr />
 
-            <article>
+            <article className="landing-article">
               <h2 className="title">Our solution</h2>
               <div className="columns">
                 <div className="column is-one-third">

@@ -14,7 +14,7 @@ const InventoryDonorItem = (props) => {
             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             Phasellus nec iaculis mauris.
             <br />
-            <small>2 hours remaining</small>
+            <span className="time-remain">2 hours remaining</span>
           </div>
         </div>
         <footer className="card-footer">

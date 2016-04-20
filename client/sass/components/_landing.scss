@@ -73,38 +73,36 @@
     color: $color-mid-navy;
     text-align: center;
     font-size: 2.4rem;
+    margin-bottom: 1px;
+    word-break: keep-all;
+    @media screen and (max-width: 400px) {
+      font-size: 1.5rem;
+    }
   }
   .subtitle {
     color: $color-light-navy;
     text-align: center;
+    font-size: 1.6rem;
     margin-top: 12px;
+    word-break: keep-all;
   }
   .content-text {
     color: $color-black;
-    font-size: 1em;
+    font-size: 1rem;
   }
   .content-text-paragraph {
     color: $color-black;
-    font-size: 1.1em;
-    line-height: 1.2em;
-    @media screen and (max-width: 400px) {
-      font-size: 1.4em;
-    }
-  }
-
-  .title, .subtitle,
-  .content-text {
-    @media screen and (max-width: 400px) {
-      font-size: 1.5em;
-      line-height: 1.25em;
-    }
+    font-size: 1rem;
+    line-height: 1.2rem;
   }
 
   .infographic {
+    margin-top: 12px;
     .content-text {
       @include font-ridley(400);
       font-size: 1.4rem;
       text-align: center;
+      line-height: 1.8rem;
       span {
         @include font-ridley(500);
         font-size: 1.6em;
@@ -114,15 +112,21 @@
       }
     }
   }
-  .content-img {
-    width: 100%;
+
+  .landing-article {
+    .columns {
+      margin-top: 12px;
+    }
+    .content-img {
+      width: 100%;
+    }
   }
   p:not(:last-child) {
     margin-bottom: 12px;
   }
   hr {
     margin: 0px;
-    border-top: 1px solid $color-lightest-navy;
+    border-top: 1px solid $color-dark-gray;
   }
 }
 

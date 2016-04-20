@@ -3,6 +3,12 @@
     padding: 10px 20px;
     font-size: 1.2rem;
     color: $color-base-navy;
+    padding-top: 16px;
+  }
+  .time-remain {
+    font-size: 0.9rem;
+    margin-top: 6px;
+    color: $color-dark-gray;
   }
   &.inv-active .card-header-title { background-color: $color-base-yellow; }
   &.inv-claimed .card-header-title { background-color: $color-base-teal; }

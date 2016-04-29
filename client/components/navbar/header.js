@@ -13,29 +13,33 @@ class Header extends Component {
     if (this.props.authenticated) {
       // show a link to sign out
       return (
-        <li className="header-item">
-          <button
-            className="button button-direct"
-            onclick={this.handleSignout()}>
-            Sign Out
-          </button>
-        </li>
+        <div className="header-right header-menu">
+          <p className="header-item">Hi, Human!</p>
+          <span className="button button-tight">
+            <a className="button button-direct">Edit</a>
+          </span>
+          <span className="button button-tight">
+            <a className="button button-direct">Log Out</a>
+          </span>
+        </div>
       );
     // Will need condition for user on signup pages – show nothing
     } else {
       // show a link to sign in or sign up
-      return [
-        <li key={1}>
-          <Link className="header-item" to="/login" className="header-item">
-            Already Registered?
-          </Link>
-        </li>,
-        <li key={2}>
-          <span className="header-item">
-            <Link className="button button-direct" to="/login">Log In</Link>
-          </span>
-        </li>
-      ];
+      return (
+        <div className="header-right header-menu">
+          <p>
+            <Link className="header-item" to="/login" className="header-item">
+              Already Registered?
+            </Link>
+          </p>
+          <p>
+            <span className="header-item">
+              <Link className="button button-direct" to="/login">Log In</Link>
+            </span>
+          </p>
+        </div>
+      );
     }
   }
 
@@ -52,11 +56,7 @@ class Header extends Component {
                 className="brand-logo" />
             </Link>
           </div>
-          <div className="header-right header-menu">
-            <ul>
-              {this.renderLinks()}
-            </ul>
-          </div>
+            {this.renderLinks()}
         </div>
 
       </header>

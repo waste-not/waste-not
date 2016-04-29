@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { hashHistory } from 'react-router';
 
 export const CHANGE_AUTH = 'change_auth';
 export const SET_ROLE = 'set_role';
@@ -10,6 +11,9 @@ export const FETCH_CLAIMED = 'fetch_claimed';
 export const CREATE_INVENTORY = 'create_inventory';
 export const DELETE_INVENTORY = 'delete_inventory';
 export const CREATE_ORG = 'create_org';
+export const AUTH_ERROR = 'auth_error';
+export const AUTH_USER = 'auth_user';
+export const UNAUTH_USER = 'unauth_user';
 
 const ROOT_URL = 'http://localhost:3000/api';
 
@@ -17,14 +21,6 @@ const getAxiosConfig = () => {
   const token = window.localStorage.getItem('token');
   return token ? { headers: { 'Token': token } } : null;
 };
-
-// Will be used as higher order component
-export function authenticate(isLoggedIn) {
-  return {
-    type: CHANGE_AUTH,
-    payload: isLoggedIn
-  };
-}
 
 export function createUser(newUser) {
   const request = axios.post(`${ROOT_URL}/signup`, newUser);
@@ -36,11 +32,16 @@ export function createUser(newUser) {
 }
 
 export function createOrg(newOrg) {
-  const request = axios.post(`${ROOT_URL}/signup`, newOrg);
-
-  return {
-    type: CREATE_ORG,
-    payload: request
+  return function(dispatch) {
+    axios.post(`${ROOT_URL}/signup`, newOrg)
+      .then(response => {
+        dispatch( { type: AUTH_USER } );
+        hashHistory.push(`/${newOrg.role}`);
+        localStorage.setItem('token', response.data.token);
+      })
+      .catch(response => {
+        dispatch(authError(response.data.error));
+      });
   };
 }
 
@@ -98,19 +99,36 @@ export function setRole(role) {
   };
 }
 
+export function authError(error) {
+  return {
+    type: AUTH_ERROR,
+    payload: error
+  };
+}
+
 export function login(user) {
-
-  const basic = window.window.btoa(`${user.username}:${user.password}`);
-
-  const request = axios.get(`${ROOT_URL}/signin`,
-    {
+  const basic = window.btoa(`${user.username}:${user.password}`);
+  return function(dispatch) {
+    axios.get(`${ROOT_URL}/signin`, {
       headers: {
         'Authorization': `Basic ${basic}`
       }
-    });
+    })
+      .then(response => {
+        dispatch( { type: AUTH_USER } );
+        hashHistory.push(`${response.data.role}`);
+        localStorage.setItem('token', response.data.token);
+      })
+      .catch(() => {
+        dispatch(authError('Bad Login Info'));
+      });
+  };
+}
+
+export function signoutUser() {
+  localStorage.removeItem('token');
 
   return {
-    type: LOGIN,
-    payload: request
+    type: UNAUTH_USER
   };
 }

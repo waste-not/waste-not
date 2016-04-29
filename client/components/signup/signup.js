@@ -1,6 +1,6 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
-import { createOrg } from '../../actions';
+import * as actions from '../../actions';
 
 const fields = [
   'username',
@@ -17,26 +17,26 @@ const fields = [
 
 class DonorProfile extends Component {
 
-  static contextTypes = {
-    router: PropTypes.object
-  }
+  // static contextTypes = {
+  //   router: PropTypes.object
+  // }
+  //
+  // static propTypes = {
+  //   createOrg: PropTypes.func,
+  //   fields: PropTypes.object,
+  //   handleSubmit: PropTypes.func,
+  //   role: PropTypes.string
+  // }
 
-  static propTypes = {
-    createOrg: PropTypes.func,
-    fields: PropTypes.object,
-    handleSubmit: PropTypes.func,
-    role: PropTypes.string
-  }
-
-  onSubmit(props) {
+  handleFormSubmit(props) {
 
     const { createOrg, role } = this.props;
-
-    createOrg({ ...props, role: role })
-      .then((data) => {
-        this.context.router.push(`/${role}`);
-        window.localStorage.setItem('token', data.token);
-      });
+    // Call action creator to sign up user with relevant role
+    createOrg({ ...props, role: role });
+      // .then((data) => {
+      //   this.context.router.push(`/${role}`);
+      //   window.localStorage.setItem('token', data.token);
+      // });
   }
 
   render() {
@@ -65,7 +65,7 @@ class DonorProfile extends Component {
           </h1>
           <div className="columns is-desktop">
             <div className="column is-one-third is-offset-one-third">
-              <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+              <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
                 <p className="control">
                   <input
                     className="input auth-input"
@@ -163,7 +163,13 @@ class DonorProfile extends Component {
 // 2nd is mapStateToProps,
 // 3rd is mapDispatchToProps
 
+function mapStateToProps(state) {
+  return {
+    errorMessage: state.auth.error
+  };
+}
+
 export default reduxForm({
   form: 'DonorProfileForm',
   fields
-}, null, { createOrg })(DonorProfile);
+}, mapStateToProps, actions)(DonorProfile);

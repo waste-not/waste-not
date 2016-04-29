@@ -5,9 +5,11 @@ import { createStore, applyMiddleware } from 'redux';
 import reducers from './reducers';
 import { Router, hashHistory } from 'react-router';
 import routes from './router';
+import reduxThunk from 'redux-thunk';
 import promise from 'redux-promise';
 
 const createStoreWithMiddleware = applyMiddleware(
+  reduxThunk,
   promise
 )(createStore);
 

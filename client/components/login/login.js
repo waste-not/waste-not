@@ -1,28 +1,25 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
-import { login } from '../../actions';
+import * as actions from '../../actions';
 
 const fields = ['username', 'password'];
 
 class Login extends Component {
 
-  static contextTypes = {
-    router: PropTypes.object
-  }
+  // static contextTypes = {
+  //   router: PropTypes.object
+  // }
+  //
+  // static propTypes = {
+  //   fields: PropTypes.object,
+  //   handleSubmit: PropTypes.func,
+  //   login: PropTypes.func
+  // }
 
-  static propTypes = {
-    fields: PropTypes.object,
-    handleSubmit: PropTypes.func,
-    login: PropTypes.func
-  }
-
-  onSubmit(props) {
-    this.props.login(props)
-      .then((data) => {
-        console.log(data.payload.data);
-        window.localStorage.setItem('token', data.payload.data.token);
-        this.context.router.push(`/${data.payload.data.role}`);
-      });
+  handleFormSubmit(formProps) {
+    // const { username, password } = this.props;
+    // Need to figure out what to pass into action
+    this.props.login(formProps);
   }
 
   render() {
@@ -34,7 +31,7 @@ class Login extends Component {
           <h1 className="page-title">Sign In</h1>
           <div className="columns is-desktop">
             <div className="column is-one-third is-offset-one-third">
-              <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+              <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
 
 
                 <p className={`control ${username.touched &&
@@ -69,7 +66,13 @@ class Login extends Component {
   }
 }
 
+function mapStateToProps(state) {
+  return {
+    errorMessage: state.auth.error
+  };
+}
+
 export default reduxForm({
   form: 'Login',
   fields
-}, null, { login })(Login);
+}, mapStateToProps, actions)(Login);

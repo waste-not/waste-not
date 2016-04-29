@@ -15,10 +15,10 @@ class Header extends Component {
       return (
         <div className="header-right header-menu">
           <p className="header-item">Hi, Human!</p>
-          <span className="button button-tight">
+          <span className="header-item  button-tight">
             <a className="button button-direct">Edit</a>
           </span>
-          <span className="button button-tight">
+          <span className="header-item  button-tight">
             <a className="button button-direct">Log Out</a>
           </span>
         </div>

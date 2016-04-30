@@ -1,9 +1,20 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { signoutUser } from '../../actions';
 
 class Header extends Component {
+  static contextTypes = {
+    router: PropTypes.object
+  }
+
+  static propTypes = {
+    fields: PropTypes.object,
+    handleSubmit: PropTypes.func,
+    login: PropTypes.func,
+    authenticated: PropTypes.bool
+  }
+
   handleSignout() {
     // Grab action createStore
     signoutUser();

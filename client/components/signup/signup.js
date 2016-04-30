@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 import * as actions from '../../actions';
 
@@ -17,16 +17,16 @@ const fields = [
 
 class DonorProfile extends Component {
 
-  // static contextTypes = {
-  //   router: PropTypes.object
-  // }
-  //
-  // static propTypes = {
-  //   createOrg: PropTypes.func,
-  //   fields: PropTypes.object,
-  //   handleSubmit: PropTypes.func,
-  //   role: PropTypes.string
-  // }
+  static contextTypes = {
+    router: PropTypes.object
+  }
+
+  static propTypes = {
+    createOrg: PropTypes.func,
+    fields: PropTypes.object,
+    handleSubmit: PropTypes.func,
+    role: PropTypes.string
+  }
 
   handleFormSubmit(props) {
 

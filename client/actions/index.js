@@ -18,7 +18,7 @@ export const UNAUTH_USER = 'unauth_user';
 const ROOT_URL = 'http://localhost:3000/api';
 
 const getAxiosConfig = () => {
-  const token = window.localStorage.getItem('token');
+  const token = localStorage.getItem('token');
   return token ? { headers: { 'Token': token } } : null;
 };
 

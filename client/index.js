@@ -7,6 +7,7 @@ import { Router, hashHistory } from 'react-router';
 import routes from './router';
 import reduxThunk from 'redux-thunk';
 import promise from 'redux-promise';
+import { AUTH_USER } from './actions';
 
 const createStoreWithMiddleware = applyMiddleware(
   reduxThunk,
@@ -14,6 +15,14 @@ const createStoreWithMiddleware = applyMiddleware(
 )(createStore);
 
 const store = createStoreWithMiddleware(reducers);
+
+const token = localStorage.getItem('token');
+console.log(token);
+// If we have a token, consider the user to be signed in
+if (token) {
+  // we need to update application state
+  store.dispatch({ type: AUTH_USER });
+}
 
 render((
   <Provider store={store}>

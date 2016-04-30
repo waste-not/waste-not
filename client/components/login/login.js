@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 import * as actions from '../../actions';
 
@@ -6,15 +6,15 @@ const fields = ['username', 'password'];
 
 class Login extends Component {
 
-  // static contextTypes = {
-  //   router: PropTypes.object
-  // }
-  //
-  // static propTypes = {
-  //   fields: PropTypes.object,
-  //   handleSubmit: PropTypes.func,
-  //   login: PropTypes.func
-  // }
+  static contextTypes = {
+    router: PropTypes.object
+  }
+
+  static propTypes = {
+    fields: PropTypes.object,
+    handleSubmit: PropTypes.func,
+    login: PropTypes.func
+  }
 
   handleFormSubmit(formProps) {
     // const { username, password } = this.props;

@@ -35,7 +35,7 @@ class Header extends Component {
         </div>
       );
     // Will need condition for user on signup pages – show nothing
-    } else {
+    }
       // show a link to sign in or sign up
       return (
         <div className="header-right header-menu">
@@ -51,9 +51,7 @@ class Header extends Component {
           </p>
         </div>
       );
-    }
   }
-
 
   render() {
     return (

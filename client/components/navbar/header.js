@@ -1,22 +1,56 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
-import HeaderItem from './header_login';
 import { connect } from 'react-redux';
-import * as actions from '../../actions';
+import { signoutUser } from '../../actions';
 
-export default class Header extends Component {
+class Header extends Component {
+  static contextTypes = {
+    router: PropTypes.object
+  }
 
   static propTypes = {
-    authenticate: PropTypes.func,
+    fields: PropTypes.object,
+    handleSubmit: PropTypes.func,
+    login: PropTypes.func,
     authenticated: PropTypes.bool
   }
 
-  authButton() {
-    if (this.props.authenticated) {
-      return <HeaderItem onClick={() => this.props.authenticate(false)} />;
-    }
+  handleSignout() {
+    // Grab action createStore
+    signoutUser();
+  }
 
-    return <HeaderItem onClick={() => this.props.authenticate(true)} />;
+  renderLinks() {
+    if (this.props.authenticated) {
+      // show a link to sign out
+      return (
+        <div className="header-right header-menu">
+          <p className="header-item">Hi, Human!</p>
+          <span className="header-item  button-tight">
+            <a className="button button-direct">Edit</a>
+          </span>
+          <span className="header-item  button-tight">
+            <a className="button button-direct">Log Out</a>
+          </span>
+        </div>
+      );
+    // Will need condition for user on signup pages – show nothing
+    }
+      // show a link to sign in or sign up
+      return (
+        <div className="header-right header-menu">
+          <p>
+            <Link className="header-item" to="/login" className="header-item">
+              Already Registered?
+            </Link>
+          </p>
+          <p>
+            <span className="header-item">
+              <Link className="button button-direct" to="/login">Log In</Link>
+            </span>
+          </p>
+        </div>
+      );
   }
 
   render() {
@@ -24,22 +58,23 @@ export default class Header extends Component {
       <header className="header landing-nav">
         <div className="container">
           <div className="header-left">
-            <Link className="header-item" to="/">
+            <Link to="/" className="header-item">
               <img
                 src="img/logo_single_light.png"
                 alt="Waste Not"
                 className="brand-logo" />
             </Link>
           </div>
-          {this.authButton()}
+            {this.renderLinks()}
         </div>
+
       </header>
     );
   }
 }
 
 function mapStateToProps(state) {
-  return { authenticated: state.authenticated };
+  return { authenticated: state.auth.authenticated };
 }
 
-export default connect(mapStateToProps, actions)(Header);
+export default connect(mapStateToProps, signoutUser)(Header);

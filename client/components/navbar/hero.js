@@ -23,7 +23,11 @@ class HeroContainer extends Component {
               <div className="columns is-mobile">
                 <div className="expands column is-half is-offset-one-quarter">
                   <p className="subtitle">
-                    Food waste is a massive global problem that has negative humanitarian, environmental and financial implications. According to the Natural Resources Defenses Council, reducing food waste by 20% would provide enough food to feed 25 million people.
+                    Food waste is a massive global problem
+                    that has negative humanitarian, environmental
+                    and financial implications. According to the Natural
+                    Resources Defenses Council, reducing food waste by 20%
+                    would provide enough food to feed 25 million people.
                   </p>
                   <Link
                   className="column is-one-quarter is-offset-one-quarter

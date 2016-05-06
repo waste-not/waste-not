@@ -2,27 +2,43 @@ import {
   CREATE_INVENTORY,
   DELETE_INVENTORY,
   FETCH_INVENTORY,
-  LOGIN, CREATE_USER,
-  CREATE_ORG,
+  FETCH_CLAIMED,
   FETCH_DONOR_INVENTORY
 } from '../actions';
 
-export default function(state = [], action) {
+const initialState = {
+  inventory: [],
+  claimedInventory: [],
+  donorInventory: []
+};
+
+export default function(state = initialState, action) {
   switch (action.type) {
-    case CREATE_ORG:
-      return [...state, action.payload.data];
-    case CREATE_USER:
-      return [...state, action.payload.data];
     case CREATE_INVENTORY:
-      return [...state, action.payload.data];
+      return {
+        ...state,
+        inventory: [...state.inventory, action.payload]
+      };
     case DELETE_INVENTORY:
-      return state.filter(item => item.id !== action.payload.data.id);
+      return {
+        ...state,
+        inventory: state.filter(item => item.id !== action.payload.id)
+      };
     case FETCH_INVENTORY:
-      return [...state, ...action.payload.data];
+      return {
+        ...state,
+        inventory: action.payload
+      };
+    case FETCH_CLAIMED:
+      return {
+        ...state,
+        claimedInventory: action.payload
+      };
     case FETCH_DONOR_INVENTORY:
-      return [...state, ...action.payload.data];
-    case LOGIN:
-      return [...state, action.payload.data];
+      return {
+        ...state,
+        donorInventory: action.payload
+      };
     default:
       return state;
   }

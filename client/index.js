@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import reducers from './reducers';
 import { Router, hashHistory } from 'react-router';
 import routes from './router';
@@ -9,9 +9,9 @@ import reduxThunk from 'redux-thunk';
 import promise from 'redux-promise';
 import { AUTH_USER } from './actions';
 
-const createStoreWithMiddleware = applyMiddleware(
-  reduxThunk,
-  promise
+const createStoreWithMiddleware = compose(
+  applyMiddleware(reduxThunk, promise),
+  window.devToolsExtension ? window.devToolsExtension() : f => f
 )(createStore);
 
 const store = createStoreWithMiddleware(reducers);

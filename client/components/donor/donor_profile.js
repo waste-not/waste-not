@@ -12,7 +12,7 @@ class InventoryForm extends Component {
       PropTypes.node
     ]),
     fetchDonorInventory: PropTypes.func,
-    inventory: PropTypes.array
+    inventory: PropTypes.object
   }
 
   componentWillMount() {

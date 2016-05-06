@@ -6,18 +6,24 @@ import {
   UNAUTH_USER
 } from '../actions';
 
-// const initialState = {
-//   authenticated: !!window.localStorage.getItem('token'),
-//   role: 'donor',
-//   token: window.localStorage.getItem('token')
-// };
+const initialState = {
+  authenticated: !!window.localStorage.getItem('token'),
+  role: 'donor',
+  token: window.localStorage.getItem('token')
+};
 
-export default function(state = {}, action) {
+export default function(state = initialState, action) {
   switch (action.type) {
     case CHANGE_AUTH:
       return { ...state, ...action.payload };
     case AUTH_USER:
-      return { ...state, error: '', authenticated: true };
+      return {
+        ...state,
+        error: '',
+        authenticated: true,
+        token: action.payload.token,
+        role: action.payload.role
+      };
     case UNAUTH_USER:
       return { ...state, authenticated: false };
     case SET_ROLE:

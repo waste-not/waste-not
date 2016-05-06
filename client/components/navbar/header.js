@@ -11,7 +11,6 @@ class Header extends Component {
   static propTypes = {
     fields: PropTypes.object,
     handleSubmit: PropTypes.func,
-    login: PropTypes.func,
     authenticated: PropTypes.bool
   }
 

@@ -14,6 +14,7 @@ export const CREATE_ORG = 'create_org';
 export const AUTH_ERROR = 'auth_error';
 export const AUTH_USER = 'auth_user';
 export const UNAUTH_USER = 'unauth_user';
+export const INVENTORY_ERROR = 'inventory_error';
 
 const ROOT_URL = 'http://localhost:3000/api';
 
@@ -32,63 +33,84 @@ export function createUser(newUser) {
 }
 
 export function createOrg(newOrg) {
-  return function(dispatch) {
+  return dispatch => {
     axios.post(`${ROOT_URL}/signup`, newOrg)
       .then(response => {
-        dispatch( { type: AUTH_USER } );
+        dispatch(authUser(response.data));
         hashHistory.push(`/${newOrg.role}`);
         localStorage.setItem('token', response.data.token);
       })
-      .catch(response => {
-        dispatch(authError(response.data.error));
+      .catch((response) => {
+        console.log(response);
+        dispatch(authError('Signup failed'));
       });
   };
 }
 
-export function createInventory(newInventory) {
-
-  const request =
-    axios.post(`${ROOT_URL}/inventory`, newInventory, getAxiosConfig());
-
+export function inventoryError(error) {
   return {
-    type: CREATE_INVENTORY,
-    payload: request
+    type: INVENTORY_ERROR,
+    payload: error
+  };
+}
+
+export function createInventory(newInventory) {
+  return dispatch => {
+    axios.post(`${ROOT_URL}/inventory`, newInventory, getAxiosConfig())
+      .then(response => {
+        dispatch({ type: CREATE_INVENTORY, payload: response.data });
+      })
+      .catch(() => {
+        dispatch(inventoryError('Could not create inventory'));
+      });
   };
 }
 
 export function fetchInventory() {
-  const request = axios.get(`${ROOT_URL}/inventory`);
-
-  return {
-    type: FETCH_INVENTORY,
-    payload: request
+  return dispatch => {
+    axios.get(`${ROOT_URL}/inventory`)
+      .then(response => {
+        dispatch({ type: FETCH_INVENTORY, payload: response.data });
+      })
+      .catch(() => {
+        dispatch(inventoryError('Could not fetch inventory'));
+      });
   };
 }
 
 export function fetchClaimedInventory() {
-  const request = axios.get(`${ROOT_URL}/inventory/claimed`, getAxiosConfig());
-
-  return {
-    type: FETCH_CLAIMED,
-    payload: request
+  return dispatch => {
+    axios.get(`${ROOT_URL}/inventory/claimed`, getAxiosConfig())
+      .then(response => {
+        dispatch({ type: FETCH_CLAIMED, payload: response.data });
+      })
+      .catch(() => {
+        dispatch(inventoryError('Could not fetch claimed inventory'));
+      });
   };
 }
 
 export function fetchDonorInventory() {
-  const request = axios.get(`${ROOT_URL}/inventory/history`, getAxiosConfig());
-
-  return {
-    type: FETCH_DONOR_INVENTORY,
-    payload: request
+  return dispatch => {
+    axios.get(`${ROOT_URL}/inventory/history`, getAxiosConfig())
+      .then(response => {
+        dispatch({ type: FETCH_DONOR_INVENTORY, payload: response.data });
+      })
+      .catch(() => {
+        dispatch(inventoryError('Could not fetch donor inventory'));
+      });
   };
 }
 
 export function deleteInventory(id) {
-  const request = axios.delete(`${ROOT_URL}/inventory/${id}`, getAxiosConfig());
-
-  return {
-    type: DELETE_INVENTORY,
-    payload: request
+  return dispatch => {
+    axios.delete(`${ROOT_URL}/inventory/${id}`, getAxiosConfig())
+      .then(response => {
+        dispatch({ type: DELETE_INVENTORY, payload: response.data });
+      })
+      .catch(() => {
+        dispatch(inventoryError('Could not delete item'));
+      });
   };
 }
 
@@ -106,16 +128,25 @@ export function authError(error) {
   };
 }
 
+export function authUser(data) {
+  const { token, role } = data;
+  return {
+    type: AUTH_USER,
+    payload: { token, role }
+  };
+}
+
 export function login(user) {
   const basic = window.btoa(`${user.username}:${user.password}`);
-  return function(dispatch) {
+  return dispatch => {
     axios.get(`${ROOT_URL}/signin`, {
       headers: {
         'Authorization': `Basic ${basic}`
       }
     })
       .then(response => {
-        dispatch( { type: AUTH_USER } );
+        console.log(response);
+        dispatch(authUser(response.data));
         hashHistory.push(`${response.data.role}`);
         localStorage.setItem('token', response.data.token);
       })

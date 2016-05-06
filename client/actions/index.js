@@ -37,8 +37,8 @@ export function createOrg(newOrg) {
     axios.post(`${ROOT_URL}/signup`, newOrg)
       .then(response => {
         dispatch(authUser(response.data));
-        hashHistory.push(`/${newOrg.role}`);
         localStorage.setItem('token', response.data.token);
+        hashHistory.push(`/${newOrg.role}`);
       })
       .catch((response) => {
         console.log(response);
@@ -60,7 +60,8 @@ export function createInventory(newInventory) {
       .then(response => {
         dispatch({ type: CREATE_INVENTORY, payload: response.data });
       })
-      .catch(() => {
+      .catch(err => {
+        console.log(err);
         dispatch(inventoryError('Could not create inventory'));
       });
   };
@@ -72,7 +73,8 @@ export function fetchInventory() {
       .then(response => {
         dispatch({ type: FETCH_INVENTORY, payload: response.data });
       })
-      .catch(() => {
+      .catch(err => {
+        console.log(err);
         dispatch(inventoryError('Could not fetch inventory'));
       });
   };
@@ -84,7 +86,8 @@ export function fetchClaimedInventory() {
       .then(response => {
         dispatch({ type: FETCH_CLAIMED, payload: response.data });
       })
-      .catch(() => {
+      .catch(err => {
+        console.log(err);
         dispatch(inventoryError('Could not fetch claimed inventory'));
       });
   };
@@ -96,7 +99,8 @@ export function fetchDonorInventory() {
       .then(response => {
         dispatch({ type: FETCH_DONOR_INVENTORY, payload: response.data });
       })
-      .catch(() => {
+      .catch(err => {
+        console.log(err);
         dispatch(inventoryError('Could not fetch donor inventory'));
       });
   };
@@ -108,7 +112,8 @@ export function deleteInventory(id) {
       .then(response => {
         dispatch({ type: DELETE_INVENTORY, payload: response.data });
       })
-      .catch(() => {
+      .catch(err => {
+        console.log(err);
         dispatch(inventoryError('Could not delete item'));
       });
   };
@@ -150,7 +155,8 @@ export function login(user) {
         hashHistory.push(`${response.data.role}`);
         localStorage.setItem('token', response.data.token);
       })
-      .catch(() => {
+      .catch(err => {
+        console.log(err);
         dispatch(authError('Bad Login Info'));
       });
   };

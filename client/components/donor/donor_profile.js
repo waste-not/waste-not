@@ -20,7 +20,7 @@ class InventoryForm extends Component {
   }
 
   renderDonorInventory(inventoryData) {
-    return inventoryData.map((inventory) => {
+    return inventoryData.donorInventory.map((inventory) => {
       return (
         <InventoryDonorItem key={inventory._id} {...inventory} />
       );

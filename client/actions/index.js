@@ -178,10 +178,10 @@ export function authError(error) {
 }
 
 export function authUser(data) {
-  const { token, role } = data;
+  const { token, role, username } = data;
   return {
     type: AUTH_USER,
-    payload: { token, role }
+    payload: { token, role, username }
   };
 }
 

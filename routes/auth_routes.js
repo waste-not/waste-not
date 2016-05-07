@@ -43,6 +43,9 @@ authRouter.get('/signin', basicHttpAuth, (req, res) => {
       return res.status(401).json({ msg: 'invalid username or password' });
     }
 
-    res.json({ token: data.generateToken(), role: data.role });
+    res.json({
+      token: data.generateToken(),
+      role: data.role,
+      username: data.username });
   });
 });

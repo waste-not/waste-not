@@ -12,7 +12,9 @@ class Header extends Component {
     fields: PropTypes.object,
     handleSubmit: PropTypes.func,
     authenticated: PropTypes.bool,
-    signoutUser: PropTypes.func
+    signoutUser: PropTypes.func,
+    role: PropTypes.string,
+    username: PropTypes.string
   }
 
   handleSignout() {
@@ -25,9 +27,13 @@ class Header extends Component {
       // show a link to sign out
       return (
         <div className="header-right header-menu">
-          <p className="header-item">Hi, Human!</p>
+          <p className="header-item">Hi, {this.props.username}!</p>
           <span className="header-item  button-tight">
-            <a className="button button-direct">Edit</a>
+            <Link
+              className="button button-direct"
+              to={this.props.role}>
+                Dashboard
+              </Link>
           </span>
           <span className="header-item  button-tight">
             <a
@@ -77,7 +83,11 @@ class Header extends Component {
 }
 
 function mapStateToProps(state) {
-  return { authenticated: state.auth.authenticated };
+  return {
+    authenticated: state.auth.authenticated,
+    role: state.auth.role,
+    username: state.auth.username
+   };
 }
 
 export default connect(mapStateToProps, { signoutUser })(Header);

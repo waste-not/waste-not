@@ -22,7 +22,8 @@ export default function(state = initialState, action) {
         error: '',
         authenticated: true,
         token: action.payload.token,
-        role: action.payload.role
+        role: action.payload.role,
+        username: action.payload.username
       };
     case UNAUTH_USER:
       return { ...state, authenticated: false };

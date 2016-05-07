@@ -6,8 +6,8 @@ const webpack = require('webpack-stream');
 const sass = require('gulp-sass');
 
 const scripts = ['server.js', 'lib/**/*.js', 'models/**/*.js', 'routes/**/*.js',
-  'client/**/*.js?(x)', '!**/*bundle.js'];
-const clientScripts = ['client/**/*.js?(x)'];
+  'client/**/*.js', '!**/*bundle.js'];
+const clientScripts = ['client/**/*.js'];
 const staticFiles = ['client/**/*.html', 'client/**/*.png', 'client/**/*.jpg',
   'client/**/*.csv'];
 
@@ -60,7 +60,8 @@ gulp.task('watch', () => {
   gulp.watch('client/sass/*.sass', ['sass:dev']);
 });
 
-gulp.task('dev', ['static:dev', 'build:dev', 'sass:dev', 'webfonts:dev']);
+gulp.task('dev', ['watch', 'static:dev', 'build:dev', 'sass:dev',
+  'webfonts:dev']);
 gulp.task('style:dev', ['static:dev', 'sass:dev', 'webfonts:dev']);
 
 gulp.task('default', ['dev', 'lint']);

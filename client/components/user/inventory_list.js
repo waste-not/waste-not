@@ -3,40 +3,45 @@ import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import InventoryItem from './inventory_item';
 
-const dummy = [
-  { title: 'Dummy', _id: 123 },
-  { title: 'Dummy2', _id: 124 }
-];
-
 class InventoryList extends Component {
 
   static propTypes = {
-    fetchInventory: PropTypes.func,
-    fetchClaimedInventory: PropTypes.func
+    fetchActiveInventory: PropTypes.func,
+    fetchClaimedInventory: PropTypes.func,
+    inventory: PropTypes.object,
+    claimInventory: PropTypes.func,
+    unclaimInventory: PropTypes.func
   }
 
   componentWillMount() {
-    this.props.fetchInventory();
+    this.props.fetchActiveInventory();
     this.props.fetchClaimedInventory();
   }
 
   renderInventory(inventoryData) {
-    return inventoryData.map((inventory) => {
+    return inventoryData.map(inventory => {
       return (
-        <InventoryItem key={inventory._id} {...inventory} />
+        <InventoryItem
+          item={inventory}
+          key={inventory._id}
+          claimInventory={this.props.claimInventory}
+          unclaimInventory={this.props.unclaimInventory} />
       );
     });
   }
 
 
   render() {
+
+    const { inventory } = this.props;
+
     return (
       <section className="main">
         <div className="container">
           <h1 className="page-title">Recent claims</h1>
           <div className="columns is-multiline">
 
-            {this.renderInventory(dummy)}
+            {this.renderInventory(inventory.claimedInventory)}
 
           </div>
 
@@ -55,26 +60,8 @@ class InventoryList extends Component {
 
           <div id="list-view" className="columns is-multiline">
 
+            {this.renderInventory(inventory.activeInventory)}
 
-            <div className="column is-half">
-              <article className="card is-fullwidth inv-item inv-active">
-                <header className="card-header is-fullwidth">
-                  <h3 className="card-header-title">
-                    claim meeee
-                  </h3>
-                </header>
-                <div className="card-content">
-                  <div className="content">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Phasellus nec iaculis mauris.
-                  </div>
-                </div>
-                <footer className="card-footer">
-                  <a className="card-footer-item">Contact donor</a>
-                  <a className="card-footer-item">Claim</a>
-                </footer>
-              </article>
-            </div>
           </div>
         </div>
       </section>

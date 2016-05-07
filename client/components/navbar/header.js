@@ -11,8 +11,8 @@ class Header extends Component {
   static propTypes = {
     fields: PropTypes.object,
     handleSubmit: PropTypes.func,
-    login: PropTypes.func,
-    authenticated: PropTypes.bool
+    authenticated: PropTypes.bool,
+    signoutUser: PropTypes.func
   }
 
   handleSignout() {
@@ -30,7 +30,10 @@ class Header extends Component {
             <a className="button button-direct">Edit</a>
           </span>
           <span className="header-item  button-tight">
-            <a className="button button-direct">Log Out</a>
+            <a
+              className="button button-direct"
+              onClick={this.props.signoutUser}>Log Out
+            </a>
           </span>
         </div>
       );
@@ -77,4 +80,4 @@ function mapStateToProps(state) {
   return { authenticated: state.auth.authenticated };
 }
 
-export default connect(mapStateToProps, signoutUser)(Header);
+export default connect(mapStateToProps, { signoutUser })(Header);

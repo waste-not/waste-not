@@ -33,10 +33,6 @@ class DonorProfile extends Component {
     const { createOrg, role } = this.props;
     // Call action creator to sign up user with relevant role
     createOrg({ ...props, role: role });
-      // .then((data) => {
-      //   this.context.router.push(`/${role}`);
-      //   window.localStorage.setItem('token', data.token);
-      // });
   }
 
   render() {

@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-const InventoryDonorItem = (props) => {
+const InventoryDonorItem = props => {
   return (
     <div className="column is-half">
       <article className="card is-fullwidth inv-item inv-active">

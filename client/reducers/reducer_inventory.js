@@ -2,14 +2,18 @@ import {
   CREATE_INVENTORY,
   DELETE_INVENTORY,
   FETCH_INVENTORY,
+  FETCH_ACTIVE,
   FETCH_CLAIMED,
-  FETCH_DONOR_INVENTORY
+  FETCH_DONOR_INVENTORY,
+  CLAIM_INVENTORY,
+  UNCLAIM_INVENTORY
 } from '../actions';
 
 const initialState = {
   inventory: [],
   claimedInventory: [],
-  donorInventory: []
+  donorInventory: [],
+  activeInventory: []
 };
 
 export default function(state = initialState, action) {
@@ -17,17 +21,22 @@ export default function(state = initialState, action) {
     case CREATE_INVENTORY:
       return {
         ...state,
-        inventory: [...state.inventory, action.payload]
+        donorInventory: [...state.donorInventory, action.payload]
       };
     case DELETE_INVENTORY:
       return {
         ...state,
-        inventory: state.filter(item => item.id !== action.payload.id)
+        inventory: state.inventory.filter(item => item._id !== action.payload)
       };
     case FETCH_INVENTORY:
       return {
         ...state,
         inventory: action.payload
+      };
+    case FETCH_ACTIVE:
+      return {
+        ...state,
+        activeInventory: action.payload
       };
     case FETCH_CLAIMED:
       return {
@@ -38,6 +47,26 @@ export default function(state = initialState, action) {
       return {
         ...state,
         donorInventory: action.payload
+      };
+    case CLAIM_INVENTORY:
+      return {
+        ...state,
+        activeInventory: state.activeInventory
+          .filter(item => item._id !== action.payload._id),
+        claimedInventory: [
+          ...state.claimedInventory,
+          { ...action.payload, claimedBy: true }
+        ]
+      };
+    case UNCLAIM_INVENTORY:
+      return {
+        ...state,
+        activeInventory: [
+          ...state.activeInventory,
+          { ...action.payload, claimedBy: false }
+        ],
+        claimedInventory: state.claimedInventory
+          .filter(item => item._id !== action.payload._id)
       };
     default:
       return state;

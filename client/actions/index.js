@@ -6,8 +6,11 @@ export const SET_ROLE = 'set_role';
 export const CREATE_USER = 'create_user';
 export const LOGIN = 'login';
 export const FETCH_INVENTORY = 'fetch_inventory';
+export const FETCH_ACTIVE = 'fetch_active';
 export const FETCH_DONOR_INVENTORY = 'fetch_donor_inventory';
 export const FETCH_CLAIMED = 'fetch_claimed';
+export const CLAIM_INVENTORY = 'claim_inventory';
+export const UNCLAIM_INVENTORY = 'unclaim_inventory';
 export const CREATE_INVENTORY = 'create_inventory';
 export const DELETE_INVENTORY = 'delete_inventory';
 export const CREATE_ORG = 'create_org';
@@ -40,7 +43,7 @@ export function createOrg(newOrg) {
         localStorage.setItem('token', response.data.token);
         hashHistory.push(`/${newOrg.role}`);
       })
-      .catch((response) => {
+      .catch(response => {
         console.log(response);
         dispatch(authError('Signup failed'));
       });
@@ -59,10 +62,38 @@ export function createInventory(newInventory) {
     axios.post(`${ROOT_URL}/inventory`, newInventory, getAxiosConfig())
       .then(response => {
         dispatch({ type: CREATE_INVENTORY, payload: response.data });
+        hashHistory.push('/donor');
       })
       .catch(err => {
         console.log(err);
         dispatch(inventoryError('Could not create inventory'));
+      });
+  };
+}
+
+export function claimInventory(item) {
+  return dispatch => {
+    axios.put(`${ROOT_URL}/inventory/claim/${item._id}`, null, getAxiosConfig())
+      .then(() => {
+        dispatch({ type: CLAIM_INVENTORY, payload: item });
+      })
+      .catch(err => {
+        console.log(err);
+        dispatch(inventoryError('Could not claim inventory'));
+      });
+  };
+}
+
+export function unclaimInventory(item) {
+  return dispatch => {
+    axios
+      .put(`${ROOT_URL}/inventory/unclaim/${item._id}`, null, getAxiosConfig())
+      .then(() => {
+        dispatch({ type: UNCLAIM_INVENTORY, payload: item });
+      })
+      .catch(err => {
+        console.log(err);
+        dispatch(inventoryError('Could not unclaim inventory'));
       });
   };
 }
@@ -76,6 +107,19 @@ export function fetchInventory() {
       .catch(err => {
         console.log(err);
         dispatch(inventoryError('Could not fetch inventory'));
+      });
+  };
+}
+
+export function fetchActiveInventory() {
+  return dispatch => {
+    axios.get(`${ROOT_URL}/inventory/active`)
+      .then(response => {
+        dispatch({ type: FETCH_ACTIVE, payload: response.data });
+      })
+      .catch(err => {
+        console.log(err);
+        dispatch(inventoryError('Could not fetch active inventory'));
       });
   };
 }
@@ -109,8 +153,8 @@ export function fetchDonorInventory() {
 export function deleteInventory(id) {
   return dispatch => {
     axios.delete(`${ROOT_URL}/inventory/${id}`, getAxiosConfig())
-      .then(response => {
-        dispatch({ type: DELETE_INVENTORY, payload: response.data });
+      .then(() => {
+        dispatch({ type: DELETE_INVENTORY, payload: id });
       })
       .catch(err => {
         console.log(err);

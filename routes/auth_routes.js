@@ -24,13 +24,13 @@ authRouter.post('/signup', jsonParser, signupValidation, (req, res) => {
   ].join(' ');
 
   geocoder(addressStr)
-    .then((coord) => {
+    .then(coord => {
       newUser.coordinates = coord;
       newUser.save((err, data) => {
         if (err) return handleDBError(err, res);
         res.status(200).json({ token: data.generateToken() });
       });
-    }, (geocodeErr) => {
+    }, geocodeErr => {
       console.log(geocodeErr);
       res.status(500).json({ msg: 'Error in geocoding' });
     });

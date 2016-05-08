@@ -52,10 +52,10 @@ export default function(state = initialState, action) {
       return {
         ...state,
         activeInventory: state.activeInventory
-          .filter(item => item._id !== action.payload._id),
+          .filter(item => item._id !== action.payload.item._id),
         claimedInventory: [
           ...state.claimedInventory,
-          { ...action.payload, claimedBy: true }
+          { ...action.payload.item, claimedBy: action.payload.userId }
         ]
       };
     case UNCLAIM_INVENTORY:
@@ -63,7 +63,7 @@ export default function(state = initialState, action) {
         ...state,
         activeInventory: [
           ...state.activeInventory,
-          { ...action.payload, claimedBy: false }
+          { ...action.payload, claimedBy: '' }
         ],
         claimedInventory: state.claimedInventory
           .filter(item => item._id !== action.payload._id)

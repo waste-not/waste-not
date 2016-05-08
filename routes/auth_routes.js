@@ -28,7 +28,10 @@ authRouter.post('/signup', jsonParser, signupValidation, (req, res) => {
       newUser.coordinates = coord;
       newUser.save((err, data) => {
         if (err) return handleDBError(err, res);
-        res.status(200).json({ token: data.generateToken() });
+        res.status(200).json({
+          token: data.generateToken(),
+          _id: data._id
+        });
       });
     }, geocodeErr => {
       console.log(geocodeErr);
@@ -43,9 +46,11 @@ authRouter.get('/signin', basicHttpAuth, (req, res) => {
       return res.status(401).json({ msg: 'invalid username or password' });
     }
 
-    res.json({
+    res.status(200).json({
       token: data.generateToken(),
       role: data.role,
-      username: data.username });
+      username: data.username,
+      _id: data._id
+    });
   });
 });

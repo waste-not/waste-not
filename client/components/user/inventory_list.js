@@ -10,7 +10,8 @@ class InventoryList extends Component {
     fetchClaimedInventory: PropTypes.func,
     inventory: PropTypes.object,
     claimInventory: PropTypes.func,
-    unclaimInventory: PropTypes.func
+    unclaimInventory: PropTypes.func,
+    userId: PropTypes.string
   }
 
   componentWillMount() {
@@ -24,8 +25,10 @@ class InventoryList extends Component {
         <InventoryItem
           item={inventory}
           key={inventory._id}
-          claimInventory={this.props.claimInventory}
-          unclaimInventory={this.props.unclaimInventory} />
+          claimInventory={this.props.claimInventory
+            .bind(null, inventory, this.props.userId)}
+          unclaimInventory={this.props.unclaimInventory
+            .bind(null, inventory)} />
       );
     });
   }
@@ -33,7 +36,7 @@ class InventoryList extends Component {
 
   render() {
 
-    const { inventory } = this.props;
+    const { claimedInventory, activeInventory } = this.props.inventory;
 
     return (
       <section className="main">
@@ -41,7 +44,7 @@ class InventoryList extends Component {
           <h1 className="page-title">Recent claims</h1>
           <div className="columns is-multiline">
 
-            {this.renderInventory(inventory.claimedInventory)}
+            {this.renderInventory(claimedInventory)}
 
           </div>
 
@@ -60,7 +63,7 @@ class InventoryList extends Component {
 
           <div id="list-view" className="columns is-multiline">
 
-            {this.renderInventory(inventory.activeInventory)}
+            {this.renderInventory(activeInventory)}
 
           </div>
         </div>
@@ -69,8 +72,8 @@ class InventoryList extends Component {
   }
 }
 
-function mapStateToProps({ inventory }) {
-  return { inventory };
+function mapStateToProps({ inventory, auth }) {
+  return { inventory, userId: auth._id };
 }
 
 export default connect(mapStateToProps, actions)(InventoryList);

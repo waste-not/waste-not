@@ -26,10 +26,10 @@ const InventoryItem = props => {
           {claimedBy ?
             <a
               className="card-footer-item"
-              onClick={unclaimInventory.bind(null, props.item)}>Remove</a> :
+              onClick={unclaimInventory}>Remove</a> :
             <a
               className="card-footer-item"
-              onClick={claimInventory.bind(null, props.item)}>Claim</a>
+              onClick={claimInventory}>Claim</a>
           }
         </footer>
       </article>

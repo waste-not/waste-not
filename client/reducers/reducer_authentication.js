@@ -8,8 +8,20 @@ import {
 
 const initialState = {
   authenticated: !!window.localStorage.getItem('token'),
-  role: 'donor',
-  token: window.localStorage.getItem('token')
+  role: localStorage.getItem('role'),
+  token: localStorage.getItem('token'),
+  username: localStorage.getItem('username'),
+  _id: localStorage.getItem('_id'),
+  'error': ''
+};
+
+const blankState = {
+  authenticated: false,
+  role: '',
+  token: '',
+  username: '',
+  _id: '',
+  error: ''
 };
 
 export default function(state = initialState, action) {
@@ -19,14 +31,12 @@ export default function(state = initialState, action) {
     case AUTH_USER:
       return {
         ...state,
+        ...action.payload,
         error: '',
-        authenticated: true,
-        token: action.payload.token,
-        role: action.payload.role,
-        username: action.payload.username
+        authenticated: true
       };
     case UNAUTH_USER:
-      return { ...state, authenticated: false };
+      return { ...blankState };
     case SET_ROLE:
       return { ...state, role: action.payload };
     case AUTH_ERROR:

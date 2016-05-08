@@ -26,6 +26,13 @@ const getAxiosConfig = () => {
   return token ? { headers: { 'Token': token } } : null;
 };
 
+const storeUser = ({ token, role, _id, username }) => {
+  localStorage.setItem('token', token);
+  localStorage.setItem('role', role);
+  localStorage.setItem('_id', _id);
+  localStorage.setItem('username', username);
+};
+
 export function createUser(newUser) {
   const request = axios.post(`${ROOT_URL}/signup`, newUser);
 
@@ -40,7 +47,12 @@ export function createOrg(newOrg) {
     axios.post(`${ROOT_URL}/signup`, newOrg)
       .then(response => {
         dispatch(authUser(response.data));
-        localStorage.setItem('token', response.data.token);
+        storeUser({
+          token: response.data.token,
+          role: newOrg.role,
+          _id: response.data._id,
+          username: newOrg.username
+        });
         hashHistory.push(`/${newOrg.role}`);
       })
       .catch(response => {
@@ -71,11 +83,11 @@ export function createInventory(newInventory) {
   };
 }
 
-export function claimInventory(item) {
+export function claimInventory(item, userId) {
   return dispatch => {
     axios.put(`${ROOT_URL}/inventory/claim/${item._id}`, null, getAxiosConfig())
       .then(() => {
-        dispatch({ type: CLAIM_INVENTORY, payload: item });
+        dispatch({ type: CLAIM_INVENTORY, payload: { item, userId } });
       })
       .catch(err => {
         console.log(err);
@@ -194,10 +206,10 @@ export function login(user) {
       }
     })
       .then(response => {
-        console.log(response);
         dispatch(authUser(response.data));
-        hashHistory.push(`${response.data.role}`);
-        localStorage.setItem('token', response.data.token);
+        const { token, role, _id, username } = response.data;
+        storeUser({ token, role, _id, username });
+        hashHistory.push(`${role}`);
       })
       .catch(err => {
         console.log(err);
@@ -207,7 +219,9 @@ export function login(user) {
 }
 
 export function signoutUser() {
-  localStorage.removeItem('token');
+  // this removes all localStorage.
+  // if we ever start storing non-auth stuff in there this will be problematic
+  localStorage.clear();
 
   return {
     type: UNAUTH_USER

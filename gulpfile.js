@@ -7,7 +7,7 @@ const sass = require('gulp-sass');
 const mocha = require('gulp-mocha');
 
 const scripts = ['server.js', 'lib/**/*.js', 'models/**/*.js', 'routes/**/*.js',
-  'client/**/*.js', '!**/*bundle.js'];
+  'client/**/*.js', '!**/*bundle.js', 'test/**/*.js'];
 const clientScripts = ['client/**/*.js'];
 const staticFiles = ['client/**/*.html', 'client/**/*.png', 'client/**/*.jpg',
   'client/**/*.csv'];
@@ -67,7 +67,7 @@ gulp.task('dev', ['watch', 'static:dev', 'build:dev', 'sass:dev',
 gulp.task('style:dev', ['static:dev', 'sass:dev', 'webfonts:dev']);
 
 
-gulp.task('test:backend', () => {
+gulp.task('test:mocha', () => {
   return gulp.src(serverSpecs, { read: false })
     .pipe(mocha())
     .once('end', process.exit);

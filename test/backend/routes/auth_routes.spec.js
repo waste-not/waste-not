@@ -10,8 +10,8 @@ const testPort = process.env.PORT = 5000;
 
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
-const server = require(__dirname + '/../../server');
-const User = require(__dirname + '/../../models/user');
+const server = require(__dirname + '/../../../server');
+const User = require(__dirname + '/../../../models/user');
 
 describe('Auth router endpoints', () => {
   before(() => {
@@ -70,7 +70,11 @@ describe('Auth router endpoints', () => {
         email: 'test@tester.com',
         role: 'user'
       };
-      User.create(formData, done);
+      User.create(formData, err => {
+        if (err) console.log(err);
+        expect(err).to.eql(null);
+        done();
+      });
     });
 
     it('should be able to sign in', done => {

@@ -10,9 +10,9 @@ const testPort = process.env.PORT = 5000;
 
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
-const server = require(__dirname + '/../../server');
-const User = require(__dirname + '/../../models/user');
-const Inventory = require(__dirname + '/../../models/inventory');
+const server = require(__dirname + '/../../../server');
+const User = require(__dirname + '/../../../models/user');
+const Inventory = require(__dirname + '/../../../models/inventory');
 
 describe('Inventory router', () => {
   before(() => {
@@ -39,6 +39,7 @@ describe('Inventory router', () => {
 
     newUser.save((err, data) => {
       if (err) console.log(err);
+      expect(err).to.eql(null);
       this.token = data.generateToken();
       done();
     });

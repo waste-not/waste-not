@@ -11,7 +11,7 @@ const scripts = ['server.js', 'lib/**/*.js', 'models/**/*.js', 'routes/**/*.js',
 const clientScripts = ['client/**/*.js'];
 const staticFiles = ['client/**/*.html', 'client/**/*.png', 'client/**/*.jpg',
   'client/**/*.csv'];
-const serverSpecs = ['test/backend/*spec.js'];
+const serverSpecs = ['test/backend/**/*spec.js'];
 
 gulp.task('static:dev', () => {
   return gulp.src(staticFiles, { 'base': 'client' })

@@ -22,7 +22,7 @@ describe('UNIT: LIB: Render CSV', () => {
   });
 
   this.testCSVPath = 'test/backend/test.csv';
-  afterEach(done => {
+  after(done => {
     fs.unlink(this.testCSVPath, done);
   });
 
@@ -48,7 +48,7 @@ describe('UNIT: LIB: Render CSV', () => {
   });
 
   describe('Functionality that requires existing inventory data', () => {
-    beforeEach(done => {
+    before(done => {
       var newInventory = new Inventory({
         title: 'New Item',
         createDate: Date.now(),
@@ -75,6 +75,7 @@ describe('UNIT: LIB: Render CSV', () => {
 
     it('should write data to a CSV file', done => {
       renderCSV(this.testCSVPath)
+        .exec()
         .then(() => {
           fs.readFile(this.testCSVPath, 'utf-8', (err, data) => {
             if (err) console.log(err);

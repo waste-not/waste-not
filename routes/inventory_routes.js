@@ -73,7 +73,7 @@ inventoryRouter.put('/inventory/:id', jwtAuth, jsonParser, (req, res) => {
   });
 });
 
-inventoryRouter.put('/inventory/claim/:id', jwtAuth, jsonParser, (req, res) => {
+inventoryRouter.put('/inventory/claim/:id', jwtAuth, (req, res) => {
   Inventory.update(
     { _id: req.params.id, claimedBy: { $eq: '' } },
     { $set: { claimedBy: req.user._id } },
@@ -88,8 +88,7 @@ inventoryRouter.put('/inventory/claim/:id', jwtAuth, jsonParser, (req, res) => {
   );
 });
 
-inventoryRouter.put('/inventory/unclaim/:id', jwtAuth, jsonParser,
-  (req, res) => {
+inventoryRouter.put('/inventory/unclaim/:id', jwtAuth, (req, res) => {
     Inventory.update(
       { _id: req.params.id, claimedBy: { $ne: '' } },
       { $set: { claimedBy: '' } },

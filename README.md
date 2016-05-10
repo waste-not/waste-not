@@ -1,4 +1,5 @@
 # waste-not
+[![Stories in Ready](https://badge.waffle.io/waste-not/waste-not.svg?label=ready&title=Ready)](http://waffle.io/waste-not/waste-not)
 
 Waste Not is a new technology platform that makes it simple for retail outlets to inventory items that they plan on throwing out and enables social and community organizations to claim these items for redistribution.
 

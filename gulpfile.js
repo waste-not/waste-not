@@ -4,12 +4,14 @@ const gulp = require('gulp');
 const eslint = require('gulp-eslint');
 const webpack = require('webpack-stream');
 const sass = require('gulp-sass');
+const mocha = require('gulp-mocha');
 
 const scripts = ['server.js', 'lib/**/*.js', 'models/**/*.js', 'routes/**/*.js',
-  'client/**/*.js?(x)', '!**/*bundle.js'];
-const clientScripts = ['client/**/*.js?(x)'];
+  'client/**/*.js', '!**/*bundle.js', 'test/**/*.js'];
+const clientScripts = ['client/**/*.js'];
 const staticFiles = ['client/**/*.html', 'client/**/*.png', 'client/**/*.jpg',
   'client/**/*.csv'];
+const serverSpecs = ['test/backend/**/*spec.js'];
 
 gulp.task('static:dev', () => {
   return gulp.src(staticFiles, { 'base': 'client' })
@@ -60,7 +62,15 @@ gulp.task('watch', () => {
   gulp.watch('client/sass/*.sass', ['sass:dev']);
 });
 
-gulp.task('dev', ['static:dev', 'build:dev', 'sass:dev', 'webfonts:dev']);
+gulp.task('dev', ['watch', 'static:dev', 'build:dev', 'sass:dev',
+  'webfonts:dev']);
 gulp.task('style:dev', ['static:dev', 'sass:dev', 'webfonts:dev']);
+
+
+gulp.task('test:mocha', () => {
+  return gulp.src(serverSpecs, { read: false })
+    .pipe(mocha())
+    .once('end', process.exit);
+});
 
 gulp.task('default', ['dev', 'lint']);

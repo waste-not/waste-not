@@ -24,13 +24,16 @@ authRouter.post('/signup', jsonParser, signupValidation, (req, res) => {
   ].join(' ');
 
   geocoder(addressStr)
-    .then((coord) => {
+    .then(coord => {
       newUser.coordinates = coord;
       newUser.save((err, data) => {
         if (err) return handleDBError(err, res);
-        res.status(200).json({ token: data.generateToken() });
+        res.status(200).json({
+          token: data.generateToken(),
+          _id: data._id
+        });
       });
-    }, (geocodeErr) => {
+    }, geocodeErr => {
       console.log(geocodeErr);
       res.status(500).json({ msg: 'Error in geocoding' });
     });
@@ -43,6 +46,11 @@ authRouter.get('/signin', basicHttpAuth, (req, res) => {
       return res.status(401).json({ msg: 'invalid username or password' });
     }
 
-    res.json({ token: data.generateToken(), role: data.role });
+    res.status(200).json({
+      token: data.generateToken(),
+      role: data.role,
+      username: data.username,
+      _id: data._id
+    });
   });
 });

@@ -13,10 +13,7 @@ class Login extends Component {
   }
 
   onSubmit(props) {
-    this.props.login(props)
-      .then(() => {
-        this.context.router.push('/');
-      });
+    this.props.login(props);
   }
 
   render() {

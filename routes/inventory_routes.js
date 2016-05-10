@@ -49,14 +49,14 @@ inventoryRouter.post('/inventory', jwtAuth, jsonParser, (req, res) => {
   newInventory.createdBy = req.user._id;
 
   geocoder(req.body.address)
-    .then((coord) => {
+    .then(coord => {
       newInventory.coordinates = coord;
       newInventory.save((err, data) => {
         if (err) return handleDBError(err, res);
         res.status(200).json(data);
         renderCSV();
       });
-    }, (geocodeErr) => {
+    }, geocodeErr => {
       console.log(geocodeErr);
       res.status(500).json({ msg: 'Error in geocoding' });
     });
@@ -66,14 +66,14 @@ inventoryRouter.put('/inventory/:id', jwtAuth, jsonParser, (req, res) => {
   var inventoryData = req.body;
   delete inventoryData._id;
 
-  Inventory.update({ _id: req.params.id }, inventoryData, (err) => {
+  Inventory.update({ _id: req.params.id }, inventoryData, err => {
     if (err) return handleDBError(err, res);
     res.status(200).json({ msg: 'Successfully updated inventory' });
     renderCSV();
   });
 });
 
-inventoryRouter.put('/inventory/claim/:id', jwtAuth, jsonParser, (req, res) => {
+inventoryRouter.put('/inventory/claim/:id', jwtAuth, (req, res) => {
   Inventory.update(
     { _id: req.params.id, claimedBy: { $eq: '' } },
     { $set: { claimedBy: req.user._id } },
@@ -88,8 +88,23 @@ inventoryRouter.put('/inventory/claim/:id', jwtAuth, jsonParser, (req, res) => {
   );
 });
 
+inventoryRouter.put('/inventory/unclaim/:id', jwtAuth, (req, res) => {
+    Inventory.update(
+      { _id: req.params.id, claimedBy: { $ne: '' } },
+      { $set: { claimedBy: '' } },
+      (err, data) => {
+        if (err) return handleDBError(err, res);
+        if (!data.n) {
+          return res.status(410).json({ msg: 'Inventory already unclaimed' });
+        }
+        res.status(200).json({ msg: 'Successfully unclaimed inventory' });
+        renderCSV();
+      }
+    );
+});
+
 inventoryRouter.delete('/inventory/:id', (req, res) => {
-  Inventory.remove({ _id: req.params.id }, (err) => {
+  Inventory.remove({ _id: req.params.id }, err => {
     if (err) return handleDBError(err, res);
     res.status(200).json({
       msg: 'Successfully deleted inventory',

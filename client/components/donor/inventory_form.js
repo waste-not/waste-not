@@ -25,10 +25,7 @@ class InventoryForm extends Component {
   }
 
   onSubmit(props) {
-    this.props.createInventory(props)
-      .then(() => {
-        this.context.router.push('/donor');
-      });
+    this.props.createInventory(props);
   }
 
   render() {

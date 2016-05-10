@@ -26,8 +26,8 @@ describe('UNIT: LIB: JWT auth', () => {
       state: 'Washington',
       zip: '98121',
       coordinates: {
-        lat: 47.6158,
-        lng: -122.3434
+        lat: 47.6182206,
+        lng: -122.3540207
       },
       contactNumber: '5555555555',
       email: 'test@tester.com',

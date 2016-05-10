@@ -10,9 +10,9 @@ describe('UNIT: LIB: DB error handler', () => {
         expect(statusCode).to.eql(500);
         return testRes;
       },
-      json(obj) {
+      json(resObj) {
         called++;
-        expect(obj.msg).to.eql('database error');
+        expect(resObj.msg).to.eql('database error');
       }
     };
     dbErrorHandler(null, testRes);

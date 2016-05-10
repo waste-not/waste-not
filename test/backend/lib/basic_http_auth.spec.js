@@ -3,17 +3,22 @@ const basicHTTP = require(__dirname + '/../../../lib/basic_http_auth');
 
 describe('UNIT: LIB: Basic HTTP Auth', () => {
   it('should be able to catch invalid data', done => {
+    var testReq = {
+      headers: {
+        authorization: 'basic invalidauth'
+      }
+    };
     var testRes = {
       status(statusCode) {
         expect(statusCode).to.eql(401);
         return testRes;
       },
-      json(obj) {
-        expect(obj.msg).to.eql('could not authenticate');
+      json(resObj) {
+        expect(resObj.msg).to.eql('could not authenticate');
         done();
       }
     };
-    basicHTTP({}, testRes);
+    basicHTTP(testReq, testRes);
   });
 
   it('should be able to decode base64 string', done => {

@@ -62,8 +62,8 @@ gulp.task('watch', () => {
   gulp.watch('client/sass/*.sass', ['sass:dev']);
 });
 
-gulp.task('dev', ['watch', 'static:dev', 'build:dev', 'sass:dev',
-  'webfonts:dev']);
+gulp.task('build', ['static:dev', 'build:dev', 'sass:dev', 'webfonts:dev']);
+gulp.task('dev', ['watch', 'build']);
 gulp.task('style:dev', ['static:dev', 'sass:dev', 'webfonts:dev']);
 
 

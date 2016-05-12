@@ -4,6 +4,8 @@
   "description": "An app developed for AngelHack 2016",
   "main": "index.js",
   "scripts": {
+    "postinstall": "gulp build",
+    "start": "node server",
     "test": "gulp test:mocha"
   },
   "repository": {

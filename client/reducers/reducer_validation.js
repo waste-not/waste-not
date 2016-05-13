@@ -10,7 +10,6 @@ const INITIAL_STATE = {
   loading: false
 };
 
-// We can use a loading boolean here if we have loading ui
 export default function(state = INITIAL_STATE, action) {
   let error;
   switch (action.type) {
@@ -21,7 +20,7 @@ export default function(state = INITIAL_STATE, action) {
       return { ...state, error: null, loading: false };
     case VALIDATE_USER_FIELDS_FAILURE:
       error = action.payload.data
-      ? action.payload.data : { message: action.payload.message };
+      ? action.payload.data : { message: action.payload.msg };
       return { ...state, error: error, loading: false };
     case RESET_VALIDATE_USER_FIELDS:
       return { ...state, error: null, loading: false };

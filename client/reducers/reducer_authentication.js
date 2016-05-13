@@ -12,7 +12,7 @@ const initialState = {
   token: localStorage.getItem('token'),
   username: localStorage.getItem('username'),
   _id: localStorage.getItem('_id'),
-  error: ''
+  'error': ''
 };
 
 const blankState = {
@@ -40,7 +40,7 @@ export default function(state = initialState, action) {
     case SET_ROLE:
       return { ...state, role: action.payload };
     case AUTH_ERROR:
-      return { ...state, error: action.payload.data };
+      return { ...state, error: action.payload };
     default:
       return state;
   }

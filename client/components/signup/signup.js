@@ -143,7 +143,7 @@ class DonorProfile extends Component {
                     type="text"
                     placeholder="State"
                     {...state} />
-                  <span className="help is-danger">
+                  <span className="help is-grouped is-danger">
                     {state.touched ? state.error : ''}
                   </span>
                   <input
@@ -152,7 +152,7 @@ class DonorProfile extends Component {
                     type="number"
                     placeholder="Zip code"
                     {...zip} />
-                  <span className="help is-danger">
+                  <span className="help is-grouped is-danger">
                     {zip.touched ? zip.error : ''}
                   </span>
                 </p>
@@ -235,11 +235,11 @@ function validate(values) {
   }
 
   if (!values.state || values.state.trim() === '') {
-    errors.state = 'Enter a state';
+    errors.state = 'Required';
   }
 
   if (!values.zip || values.zip.trim() === '') {
-    errors.zip = 'Enter a zipcode';
+    errors.zip = 'Required';
   }
 
   if (!values.username || values.username.trim() === '') {

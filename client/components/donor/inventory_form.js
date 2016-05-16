@@ -42,6 +42,7 @@ class InventoryForm extends Component {
       handleSubmit
     } = this.props;
 
+    // Form validation will check if user has inputed data
     return (
       <section className="main">
         <div className="container">
@@ -51,26 +52,38 @@ class InventoryForm extends Component {
               <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                 <p className="control">
                   <input
-                    className="input auth-input"
+                    className={`input auth-input ${title.touched
+                      && title.invalid ? 'is-danger' : ''}`}
                     placeholder="DropOff Title"
                     type="text"
                     {...title} />
+                  <span className="help is-danger">
+                    {title.touched ? title.error : ''}
+                  </span>
                 </p>
 
                 <p className="control">
                   <label>Deadline Pickup Date: </label>
                   <input
-                    className="input auth-input"
+                    className={`input auth-input ${deadlineDate.touched
+                      && deadlineDate.invalid ? 'is-danger' : ''}`}
                     type="date"
                     {...deadlineDate} />
+                  <span className="help is-danger">
+                    {deadlineDate.touched ? deadlineDate.error : ''}
+                  </span>
                 </p>
 
                 <p className="control">
                   <input
-                    className="input auth-input"
+                    className={`input auth-input ${description.touched
+                      && description.invalid ? 'is-danger' : ''}`}
                     placeholder="Full Inventory Description"
                     type="text"
                     {...description} />
+                  <span className="help is-danger">
+                    {description.touched ? description.error : ''}
+                  </span>
                 </p>
 
                 <p className="control">
@@ -83,15 +96,20 @@ class InventoryForm extends Component {
 
                 <p className="control">
                   <input
-                    className="input auth-input"
+                    className={`input auth-input ${address.touched
+                      && address.invalid ? 'is-danger' : ''}`}
                     placeholder="Address"
                     type="text"
                     {...address} />
+                  <span className="help is-danger">
+                    {address.touched ? address.error : ''}
+                  </span>
                 </p>
 
                 <p className="control">
                   <label>Category: &nbsp;&nbsp;</label>
-                  <select className="auth-input"
+                  <select className={`auth-input ${category.touched
+                      && category.invalid ? 'is-danger' : ''}`}
                     {...category}
                     value={category.value || ''}>
                     <option value=""></option>
@@ -101,6 +119,9 @@ class InventoryForm extends Component {
                     <option value="Children">Children</option>
                     <option value="Other">Other</option>
                   </select>
+                  <span className="help is-danger">
+                    {category.touched ? category.error : ''}
+                  </span>
                 </p>
 
                 <p className="control">
@@ -127,11 +148,38 @@ class InventoryForm extends Component {
   }
 }
 
+function validate(values) {
+  const errors = {};
+
+  if (!values.title) {
+    errors.title = 'Enter a title';
+  }
+
+  if (!values.deadlineDate) {
+    errors.deadlineDate = 'Enter a deadline date';
+  }
+
+  if (!values.description) {
+    errors.description = 'Enter a description';
+  }
+
+  if (!values.address) {
+    errors.address = 'Enter an address';
+  }
+
+  if (!values.category || '') {
+    errors.category = 'Pick a category';
+  }
+
+  return errors;
+}
+
 // reduxForm: 1 is form config
 // 2nd is mapStateToProps
 // 3rd is mapDispatchToProps
 
 export default reduxForm({
   form: 'InventoryForm',
-  fields
+  fields,
+  validate
 }, null, { createInventory })(InventoryForm);

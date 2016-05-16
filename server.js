@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/waste_not');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/waste_not');
 
 const authRouter = require(__dirname + '/routes/auth_routes');
 const inventoryRouter = require(__dirname + '/routes/inventory_routes');

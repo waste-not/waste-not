@@ -1,12 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 import * as actions from '../../actions';
-import {
-  validateUserFields,
-  validateUserFieldsSuccess,
-  validateUserFieldsFailure,
-  validateTempFields
-} from '../../actions/validate_user_fields';
+import { validateUserFields } from '../../actions/validate_user_fields';
 
 const fields = [
   'username',
@@ -148,7 +143,7 @@ class DonorProfile extends Component {
                     type="text"
                     placeholder="State"
                     {...state} />
-                  <span className="help is-danger">
+                  <span className="help is-grouped is-danger">
                     {state.touched ? state.error : ''}
                   </span>
                   <input
@@ -157,7 +152,7 @@ class DonorProfile extends Component {
                     type="number"
                     placeholder="Zip code"
                     {...zip} />
-                  <span className="help is-danger">
+                  <span className="help is-grouped is-danger">
                     {zip.touched ? zip.error : ''}
                   </span>
                 </p>
@@ -169,11 +164,9 @@ class DonorProfile extends Component {
                     type="text"
                     placeholder="Username"
                     {...username} />
+                  {asyncValidating === 'username'}
                   <span className="help is-danger">
                     {username.touched ? username.error : ''}
-                  </span>
-                  <span className="help">
-                    {asyncValidating === 'username' ? 'validating..' : ''}
                   </span>
                 </p>
 
@@ -213,8 +206,9 @@ class DonorProfile extends Component {
 // }
 
 const asyncValidate = (values, dispatch) => {
-  console.log('called');
-    dispatch(validateUserFields(values));
+  return new Promise((resolve, reject) => {
+    dispatch(validateUserFields(values, resolve, reject));
+  });
 };
 
 function validate(values) {
@@ -241,11 +235,11 @@ function validate(values) {
   }
 
   if (!values.state || values.state.trim() === '') {
-    errors.state = 'Enter a state';
+    errors.state = 'Required';
   }
 
   if (!values.zip || values.zip.trim() === '') {
-    errors.zip = 'Enter a zipcode';
+    errors.zip = 'Required';
   }
 
   if (!values.username || values.username.trim() === '') {

@@ -6,18 +6,7 @@ export const VALIDATE_USER_FIELDS_SUCCESS = 'VALIDATE_USER_FIELDS_SUCCESS';
 export const VALIDATE_USER_FIELDS_FAILURE = 'VALIDATE_USER_FIELDS_FAILURE';
 export const RESET_VALIDATE_USER_FIELDS = 'RESET_VALIDATE_USER_FIELDS';
 
-
 const ROOT_URL = 'http://localhost:3000/api';
-
-// This is a temp function used to compare
-export function validateTempFields(values) {
-  const request = axios.post(`${ROOT_URL}/validate/user`, values);
-
-  return {
-    type: VALIDATE_USER_FIELDS,
-    payload: request
-  };
-}
 
 export function validateUserFieldsSuccess() {
   return {
@@ -38,16 +27,16 @@ export function resetValidateUserFields() {
   };
 }
 
-export function validateUserFields(values) {
+export function validateUserFields(values, resolve, reject) {
   return dispatch => {
     axios.post(`${ROOT_URL}/validate/user`, values)
       .then(response => {
-        console.log(response.status);
         dispatch(validateUserFieldsSuccess(response.data));
+        resolve();
       })
       .catch(err => {
-        console.log(err.data.msg);
-        dispatch(validateUserFieldsFailure(err));
+        dispatch(validateUserFieldsFailure(err.data));
+        reject({ username: err.data.msg });
       });
   };
 }

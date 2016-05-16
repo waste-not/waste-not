@@ -4,7 +4,7 @@ chai.use(chaiHttp);
 const expect = chai.expect;
 const request = chai.request;
 
-process.env.MONGOLAB_URI = 'mongodb://localhost/waste_not_test';
+process.env.MONGODB_URI = 'mongodb://localhost/waste_not_test';
 process.env.APP_SECRET = 'secrettesting';
 const testPort = process.env.PORT = 5000;
 

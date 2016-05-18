@@ -4,9 +4,11 @@
   "description": "An app developed for AngelHack 2016",
   "main": "index.js",
   "scripts": {
+    "lint": "node_modules/eslint/bin/eslint.js --ext=.js client/ lib/ models/ routes/ test/backend/ *.js",
     "postinstall": "gulp build",
+    "pretest": "npm run lint",
     "start": "node server",
-    "test": "gulp test:mocha"
+    "test": "node_modules/mocha/bin/mocha test/backend/lib test/backend/routes"
   },
   "repository": {
     "type": "git",
@@ -64,6 +66,7 @@
     "gulp-eslint": "^2.0.0",
     "gulp-mocha": "^2.2.0",
     "gulp-sass": "^2.2.0",
+    "mocha": "^2.4.5",
     "react": "^15.0.1",
     "react-dom": "^15.0.1",
     "react-redux": "^4.4.5",

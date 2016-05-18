@@ -244,10 +244,14 @@ function validate(values) {
 
   if (!values.username || values.username.trim() === '') {
     errors.username = 'Enter a username';
+  } else if (values.username.length < 8) {
+    errors.username = 'Must be more than 8 characters';
   }
 
   if (!values.password || values.password.trim() === '') {
     errors.password = 'Enter a password';
+  } else if (values.password.length < 8) {
+    errors.password = 'Must be more than 8 characters';
   }
 
   return errors;

@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 import * as actions from '../../actions';
+import { login } from '../../actions';
 
 const fields = ['username', 'password'];
 
@@ -13,17 +14,22 @@ class Login extends Component {
   static propTypes = {
     fields: PropTypes.object,
     handleSubmit: PropTypes.func,
-    login: PropTypes.func
-  }
-
-  handleFormSubmit(formProps) {
-    // const { username, password } = this.props;
-    // Need to figure out what to pass into action
-    this.props.login(formProps);
+    login: PropTypes.func,
+    submitting: PropTypes.bool,
+    error: PropTypes.string
   }
 
   render() {
-    const { fields: { username, password }, handleSubmit } = this.props;
+    const {
+      fields: {
+        username,
+        password
+      },
+      error,
+      handleSubmit,
+      submitting
+    }
+      = this.props;
 
     return (
       <section className="main">
@@ -31,7 +37,7 @@ class Login extends Component {
           <h1 className="page-title">Sign In</h1>
           <div className="columns is-desktop">
             <div className="column is-one-third is-offset-one-third">
-              <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+              <form onSubmit={handleSubmit(submit)}>
 
 
                 <p className={`control ${username.touched &&
@@ -41,6 +47,9 @@ class Login extends Component {
                     type="text"
                     placeholder="Username"
                     {...username} />
+                    <span className="help is-danger">
+                      {username.touched ? username.error : ''}
+                    </span>
                 </p>
 
                 <p className="control">
@@ -49,12 +58,21 @@ class Login extends Component {
                     type="password"
                     placeholder="Password"
                     {...password} />
+                  <span className="help is-danger">
+                    {password.touched ? password.error : ''}
+                  </span>
                 </p>
-
+                  {error &&
+                    <p className="control">
+                      <span className="help is-danger">{error}</span>
+                    </p>
+                  }
                 <p className="control center-control">
                   <button
                     type="submit"
-                    className="button button-submit">Sign In
+                    disabled={submitting}
+                    className="button button-submit">
+                    {submitting ? <i/> : <i/>}Sign In
                   </button>
                 </p>
               </form>
@@ -66,6 +84,26 @@ class Login extends Component {
   }
 }
 
+const submit = (values, dispatch) => {
+  return new Promise((resolve, reject) => {
+    dispatch(login(values, resolve, reject));
+  });
+};
+
+function validate(values) {
+  const errors = {};
+
+  if (!values.username || values.username.trim() === '') {
+    errors.username = 'Enter a username';
+  }
+
+  if (!values.password || values.password.trim() === '') {
+    errors.password = 'Enter a password';
+  }
+
+  return errors;
+}
+
 function mapStateToProps(state) {
   return {
     errorMessage: state.auth.error
@@ -74,5 +112,6 @@ function mapStateToProps(state) {
 
 export default reduxForm({
   form: 'Login',
-  fields
+  fields,
+  validate
 }, mapStateToProps, actions)(Login);

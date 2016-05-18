@@ -197,7 +197,7 @@ export function authUser(data) {
   };
 }
 
-export function login(user) {
+export function login(user, resolve, reject) {
   const basic = window.btoa(`${user.username}:${user.password}`);
   return dispatch => {
     axios.get(`${ROOT_URL}/signin`, {
@@ -210,10 +210,12 @@ export function login(user) {
         const { token, role, _id, username } = response.data;
         storeUser({ token, role, _id, username });
         hashHistory.push(`${role}`);
+        resolve();
       })
       .catch(err => {
         console.log(err);
-        dispatch(authError('Bad Login Info'));
+        dispatch(authError(err));
+        reject({ _error: err.data.msg });
       });
   };
 }

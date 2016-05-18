@@ -40,7 +40,8 @@ export default function(state = initialState, action) {
     case SET_ROLE:
       return { ...state, role: action.payload };
     case AUTH_ERROR:
-      return { ...state, error: action.payload.data };
+      console.log(action.payload.data.msg);
+      return { ...state, error: action.payload.data.msg };
     default:
       return state;
   }

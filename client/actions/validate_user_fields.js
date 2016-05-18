@@ -36,7 +36,7 @@ export function validateUserFields(values, resolve, reject) {
       })
       .catch(err => {
         dispatch(validateUserFieldsFailure(err.data));
-        reject({ username: err.data.msg });
+        reject({ error: err.data.msg });
       });
   };
 }

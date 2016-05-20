@@ -19,7 +19,7 @@ export const AUTH_USER = 'auth_user';
 export const UNAUTH_USER = 'unauth_user';
 export const INVENTORY_ERROR = 'inventory_error';
 
-const ROOT_URL = 'http://localhost:3000/api';
+const ROOT_URL = __BASEURL__;
 
 const getAxiosConfig = () => {
   const token = localStorage.getItem('token');

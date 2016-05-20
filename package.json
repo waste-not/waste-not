@@ -75,6 +75,7 @@
     "redux-form": "^5.0.1",
     "redux-thunk": "^2.0.1",
     "sinon": "^1.17.4",
+    "webpack": "^1.13.0",
     "webpack-stream": "^3.1.0"
   }
 }

@@ -2,7 +2,8 @@
 
 const gulp = require('gulp');
 const eslint = require('gulp-eslint');
-const webpack = require('webpack-stream');
+const webpack = require('webpack');
+const webpackStream = require('webpack-stream');
 const sass = require('gulp-sass');
 const mocha = require('gulp-mocha');
 
@@ -30,7 +31,7 @@ gulp.task('sass:dev', () => {
 });
 
 gulp.task('build:dev', () => {
-  webpack({
+  webpackStream({
     entry: ['./client/index.js'],
     output: {
       filename: 'bundle.js'
@@ -44,6 +45,13 @@ gulp.task('build:dev', () => {
         }
       ]
     },
+    plugins: [
+      new webpack.DefinePlugin({
+        __BASEURL__: JSON.stringify(process.env.SERVER_ENV === 'production' ?
+          `http://${process.env.HEROKU_APP_NAME}.herokuapp.com` :
+          'http://localhost:3000')
+      })
+    ],
     devtool: 'source-map'
   })
   .pipe(gulp.dest('dist/'));

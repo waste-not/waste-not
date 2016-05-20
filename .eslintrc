@@ -22,7 +22,8 @@
     "$": true,
     "ga": true,
     "jQuery": true,
-    "router": true
+    "router": true,
+    "__BASEURL__": false
   },
   "rules": {
     "comma-dangle": 2,

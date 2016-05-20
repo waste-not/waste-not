@@ -6,7 +6,7 @@ export const VALIDATE_USER_FIELDS_SUCCESS = 'VALIDATE_USER_FIELDS_SUCCESS';
 export const VALIDATE_USER_FIELDS_FAILURE = 'VALIDATE_USER_FIELDS_FAILURE';
 export const RESET_VALIDATE_USER_FIELDS = 'RESET_VALIDATE_USER_FIELDS';
 
-const ROOT_URL = __BASEURL__;
+const ROOT_URL = `${__BASEURL__}/api`;
 
 export function validateUserFieldsSuccess() {
   return {

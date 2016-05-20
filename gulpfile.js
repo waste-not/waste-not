@@ -48,7 +48,7 @@ gulp.task('build:dev', () => {
     plugins: [
       new webpack.DefinePlugin({
         __BASEURL__: JSON.stringify(process.env.SERVER_ENV === 'production' ?
-          `http://${process.env.HEROKU_APP_NAME}.herokuapp.com` :
+          'http://waste-not-beta.herokuapp.com' :
           'http://localhost:3000')
       })
     ],

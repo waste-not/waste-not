@@ -16,15 +16,16 @@ _Waste Not is the winner of [AngelHack Seattle 2016](http://angelhack.com/)_
   $ git clone https://github.com/waste-not/waste-not.git
   $ cd waste-not
   ```
-  
+
 - Install dependencies and create dev build
   ```
   $ npm install
-  $ gulp dev
+  $ gulp build
   ```
-  
+
 - Run local server and database
   ```
+  $ mkdir db
   $ mongod --dbpath=./db --smallfiles
   $ node server.js
   ```

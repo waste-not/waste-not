@@ -19,7 +19,7 @@ export const AUTH_USER = 'auth_user';
 export const UNAUTH_USER = 'unauth_user';
 export const INVENTORY_ERROR = 'inventory_error';
 
-const ROOT_URL = 'http://localhost:3000/api';
+const ROOT_URL = `${__BASEURL__}/api`;
 
 const getAxiosConfig = () => {
   const token = localStorage.getItem('token');
@@ -197,7 +197,7 @@ export function authUser(data) {
   };
 }
 
-export function login(user) {
+export function login(user, resolve, reject) {
   const basic = window.btoa(`${user.username}:${user.password}`);
   return dispatch => {
     axios.get(`${ROOT_URL}/signin`, {
@@ -210,10 +210,12 @@ export function login(user) {
         const { token, role, _id, username } = response.data;
         storeUser({ token, role, _id, username });
         hashHistory.push(`${role}`);
+        resolve();
       })
       .catch(err => {
         console.log(err);
-        dispatch(authError('Bad Login Info'));
+        dispatch(authError(err));
+        reject({ _error: err.data.msg });
       });
   };
 }

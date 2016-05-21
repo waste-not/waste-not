@@ -66,11 +66,30 @@ gulp.task('build', ['static:dev', 'build:dev', 'sass:dev', 'webfonts:dev']);
 gulp.task('dev', ['watch', 'build']);
 gulp.task('style:dev', ['static:dev', 'sass:dev', 'webfonts:dev']);
 
-
 gulp.task('test:mocha', () => {
   return gulp.src(serverSpecs, { read: false })
     .pipe(mocha())
     .once('end', process.exit);
+});
+
+gulp.task('test:client', () => {
+  gulp.src(__dirname + '/test/frontend/test_entry.js')
+    .pipe(webpack({
+      output: {
+        filename: 'test_client.js'
+      },
+      module: {
+        loaders: [
+          {
+            test: /\.js$/,
+            exclude: /node_modules/,
+            loader: 'babel-loader'
+          }
+        ]
+      },
+      devtool: 'source-map'
+    }))
+    .pipe(gulp.dest('test/frontend/'));
 });
 
 gulp.task('default', ['dev', 'lint']);

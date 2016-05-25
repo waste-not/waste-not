@@ -1,7 +1,6 @@
 import { expect } from 'chai';
 import authReducer from '../../../client/reducers/reducer_authentication';
 import {
-  CHANGE_AUTH,
   AUTH_USER,
   UNAUTH_USER,
   SET_ROLE,
@@ -18,15 +17,6 @@ describe('Authentication Reducer', () => {
       username: null
     };
   });
-
-  // it('handles action with unknown type', () => {
-  //   const action = { type: null, payload: null };
-  //   const reducer = authReducer(initialState, action);
-  // });
-
-  // it('CHANGE_AUTH', () => {
-  //
-  // });
 
   it('AUTH_USER', () => {
     const payload = {
@@ -50,14 +40,19 @@ describe('Authentication Reducer', () => {
   });
 
   it('SET_ROLE', () => {
-    const payload = { role: 'user' };
-    const action = { type: SET_ROLE, payload };
+    const action = { type: SET_ROLE, payload: 'user' };
     const reducer = authReducer(userState, action);
-    expect(reducer.role).to.eql('user');
+    expect(reducer.role).to.equal('user');
   });
 
   it('AUTH_ERROR', () => {
-    const payload = { error } // unsure of what value to pass to the error property
+    const payload = { error: 'test error message' };
+    const action = { type: AUTH_ERROR, payload };
+    const reducer = authReducer(initialState, action);
+    console.log(reducer);
+    // expect(reducer.error).to.be.a('string');
+
+    // action won't take an error message alone as a payload.
   });
 
 });

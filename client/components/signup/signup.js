@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
-import * as actions from '../../actions';
+import { createOrg } from '../../actions';
 import { validateUserFields } from '../../actions/validate_user_fields';
 
 const fields = [
@@ -14,7 +14,9 @@ const fields = [
   'state',
   'zip',
   'country',
-  'password'];
+  'password',
+  'role'
+];
 
 class DonorProfile extends Component {
 
@@ -30,14 +32,22 @@ class DonorProfile extends Component {
     createOrg: PropTypes.func,
     fields: PropTypes.object,
     handleSubmit: PropTypes.func,
-    role: PropTypes.string
+    submitting: PropTypes.bool
   }
 
-  handleFormSubmit(props) {
+  // handleFormSubmit(props) {
+  //   console.log(props);
+  //
+  //   const { createOrg } = this.props;
+  //   // Call action creator to sign up user with relevant role
+  //   createOrg({ ...props });
+  // }
 
-    const { createOrg, role } = this.props;
-    // Call action creator to sign up user with relevant role
-    createOrg({ ...props, role: role });
+  handleFormSubmit = (newOrg, dispatch) => {
+    const { createOrg } = this.props;
+    return new Promise((resolve, reject) => {
+      dispatch(createOrg(newOrg, resolve, reject ));
+    });
   }
 
   render() {
@@ -53,17 +63,18 @@ class DonorProfile extends Component {
         city,
         state,
         zip,
-        password
+        password,
+        role
       },
       handleSubmit,
-      role
+      submitting
     } = this.props;
 
     return (
       <section className="main">
         <div className="container">
           <h1 className="page-title">
-            Register to {role === 'donor' ? 'Donate' : 'Pickup'}
+            Register Organization
           </h1>
           <div className="columns is-desktop">
             <div className="column is-one-third is-offset-one-third">
@@ -78,6 +89,27 @@ class DonorProfile extends Component {
                   <span className="help is-danger">
                     {name.touched ? name.error : ''}
                   </span>
+                </p>
+
+                <p className="control">
+                  <label className="radio">
+                    <input
+                      type="radio"
+                      {...role}
+                      value="donor"
+                      checked={role.value === 'donor'}
+                      />
+                    Donor
+                  </label>
+                  <label className="radio">
+                    <input
+                      type="radio"
+                      {...role}
+                      value="user"
+                      checked={role.value === 'user'}
+                      />
+                    Organization
+                  </label>
                 </p>
 
                 <p className="control">
@@ -185,7 +217,8 @@ class DonorProfile extends Component {
                 <p className="control center-control">
                   <button
                     type="submit"
-                    className="button button-submit">Sign Up
+                    className="button button-submit">
+                    {submitting ? <i/> : <i/>}Sign Up
                   </button>
                 </p>
               </form>
@@ -271,4 +304,4 @@ export default reduxForm({
   asyncBlurFields: [ 'username' ],
   // callback function for client-side validation
   validate
-}, mapStateToProps, actions)(DonorProfile);
+}, mapStateToProps, { createOrg })(DonorProfile);

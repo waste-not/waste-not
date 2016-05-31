@@ -23,22 +23,24 @@ class Header extends Component {
   }
 
   renderLinks() {
-    if (this.props.authenticated) {
+    const { authenticated, role, username, signoutUser } = this.props;
+
+    if (authenticated) {
       // show a link to sign out
       return (
         <div className="header-right header-menu">
-          <p className="header-item">Hi, {this.props.username}!</p>
+          <p className="header-item">Hi, {username}!</p>
           <span className="header-item  button-tight">
             <Link
               className="button button-direct"
-              to={this.props.role}>
+              to={role}>
                 Dashboard
               </Link>
           </span>
           <span className="header-item  button-tight">
             <a
               className="button button-direct"
-              onClick={this.props.signoutUser}>Log Out
+              onClick={signoutUser}>Log Out
             </a>
           </span>
         </div>

@@ -30,7 +30,9 @@ authRouter.post('/signup', jsonParser, signupValidation, (req, res) => {
         if (err) return handleDBError(err, res);
         res.status(200).json({
           token: data.generateToken(),
-          _id: data._id
+          _id: data._id,
+          role: data.role,
+          username: data.username
         });
       });
     }, geocodeErr => {

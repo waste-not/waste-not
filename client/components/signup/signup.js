@@ -35,14 +35,6 @@ class DonorProfile extends Component {
     submitting: PropTypes.bool
   }
 
-  // handleFormSubmit(props) {
-  //   console.log(props);
-  //
-  //   const { createOrg } = this.props;
-  //   // Call action creator to sign up user with relevant role
-  //   createOrg({ ...props });
-  // }
-
   handleFormSubmit = (newOrg, dispatch) => {
     const { createOrg } = this.props;
     return new Promise((resolve, reject) => {

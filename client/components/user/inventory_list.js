@@ -11,7 +11,9 @@ class InventoryList extends Component {
     inventory: PropTypes.object,
     claimInventory: PropTypes.func,
     unclaimInventory: PropTypes.func,
-    userId: PropTypes.string
+    userId: PropTypes.string,
+    lat: PropTypes.number,
+    lng: PropTypes.number
   }
 
   componentWillMount() {
@@ -31,6 +33,12 @@ class InventoryList extends Component {
             .bind(null, inventory)} />
       );
     });
+  }
+
+  renderMap() {
+    return (
+      <Map />
+    );
   }
 
 
@@ -66,6 +74,10 @@ class InventoryList extends Component {
             {this.renderInventory(activeInventory)}
 
           </div>
+          <div>
+
+          </div>
+
         </div>
       </section>
     );

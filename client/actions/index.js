@@ -18,6 +18,7 @@ export const AUTH_ERROR = 'auth_error';
 export const AUTH_USER = 'auth_user';
 export const UNAUTH_USER = 'unauth_user';
 export const INVENTORY_ERROR = 'inventory_error';
+export const FETCH_ACTIVE_MAP_MARKER = 'fetch_active_map_marker';
 
 const ROOT_URL = `${__BASEURL__}/api`;
 
@@ -103,6 +104,7 @@ export function fetchInventory() {
     axios.get(`${ROOT_URL}/inventory`)
       .then(response => {
         dispatch({ type: FETCH_INVENTORY, payload: response.data });
+
       })
       .catch(err => {
         console.log(err);
@@ -116,6 +118,7 @@ export function fetchActiveInventory() {
     axios.get(`${ROOT_URL}/inventory/active`)
       .then(response => {
         dispatch({ type: FETCH_ACTIVE, payload: response.data });
+        dispatch({ type: FETCH_ACTIVE_MAP_MARKER, payload: response.data });
       })
       .catch(err => {
         console.log(err);

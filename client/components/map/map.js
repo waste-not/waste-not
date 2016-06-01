@@ -26,15 +26,15 @@ class InventoryMap extends Component {
     this.props.fetchClaimedInventory();
   }
 
-  // renderMap(inventoryData) {
-  //   return inventoryData.map(inventory => {
-  //     return (
-  //       inventory.coordinates
-  //     );
-  //   });
+  // handleMarkerClick(marker) {
+  //   marker.showInfo = true;
+  //
   // }
+
   // Temporary values of lat and lng need to be changed to fit dynamic markers
 render() {
+  const { activeMarkerInventory } = this.props.inventory;
+
   return (
     <section className="map-container">
       <GoogleMapLoader
@@ -50,17 +50,29 @@ render() {
         googleMapElement={
           <GoogleMap
             ref={(map => console.log(map))}
-            defaultZoom={3}
+            defaultZoom={12}
             defaultCenter={{
-              lat: -34.397,
-              lng: 150.644
-            }} />
-          }
-          />
-      </section>
-    );
-  }
-}
+              lat: 47.6062,
+              lng: -122.3321
+            }} >
+              {activeMarkerInventory.map((marker, index) => {
+                const ref = `marker_${index}`;
+
+                return ( <Marker
+                  key={index}
+                  ref={ref}
+                  position={new google.maps.LatLng(marker.lat, marker.lng)} >
+                    {null}
+                  </Marker>
+                );
+              })
+              }
+          </GoogleMap>
+        }
+      />
+    </section>
+  );
+}}
 
 function mapStateToProps({ inventory, auth }) {
   return { inventory, userId: auth._id };

@@ -6,14 +6,16 @@ import {
   FETCH_CLAIMED,
   FETCH_DONOR_INVENTORY,
   CLAIM_INVENTORY,
-  UNCLAIM_INVENTORY
+  UNCLAIM_INVENTORY,
+  FETCH_ACTIVE_MAP_MARKER
 } from '../actions';
 
 const initialState = {
   inventory: [],
   claimedInventory: [],
   donorInventory: [],
-  activeInventory: []
+  activeInventory: [],
+  activeMarkerInventory: []
 };
 
 export default function(state = initialState, action) {
@@ -47,6 +49,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         donorInventory: action.payload
+      };
+    case FETCH_ACTIVE_MAP_MARKER:
+      return {
+        ...state,
+        activeMarkerInventory: action.payload.map(marker => marker.coordinates)
       };
     case CLAIM_INVENTORY:
       return {

@@ -33,31 +33,19 @@ const storeUser = ({ token, role, _id, username }) => {
   localStorage.setItem('username', username);
 };
 
-export function createUser(newUser) {
-  const request = axios.post(`${ROOT_URL}/signup`, newUser);
-
-  return {
-    type: CREATE_USER,
-    payload: request
-  };
-}
-
-export function createOrg(newOrg) {
+export function createOrg(newOrg, resolve, reject) {
   return dispatch => {
     axios.post(`${ROOT_URL}/signup`, newOrg)
       .then(response => {
         dispatch(authUser(response.data));
-        storeUser({
-          token: response.data.token,
-          role: newOrg.role,
-          _id: response.data._id,
-          username: newOrg.username
-        });
-        hashHistory.push(`/${newOrg.role}`);
+        const { token, role, _id, username } = response.data;
+        storeUser({ token, role, _id, username });
+        hashHistory.push(`${role}`);
+        resolve();
       })
-      .catch(response => {
-        console.log(response);
+      .catch(err => {
         dispatch(authError('Signup failed'));
+        reject({ username: err.data.msg });
       });
   };
 }
@@ -172,13 +160,6 @@ export function deleteInventory(id) {
         console.log(err);
         dispatch(inventoryError('Could not delete item'));
       });
-  };
-}
-
-export function setRole(role) {
-  return {
-    type: SET_ROLE,
-    payload: role
   };
 }
 

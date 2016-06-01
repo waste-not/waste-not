@@ -1,17 +1,10 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import { setRole } from '../../actions';
 
 class HeroContainer extends Component {
 
-  static propTypes = {
-    setRole: PropTypes.func
-  }
-
   render() {
-
-  const { setRole } = this.props;
 
     return (
       <div>
@@ -33,12 +26,7 @@ class HeroContainer extends Component {
                   className="column is-one-quarter is-offset-one-quarter
                   button button-direct"
                   to="/signup"
-                  onClick={setRole.bind(null, 'user')}>Pick Up
-                  </Link>
-                  <Link
-                  className="button is-one-quarter column button-direct"
-                  to="/signup"
-                  onClick={setRole.bind(null, 'donor')}>Donate
+                  >Register
                   </Link>
                 </div>
               </div>
@@ -119,4 +107,4 @@ class HeroContainer extends Component {
   }
 }
 
-export default connect(null, { setRole })(HeroContainer);
+export default connect(null)(HeroContainer);

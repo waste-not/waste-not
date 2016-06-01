@@ -16,10 +16,14 @@ const createStoreWithMiddleware = compose(
 const store = createStoreWithMiddleware(reducers);
 
 const token = localStorage.getItem('token');
+const role = localStorage.getItem('role');
 // If we have a token, consider the user to be signed in
-if (token) {
+if (token && role) {
   // we need to update application state
-  store.dispatch({ type: AUTH_USER, payload: { token, role: 'donor' } });
+  store.dispatch({
+    type: AUTH_USER,
+    payload: { token, role }
+  });
 }
 
 render((

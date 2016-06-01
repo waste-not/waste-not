@@ -28,8 +28,7 @@ class Login extends Component {
       error,
       handleSubmit,
       submitting
-    }
-      = this.props;
+    } = this.props;
 
     return (
       <section className="main">

@@ -1,4 +1,6 @@
 import React, { PropTypes, Component } from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../../actions';
 import {
   GoogleMapLoader,
   GoogleMap,
@@ -7,10 +9,22 @@ import {
 } from 'react-google-maps';
 
 class InventoryMap extends Component {
-  // static propTypes = {
-  //   lat: PropTypes.number,
-  //   lng: PropTypes.number
-  // }
+
+  static propTypes = {
+    fetchActiveInventory: PropTypes.func,
+    fetchClaimedInventory: PropTypes.func,
+    inventory: PropTypes.object,
+    claimInventory: PropTypes.func,
+    unclaimInventory: PropTypes.func,
+    userId: PropTypes.string,
+    lat: PropTypes.number,
+    lng: PropTypes.number
+  }
+
+  componentWillMount() {
+    this.props.fetchActiveInventory();
+    this.props.fetchClaimedInventory();
+  }
 
   // renderMap(inventoryData) {
   //   return inventoryData.map(inventory => {
@@ -22,22 +36,34 @@ class InventoryMap extends Component {
   // Temporary values of lat and lng need to be changed to fit dynamic markers
 render() {
   return (
-    <div className="map-container">
+    <section className="map-container">
       <GoogleMapLoader
-        className="map-area"
-        containerElement={ <div style={{ height: '100%' }} /> }
+        containerElement={
+          <div
+            style={{
+              height: '500px',
+              width: '75%',
+              margin: 'auto'
+            }}
+          />
+        }
         googleMapElement={
           <GoogleMap
-            defaultZoom={12}
+            ref={(map => console.log(map))}
+            defaultZoom={3}
             defaultCenter={{
               lat: -34.397,
               lng: 150.644
             }} />
           }
           />
-    </div>
+      </section>
     );
-}
+  }
 }
 
-export default InventoryMap;
+function mapStateToProps({ inventory, auth }) {
+  return { inventory, userId: auth._id };
+}
+
+export default connect(mapStateToProps, actions)(InventoryMap);

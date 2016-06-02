@@ -7,7 +7,9 @@ import {
   FETCH_DONOR_INVENTORY,
   CLAIM_INVENTORY,
   UNCLAIM_INVENTORY,
-  FETCH_ACTIVE_MAP_MARKER
+  FETCH_ACTIVE_MAP_MARKER,
+  CLICK_MAP_MARKER,
+  CLOSE_MAP_MARKER
 } from '../actions';
 
 const initialState = {
@@ -15,7 +17,8 @@ const initialState = {
   claimedInventory: [],
   donorInventory: [],
   activeInventory: [],
-  activeMarkerInventory: []
+  activeMarkerInventory: [],
+  showInfo: false
 };
 
 export default function(state = initialState, action) {
@@ -74,6 +77,18 @@ export default function(state = initialState, action) {
         ],
         claimedInventory: state.claimedInventory
           .filter(item => item._id !== action.payload._id)
+      };
+    case CLICK_MAP_MARKER:
+      console.log(state.showInfo);
+      return {
+        ...state,
+        showInfo: true
+      };
+    case CLOSE_MAP_MARKER:
+      console.log(action.payload);
+      return {
+        ...state,
+        showInfo: false
       };
     default:
       return state;

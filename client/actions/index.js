@@ -19,6 +19,8 @@ export const AUTH_USER = 'auth_user';
 export const UNAUTH_USER = 'unauth_user';
 export const INVENTORY_ERROR = 'inventory_error';
 export const FETCH_ACTIVE_MAP_MARKER = 'fetch_active_map_marker';
+export const CLICK_MAP_MARKER = 'click_map_marker';
+export const CLOSE_MAP_MARKER = 'close_map_marker';
 
 const ROOT_URL = `${__BASEURL__}/api`;
 
@@ -163,6 +165,20 @@ export function deleteInventory(id) {
         console.log(err);
         dispatch(inventoryError('Could not delete item'));
       });
+  };
+}
+
+export function clickMapInfo(marker) {
+  return {
+    type: CLICK_MAP_MARKER,
+    payload: marker
+  };
+}
+
+export function closeMapInfo(marker) {
+  return {
+    type: CLOSE_MAP_MARKER,
+    payload: marker
   };
 }
 

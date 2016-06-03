@@ -50,7 +50,8 @@ export function createOrg(newOrg, resolve, reject) {
       })
       .catch(err => {
         dispatch(authError('Signup failed'));
-        reject({ username: err.data.msg });
+        console.log(err);
+        reject(err);
       });
   };
 }

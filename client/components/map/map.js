@@ -17,8 +17,6 @@ class InventoryMap extends Component {
     claimInventory: PropTypes.func,
     unclaimInventory: PropTypes.func,
     userId: PropTypes.string,
-    lat: PropTypes.number,
-    lng: PropTypes.number,
     showInfo: PropTypes.bool,
     clickMapInfo: PropTypes.func,
     closeMapInfo: PropTypes.func
@@ -84,7 +82,7 @@ render() {
           <div
             style={{
               height: '500px',
-              width: '75%',
+              width: '100%',
               margin: 'auto'
             }}
           />
@@ -102,7 +100,7 @@ render() {
                 return ( <Marker
                   key={index}
                   ref={ref}
-                  position={new google.maps.LatLng(marker.lat, marker.lng)}
+                  position={new google.maps.LatLng(marker.lat, marker.lng)} // eslint-disable-line
                   onClick={this.handleMarkerClick.bind(this, marker)} >
                     {showInfo ? this.renderInfoWindow(ref, marker) : null}
                   </Marker>

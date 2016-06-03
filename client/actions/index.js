@@ -21,6 +21,8 @@ export const INVENTORY_ERROR = 'inventory_error';
 export const FETCH_ACTIVE_MAP_MARKER = 'fetch_active_map_marker';
 export const CLICK_MAP_MARKER = 'click_map_marker';
 export const CLOSE_MAP_MARKER = 'close_map_marker';
+export const TOGGLE_MAP_ON = 'toggle_map_on';
+export const TOGGLE_MAP_OFF = 'toggle_map_off';
 
 const ROOT_URL = `${__BASEURL__}/api`;
 
@@ -179,6 +181,18 @@ export function closeMapInfo(marker) {
   return {
     type: CLOSE_MAP_MARKER,
     payload: marker
+  };
+}
+
+export function toggleMap() {
+  return {
+    type: TOGGLE_MAP_ON
+  };
+}
+
+export function toggleMapOff() {
+  return {
+    type: TOGGLE_MAP_OFF
   };
 }
 

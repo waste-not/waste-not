@@ -9,7 +9,9 @@ import {
   UNCLAIM_INVENTORY,
   FETCH_ACTIVE_MAP_MARKER,
   CLICK_MAP_MARKER,
-  CLOSE_MAP_MARKER
+  CLOSE_MAP_MARKER,
+  TOGGLE_MAP_ON,
+  TOGGLE_MAP_OFF
 } from '../actions';
 
 const initialState = {
@@ -18,7 +20,8 @@ const initialState = {
   donorInventory: [],
   activeInventory: [],
   activeMarkerInventory: [],
-  showInfo: false
+  showInfo: false,
+  showMap: false
 };
 
 export default function(state = initialState, action) {
@@ -89,6 +92,16 @@ export default function(state = initialState, action) {
       return {
         ...state,
         showInfo: false
+      };
+    case TOGGLE_MAP_ON:
+      return {
+        ...state,
+        showMap: true
+      };
+    case TOGGLE_MAP_OFF:
+      return {
+        ...state,
+        showMap: false
       };
     default:
       return state;

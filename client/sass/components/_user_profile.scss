@@ -8,7 +8,7 @@
     color: $color-dark-navy;
     width: 50%;
     border: 0px;
-    &.user-nav-active {
+    &:active {
       background-color: $color-lightest-navy;
     }
   }

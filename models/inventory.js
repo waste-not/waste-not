@@ -6,7 +6,7 @@ var inventorySchema = new mongoose.Schema({
   createdBy: { type: String, required: true },
   deadlineDate: { type: Date, required: true },
   description: { type: String, required: true },
-  perishable: { type: Boolean, required: true },
+  perishable: { type: Boolean, required: true, default: false },
   address: { type: String, required: true },
   coordinates: {
     lat: { type: Number, min: -90, max: 90 },

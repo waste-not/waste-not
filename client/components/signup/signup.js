@@ -109,7 +109,7 @@ class DonorProfile extends Component {
                     className={`input auth-input ${contactNumber.touched
                       && contactNumber.invalid ? 'is-danger' : ''}`}
                     placeholder="Phone Number"
-                    type="number"
+                    type="text"
                     {...contactNumber} />
                   <span className="help is-danger">
                     {contactNumber.touched ? contactNumber.error : ''}
@@ -173,7 +173,7 @@ class DonorProfile extends Component {
                   <input
                     className={`input auth-input ${zip.touched
                       && zip.invalid ? 'is-danger' : ''}`}
-                    type="number"
+                    type="text"
                     placeholder="Zip code"
                     {...zip} />
                   <span className="help is-grouped is-danger">

@@ -8,8 +8,14 @@
     color: $color-dark-navy;
     width: 50%;
     border: 0px;
-    &.user-nav-active {
+    &:active {
       background-color: $color-lightest-navy;
     }
   }
+}
+
+.map-container {
+  height: 100%;
+  display: flex;
+  margin-bottom: 20px;
 }

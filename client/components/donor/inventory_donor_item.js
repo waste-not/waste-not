@@ -12,8 +12,6 @@ const InventoryDonorItem = props => {
         <div className="card-content">
           <div className="content">
             {props.description}
-            <br />
-            <span className="time-remain">2 hours remaining</span>
           </div>
         </div>
         <footer className="card-footer">

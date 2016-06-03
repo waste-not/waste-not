@@ -8,6 +8,7 @@ const fields = [
   'description',
   'perishable',
   'address',
+  'city',
   'category',
   'note'
 ];
@@ -36,6 +37,7 @@ class InventoryForm extends Component {
         description,
         perishable,
         address,
+        city,
         category,
         note
       },
@@ -107,6 +109,18 @@ class InventoryForm extends Component {
                 </p>
 
                 <p className="control">
+                  <input
+                    className={`input auth-input ${city.touched
+                      && city.invalid ? 'is-danger' : ''}`}
+                    type="text"
+                    placeholder="City"
+                    {...city} />
+                  <span className="help is-danger">
+                    {city.touched ? city.error : ''}
+                  </span>
+                </p>
+
+                <p className="control">
                   <label>Category: &nbsp;&nbsp;</label>
                   <select className={`auth-input ${category.touched
                       && category.invalid ? 'is-danger' : ''}`}
@@ -165,6 +179,10 @@ function validate(values) {
 
   if (!values.address) {
     errors.address = 'Enter an address';
+  }
+
+  if (!values.city || values.city.trim() === '') {
+    errors.city = 'Enter a city';
   }
 
   if (!values.category || '') {

@@ -6,14 +6,22 @@ import {
   FETCH_CLAIMED,
   FETCH_DONOR_INVENTORY,
   CLAIM_INVENTORY,
-  UNCLAIM_INVENTORY
+  UNCLAIM_INVENTORY,
+  FETCH_ACTIVE_MAP_MARKER,
+  CLICK_MAP_MARKER,
+  CLOSE_MAP_MARKER,
+  TOGGLE_MAP_ON,
+  TOGGLE_MAP_OFF
 } from '../actions';
 
 const initialState = {
   inventory: [],
   claimedInventory: [],
   donorInventory: [],
-  activeInventory: []
+  activeInventory: [],
+  activeMarkerInventory: [],
+  showInfo: false,
+  showMap: false
 };
 
 export default function(state = initialState, action) {
@@ -48,6 +56,11 @@ export default function(state = initialState, action) {
         ...state,
         donorInventory: action.payload
       };
+    case FETCH_ACTIVE_MAP_MARKER:
+      return {
+        ...state,
+        activeMarkerInventory: action.payload.map(marker => marker.coordinates)
+      };
     case CLAIM_INVENTORY:
       return {
         ...state,
@@ -67,6 +80,28 @@ export default function(state = initialState, action) {
         ],
         claimedInventory: state.claimedInventory
           .filter(item => item._id !== action.payload._id)
+      };
+    case CLICK_MAP_MARKER:
+      console.log(state.showInfo);
+      return {
+        ...state,
+        showInfo: true
+      };
+    case CLOSE_MAP_MARKER:
+      console.log(action.payload);
+      return {
+        ...state,
+        showInfo: false
+      };
+    case TOGGLE_MAP_ON:
+      return {
+        ...state,
+        showMap: true
+      };
+    case TOGGLE_MAP_OFF:
+      return {
+        ...state,
+        showMap: false
       };
     default:
       return state;

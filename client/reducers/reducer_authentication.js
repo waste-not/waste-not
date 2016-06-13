@@ -1,5 +1,4 @@
 import {
-  CHANGE_AUTH,
   SET_ROLE,
   AUTH_ERROR,
   AUTH_USER,
@@ -26,8 +25,6 @@ const blankState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case CHANGE_AUTH:
-      return { ...state, ...action.payload };
     case AUTH_USER:
       return {
         ...state,

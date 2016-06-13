@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { hashHistory } from 'react-router';
 
-export const CHANGE_AUTH = 'change_auth';
 export const SET_ROLE = 'set_role';
 export const CREATE_USER = 'create_user';
 export const LOGIN = 'login';
